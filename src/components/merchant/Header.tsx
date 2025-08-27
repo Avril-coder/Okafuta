@@ -1,6 +1,6 @@
 import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { Search, Bell } from "lucide-react";
+import { Menu as HeadlessMenu, Transition } from "@headlessui/react"; // Renamed to avoid conflict with lucide-react Menu
+import { Search, Bell, Menu, Wallet, LayoutDashboard, ArrowRightLeft, Users, CreditCard, Settings } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -12,11 +12,67 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { NavLink, Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
+
+const navigation = [
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Transact", href: "/dashboard/transact", icon: ArrowRightLeft },
+  { name: "Customers", href: "/dashboard/customers", icon: Users },
+  { name: "Benefits & Cards", href: "/dashboard/benefits", icon: CreditCard },
+  { name: "Settings", href: "/dashboard/settings", icon: Settings },
+];
 
 export function Header() {
   return (
     <div className="relative z-10 flex-shrink-0 flex h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 lg:border-none">
       <div className="flex-1 px-4 flex justify-between sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
+        {/* Mobile menu button */}
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="-ml-2 flex items-center justify-center text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary lg:hidden"
+            >
+              <span className="sr-only">Open sidebar</span>
+              <Menu className="h-6 w-6" aria-hidden="true" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[240px] p-0">
+            <div className="flex flex-col p-4 space-y-1">
+              <Link to="/dashboard" className="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-6">
+                <Wallet className="h-6 w-6 mr-2 text-amber-600" />
+                Merchant
+              </Link>
+              {navigation.map((item) => (
+                <NavLink
+                  key={item.name}
+                  to={item.href}
+                  end={item.href === "/dashboard"}
+                  className={({ isActive }) =>
+                    cn(
+                      "group flex items-center px-3 py-2 text-sm font-medium rounded-md",
+                      isActive
+                        ? "bg-primary text-primary-foreground"
+                        : "text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-700"
+                    )
+                  }
+                >
+                  <item.icon
+                    className={cn(
+                      "mr-3 flex-shrink-0 h-5 w-5",
+                    )}
+                    aria-hidden="true"
+                  />
+                  {item.name}
+                </NavLink>
+              ))}
+            </div>
+          </SheetContent>
+        </Sheet>
+
         <div className="flex-1 flex">
           <form className="w-full flex md:ml-0" action="#" method="GET">
             <label htmlFor="search-field" className="sr-only">
