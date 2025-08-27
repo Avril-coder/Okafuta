@@ -64,25 +64,7 @@ export const LandingHeader: React.FC = () => {
           </GradientButton>
         </div>
 
-        {/* Mobile Menu Placeholder (if needed for landing page, otherwise remove) */}
-        <div className="lg:hidden">
-          {/* You might want to add a mobile menu icon and drawer here for landing page specific navigation */}
-          <Button variant="ghost">
-            <svg
-              className="h-6 w-6 text-gray-700 dark:text-gray-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </Button>
-        </div>
+        {/* No mobile menu on landing page */}
       </nav>
     </header>
   );
