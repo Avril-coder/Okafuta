@@ -6,19 +6,22 @@ import { BillPaymentTab } from "@/components/transact/BillPaymentTab";
 import { MoveMoneyTab } from "@/components/transact/MoveMoneyTab";
 import { PayoutTab } from "@/components/transact/PayoutTab";
 import { GroupRebateTab } from "@/components/transact/GroupRebateTab";
-import { useSearchParams } from "react-router-dom"; // Import useSearchParams
+import { TransactionQuickActions } from "@/components/transact/TransactionQuickActions"; // Import the new component
+import { useSearchParams } from "react-router-dom";
 import React from "react";
 
 export default function Transact() {
   const [searchParams] = useSearchParams();
-  const defaultTab = searchParams.get("tab") || "add-fund"; // Read 'tab' from URL, default to 'add-fund'
+  const defaultTab = searchParams.get("tab") || "add-fund";
 
   return (
     <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8 py-8">
       <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Transact</h1>
       <p className="text-gray-600 dark:text-gray-400 mb-8">Manage all your payment operations from one place.</p>
 
-      <Tabs defaultValue={defaultTab} className="w-full"> {/* Use defaultTab here */}
+      <TransactionQuickActions /> {/* Render the new quick actions component here */}
+
+      <Tabs defaultValue={defaultTab} className="w-full">
         <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 h-auto flex-wrap">
           <TabsTrigger value="add-fund">Add Fund</TabsTrigger>
           <TabsTrigger value="send-money">Send Money</TabsTrigger>
