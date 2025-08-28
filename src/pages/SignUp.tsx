@@ -26,17 +26,27 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
 
-  // New state for conditional fields (Employment Status)
+  // Conditional fields for Student employment status
   const [studentType, setStudentType] = useState<'local' | 'foreign' | ''>(''); // 'local', 'foreign', or '' (undetermined)
   const [proofOfRegistration, setProofOfRegistration] = useState<File | null>(null);
   const [studyPermit, setStudyPermit] = useState<File | null>(null);
-  const [companyName, setCompanyName] = useState('');
-  const [companyAddress, setCompanyAddress] = useState('');
+
+  // Conditional fields for Employed employment status
+  const [companyNameEmployed, setCompanyNameEmployed] = useState('');
+  const [companyAddressEmployed, setCompanyAddressEmployed] = useState('');
   const [salary, setSalary] = useState('');
   const [payslip, setPayslip] = useState<File | null>(null);
-  const [placeOfResidence, setPlaceOfResidence] = useState('');
+  const [placeOfResidenceEmployed, setPlaceOfResidenceEmployed] = useState('');
 
-  // New state for conditional fields (Marital Status)
+  // NEW: Conditional fields for Self-Employed employment status
+  const [companyNameSelfEmployed, setCompanyNameSelfEmployed] = useState('');
+  const [registrationNumberSelfEmployed, setRegistrationNumberSelfEmployed] = useState('');
+  const [natureOfBusiness, setNatureOfBusiness] = useState('');
+  const [physicalAddressSelfEmployed, setPhysicalAddressSelfEmployed] = useState('');
+  const [placeOfBusinessFile, setPlaceOfBusinessFile] = useState<File | null>(null);
+
+
+  // Conditional fields for Marital Status
   const [marriageCertificate, setMarriageCertificate] = useState<File | null>(null);
   const [divorceDocument, setDivorceDocument] = useState<File | null>(null);
   const [deathCertificate, setDeathCertificate] = useState<File | null>(null);
@@ -57,6 +67,28 @@ export default function SignUp() {
       setStudentType('');
       setProofOfRegistration(null);
       setStudyPermit(null);
+    }
+  }, [employmentStatus]);
+
+  // Effect to clear employed-specific fields if employment status changes from Employed
+  useEffect(() => {
+    if (employmentStatus !== 'Employed') {
+      setCompanyNameEmployed('');
+      setCompanyAddressEmployed('');
+      setSalary('');
+      setPayslip(null);
+      setPlaceOfResidenceEmployed('');
+    }
+  }, [employmentStatus]);
+
+  // NEW: Effect to clear self-employed-specific fields if employment status changes from Self-Employed
+  useEffect(() => {
+    if (employmentStatus !== 'Self-Employed') {
+      setCompanyNameSelfEmployed('');
+      setRegistrationNumberSelfEmployed('');
+      setNatureOfBusiness('');
+      setPhysicalAddressSelfEmployed('');
+      setPlaceOfBusinessFile(null);
     }
   }, [employmentStatus]);
 
@@ -94,8 +126,15 @@ export default function SignUp() {
       }
     }
     if (employmentStatus === 'Employed') {
-      if (!companyName || !companyAddress || !salary || !payslip || !placeOfResidence) {
+      if (!companyNameEmployed || !companyAddressEmployed || !salary || !payslip || !placeOfResidenceEmployed) {
         toast.error("Please fill all required fields for employment status and upload payslip.");
+        return;
+      }
+    }
+    // NEW: Validation for Self-Employed fields
+    if (employmentStatus === 'Self-Employed') {
+      if (!companyNameSelfEmployed || !registrationNumberSelfEmployed || !natureOfBusiness || !physicalAddressSelfEmployed || !placeOfBusinessFile) {
+        toast.error("Please fill all required fields for self-employed status and upload a document for place of business.");
         return;
       }
     }
@@ -133,11 +172,19 @@ export default function SignUp() {
         ...(studentType === 'foreign' && { studyPermit: studyPermit?.name }),
       }),
       ...(employmentStatus === 'Employed' && {
-        companyName,
-        companyAddress,
+        companyName: companyNameEmployed,
+        companyAddress: companyAddressEmployed,
         salary,
         payslip: payslip?.name,
-        placeOfResidence,
+        placeOfResidence: placeOfResidenceEmployed,
+      }),
+      // NEW: Self-Employed fields
+      ...(employmentStatus === 'Self-Employed' && {
+        companyName: companyNameSelfEmployed,
+        registrationNumber: registrationNumberSelfEmployed,
+        natureOfBusiness,
+        physicalAddress: physicalAddressSelfEmployed,
+        placeOfBusinessFile: placeOfBusinessFile?.name,
       }),
       // Conditional marital status fields
       ...(maritalStatus === 'married' && { marriageCertificate: marriageCertificate?.name }),
@@ -353,24 +400,24 @@ export default function SignUp() {
             {employmentStatus === 'Employed' && (
               <>
                 <div className="grid gap-2">
-                  <Label htmlFor="companyName">Company Name</Label>
+                  <Label htmlFor="companyNameEmployed">Company Name</Label>
                   <Input
-                    id="companyName"
+                    id="companyNameEmployed"
                     type="text"
                     placeholder="e.g., Tech Solutions Inc."
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
+                    value={companyNameEmployed}
+                    onChange={(e) => setCompanyNameEmployed(e.target.value)}
                     required
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="companyAddress">Physical Address (Company)</Label>
+                  <Label htmlFor="companyAddressEmployed">Physical Address (Company)</Label>
                   <Input
-                    id="companyAddress"
+                    id="companyAddressEmployed"
                     type="text"
                     placeholder="e.g., 456 Business Rd, City, Country"
-                    value={companyAddress}
-                    onChange={(e) => setCompanyAddress(e.target.value)}
+                    value={companyAddressEmployed}
+                    onChange={(e) => setCompanyAddressEmployed(e.target.value)}
                     required
                   />
                 </div>
@@ -397,13 +444,73 @@ export default function SignUp() {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="placeOfResidence">Place of Residence</Label>
+                  <Label htmlFor="placeOfResidenceEmployed">Place of Residence</Label>
                   <Input
-                    id="placeOfResidence"
+                    id="placeOfResidenceEmployed"
                     type="text"
                     placeholder="e.g., 789 Residential St, City, Country"
-                    value={placeOfResidence}
-                    onChange={(e) => setPlaceOfResidence(e.target.value)}
+                    value={placeOfResidenceEmployed}
+                    onChange={(e) => setPlaceOfResidenceEmployed(e.target.value)}
+                    required
+                  />
+                </div>
+              </>
+            )}
+
+            {/* NEW: Conditional fields for Self-Employed status */}
+            {employmentStatus === 'Self-Employed' && (
+              <>
+                <div className="grid gap-2">
+                  <Label htmlFor="companyNameSelfEmployed">Company Name</Label>
+                  <Input
+                    id="companyNameSelfEmployed"
+                    type="text"
+                    placeholder="e.g., My Freelance Services"
+                    value={companyNameSelfEmployed}
+                    onChange={(e) => setCompanyNameSelfEmployed(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="registrationNumberSelfEmployed">Registration Number</Label>
+                  <Input
+                    id="registrationNumberSelfEmployed"
+                    type="text"
+                    placeholder="e.g., REG123456789"
+                    value={registrationNumberSelfEmployed}
+                    onChange={(e) => setRegistrationNumberSelfEmployed(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="natureOfBusiness">Nature of Business</Label>
+                  <Input
+                    id="natureOfBusiness"
+                    type="text"
+                    placeholder="e.g., IT Consulting, Graphic Design"
+                    value={natureOfBusiness}
+                    onChange={(e) => setNatureOfBusiness(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="physicalAddressSelfEmployed">Physical Address</Label>
+                  <Input
+                    id="physicalAddressSelfEmployed"
+                    type="text"
+                    placeholder="e.g., 101 Business Park, City, Country"
+                    value={physicalAddressSelfEmployed}
+                    onChange={(e) => setPhysicalAddressSelfEmployed(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="placeOfBusinessFile">Place of Business (Document/Proof)</Label>
+                  <Input
+                    id="placeOfBusinessFile"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => setPlaceOfBusinessFile(e.target.files ? e.target.files[0] : null)}
                     required
                   />
                 </div>
