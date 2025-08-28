@@ -8,12 +8,13 @@ import { toast } from 'sonner';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { BlobBackground } from '@/components/shared/BlobBackground';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'; // Import Select components
 import { cn } from '@/lib/utils';
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState(''); // Changed from identifier to email
-  const [areaCode, setAreaCode] = useState('');
+  const [email, setEmail] = useState('');
+  const [areaCode, setAreaCode] = useState('+264'); // Default area code
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -26,7 +27,7 @@ export default function SignUp() {
       return;
     }
 
-    console.log("Signing up with:", { email, areaCode, phoneNumber, password, accountType }); // Log email
+    console.log("Signing up with:", { email, areaCode, phoneNumber, password, accountType });
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
   };
@@ -77,11 +78,11 @@ export default function SignUp() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label> {/* Changed label to Email */}
+              <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
-                type="email" // Changed type to email
-                placeholder="m@example.com" // Changed placeholder
+                type="email"
+                placeholder="m@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -90,14 +91,19 @@ export default function SignUp() {
             <div className="grid grid-cols-3 gap-2">
               <div className="col-span-1">
                 <Label htmlFor="areaCode">Area Code</Label>
-                <Input
-                  id="areaCode"
-                  type="text"
-                  placeholder="+264"
-                  value={areaCode}
-                  onChange={(e) => setAreaCode(e.target.value)}
-                  required
-                />
+                <Select value={areaCode} onValueChange={setAreaCode} required>
+                  <SelectTrigger id="areaCode">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="+1">+1 (USA/Canada)</SelectItem>
+                    <SelectItem value="+44">+44 (UK)</SelectItem>
+                    <SelectItem value="+264">+264 (Namibia)</SelectItem>
+                    <SelectItem value="+234">+234 (Nigeria)</SelectItem>
+                    <SelectItem value="+27">+27 (South Africa)</SelectItem>
+                    {/* Add more area codes as needed */}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="col-span-2">
                 <Label htmlFor="phoneNumber">Phone Number</Label>
