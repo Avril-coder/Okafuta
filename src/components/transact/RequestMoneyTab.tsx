@@ -57,10 +57,10 @@ export const RequestMoneyTab: React.FC = () => {
         <CardContent className="space-y-4">
           <form onSubmit={handleCreateRequest} className="space-y-4">
             <div className="grid gap-2">
-              <Label htmlFor="request-from">Request From (Account/ID)</Label>
+              <Label htmlFor="request-from">Request From (Email, Username, or Phone Number)</Label>
               <Input
                 id="request-from"
-                placeholder="e.g., user@example.com or account number"
+                placeholder="e.g., user@example.com, username, or +1234567890"
                 value={requestFrom}
                 onChange={(e) => setRequestFrom(e.target.value)}
                 required
