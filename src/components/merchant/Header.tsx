@@ -37,7 +37,7 @@ export function Header() {
               className="-ml-2 flex items-center justify-center text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary lg:hidden"
             >
               <span className="sr-only">Open sidebar</span>
-              <Menu className="h-6 w-6" aria-hidden="true" />
+              <Menu className="h-5 w-5" aria-hidden="true" /> {/* Adjusted icon size */}
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[240px] p-0">
@@ -83,12 +83,12 @@ export function Header() {
                 className="absolute inset-y-0 left-0 flex items-center pointer-events-none"
                 aria-hidden="true"
               >
-                <Search className="h-5 w-5" />
+                <Search className="h-4 w-4" /> {/* Adjusted icon size */}
               </div>
               <Input
                 id="search-field"
                 name="search-field"
-                className="block w-full h-full pl-8 pr-3 py-2 border-transparent bg-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm dark:text-white"
+                className="block w-full h-full pl-8 pr-3 py-1.5 border-transparent bg-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent sm:text-sm dark:text-white" {/* Adjusted padding */}
                 placeholder="Search transactions, customers..."
                 type="search"
               />
