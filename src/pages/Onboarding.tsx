@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Wallet, ScanLine, Smartphone, UserCheck } from 'lucide-react';
+import { ScanLine, Smartphone, UserCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { DiditLogo } from '@/components/shared/DiditLogo'; // Import the new DiditLogo
 
 const verificationSteps = [
   { id: 1, name: 'ID Verification', icon: ScanLine, description: 'Upload a valid government-issued ID.' },
@@ -28,12 +29,11 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-12">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white dark:bg-gray-950 px-4 py-12">
       <header className="w-full max-w-4xl text-center mb-8">
         <div className="flex items-center justify-center lg:justify-start mb-4">
-          <Link to="/" className="flex items-center text-3xl font-bold text-gray-900 dark:text-white">
-            <Wallet className="h-9 w-9 mr-3 text-amber-600" />
-            Didit
+          <Link to="/" className="flex items-center">
+            <DiditLogo /> {/* Use the new DiditLogo component */}
           </Link>
         </div>
         <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">
@@ -47,7 +47,7 @@ export default function Onboarding() {
 
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* QR Code Section */}
-        <Card className="flex flex-col items-center justify-center p-8 text-center h-full">
+        <Card className="flex flex-col items-center justify-center p-8 text-center h-full shadow-none border-none bg-gray-50 dark:bg-gray-900"> {/* Removed shadow */}
           <CardHeader>
             <CardTitle className="text-2xl font-semibold">Start Verification on Mobile</CardTitle>
           </CardHeader>
@@ -66,7 +66,7 @@ export default function Onboarding() {
         </Card>
 
         {/* Verification Steps List */}
-        <Card className="p-6 h-full">
+        <Card className="p-6 h-full shadow-none border-none bg-gray-50 dark:bg-gray-900"> {/* Removed shadow */}
           <CardHeader>
             <CardTitle className="text-xl font-semibold mb-4">Verification Steps</CardTitle>
           </CardHeader>
@@ -77,23 +77,23 @@ export default function Onboarding() {
                 className={cn(
                   "flex items-center p-4 rounded-lg transition-all duration-200",
                   currentStep === step.id
-                    ? "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 shadow-sm"
-                    : "bg-gray-50 dark:bg-gray-800"
+                    ? "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700" // Removed shadow-sm
+                    : "bg-gray-100 dark:bg-gray-800" // Slightly lighter gray for inactive background
                 )}
               >
                 <div
                   className={cn(
                     "flex items-center justify-center h-10 w-10 rounded-full mr-4",
                     currentStep === step.id
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+                      ? "bg-blue-600 text-white" // Darker blue for active icon background
+                      : "bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-600" // Lighter gray for inactive icon and text
                   )}
                 >
                   <step.icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="font-medium text-gray-900 dark:text-white">{step.name}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{step.description}</p>
+                  <h3 className={cn("font-medium", currentStep === step.id ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-gray-400")}>{step.name}</h3>
+                  <p className={cn("text-sm", currentStep === step.id ? "text-gray-600 dark:text-gray-300" : "text-gray-400 dark:text-gray-600")}>{step.description}</p>
                 </div>
               </div>
             ))}
