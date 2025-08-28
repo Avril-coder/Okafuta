@@ -3,19 +3,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Wallet, Briefcase, User } from 'lucide-react'; // Import Briefcase and User icons
+import { Wallet, Briefcase, User } from 'lucide-react';
 import { toast } from 'sonner';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { BlobBackground } from '@/components/shared/BlobBackground';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'; // Import RadioGroup components
-import { cn } from '@/lib/utils'; // Import cn for conditional class names
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { cn } from '@/lib/utils';
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState(''); // Changed from identifier to email
+  const [identifier, setIdentifier] = useState(''); // Back to ID/Passport Number
+  const [areaCode, setAreaCode] = useState(''); // New state for Area Code
+  const [phoneNumber, setPhoneNumber] = useState(''); // New state for Phone Number
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant'); // New state for account type
+  const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,9 +26,7 @@ export default function SignUp() {
       return;
     }
 
-    // In a real application, you would handle user registration here.
-    // For now, we'll just simulate a successful sign-up and redirect.
-    console.log("Signing up with:", { email, password, accountType }); // Log email
+    console.log("Signing up with:", { identifier, areaCode, phoneNumber, password, accountType });
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
   };
@@ -49,13 +49,13 @@ export default function SignUp() {
               <RadioGroup
                 defaultValue="merchant"
                 onValueChange={(value: 'merchant' | 'customer') => setAccountType(value)}
-                className="flex justify-center gap-8" // Adjusted for spacing circular items
+                className="flex justify-center gap-8"
               >
                 <Label
                   htmlFor="account-type-merchant"
                   className={cn(
                     "flex flex-col items-center justify-center h-28 w-28 rounded-full border-2 border-muted bg-popover hover:bg-accent hover:text-accent-foreground cursor-pointer transition-all duration-200",
-                    accountType === 'merchant' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400"
+                    accountType === 'merchant' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400 shadow-lg shadow-blue-500/50" // Added glowy effect
                   )}
                 >
                   <RadioGroupItem value="merchant" id="account-type-merchant" className="sr-only" />
@@ -66,7 +66,7 @@ export default function SignUp() {
                   htmlFor="account-type-customer"
                   className={cn(
                     "flex flex-col items-center justify-center h-28 w-28 rounded-full border-2 border-muted bg-popover hover:bg-accent hover:text-accent-foreground cursor-pointer transition-all duration-200",
-                    accountType === 'customer' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400"
+                    accountType === 'customer' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400 shadow-lg shadow-blue-500/50" // Added glowy effect
                   )}
                 >
                   <RadioGroupItem value="customer" id="account-type-customer" className="sr-only" />
@@ -77,15 +77,39 @@ export default function SignUp() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label> {/* Reverted to Email */}
+              <Label htmlFor="identifier">ID/Passport Number</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com" // Reverted placeholder
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="identifier"
+                type="text"
+                placeholder="e.g., 9012345678901"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
                 required
               />
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              <div className="col-span-1">
+                <Label htmlFor="areaCode">Area Code</Label>
+                <Input
+                  id="areaCode"
+                  type="text"
+                  placeholder="+264"
+                  value={areaCode}
+                  onChange={(e) => setAreaCode(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="col-span-2">
+                <Label htmlFor="phoneNumber">Phone Number</Label>
+                <Input
+                  id="phoneNumber"
+                  type="tel"
+                  placeholder="e.g., 812345678"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </div>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
