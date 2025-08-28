@@ -135,7 +135,7 @@ export function Header() {
                   Profile
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
+              {/* Removed Billing DropdownMenuItem */}
               <DropdownMenuItem asChild>
                 <Link to="/dashboard/settings">
                   <Settings className="mr-2 h-4 w-4" />
