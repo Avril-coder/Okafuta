@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import React, { Fragment } from "react"; // Added React import
 import { Menu as HeadlessMenu, Transition } from "@headlessui/react"; // Renamed to avoid conflict with lucide-react Menu
 import { Search, Bell, Menu, Wallet, LayoutDashboard, ArrowRightLeft, Users, CreditCard, Settings } from "lucide-react";
 import { Input } from "@/components/ui/input";
