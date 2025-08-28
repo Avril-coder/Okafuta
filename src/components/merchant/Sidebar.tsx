@@ -21,7 +21,7 @@ const navigation = [
 
 export function Sidebar() {
   return (
-    <div className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100/50 dark:bg-gray-800/50 dark:border-gray-700">
+    <div className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:bg-gray-100/80 dark:bg-gray-800/80 lg:backdrop-blur-sm dark:border-gray-700">
       <div className="flex items-center flex-shrink-0 px-6">
         <Wallet className="h-8 w-auto text-primary" />
         <span className="ml-2 text-lg font-semibold">Merchant</span>
