@@ -24,7 +24,7 @@ export const HeroSection: React.FC = () => {
             Streamline your transactions, manage finances effortlessly, and grow your business with our secure and seamless platform.
           </p>
           <GradientButton asChild className="px-8 py-4 text-lg">
-            <Link to="/signup">Create Free Account</Link>
+            <Link to="/onboarding">Create Free Account</Link> {/* Changed link to /onboarding */}
           </GradientButton>
         </div>
 

@@ -6,8 +6,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'; // Import InputOTP components
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -15,48 +13,11 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [cellphoneNumber, setCellphoneNumber] = useState('');
-  const [verificationMethod, setVerificationMethod] = useState<'email' | 'phone'>('email');
-  const [otp, setOtp] = useState('');
-  const [isCodeSent, setIsCodeSent] = useState(false);
-  const [isVerified, setIsVerified] = useState(false);
-
-  const handleSendCode = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.trim() && verificationMethod === 'email') {
-      toast.error("Please enter your email to send the code.");
-      return;
-    }
-    if (!cellphoneNumber.trim() && verificationMethod === 'phone') {
-      toast.error("Please enter your cellphone number to send the code.");
-      return;
-    }
-
-    // Simulate sending code
-    setIsCodeSent(true);
-    setIsVerified(false); // Reset verification status
-    toast.info(`Verification code sent to your ${verificationMethod}.`);
-    // In a real app, you'd make an API call here to send the code
-  };
-
-  const handleVerifyCode = () => {
-    // Simulate code verification
-    if (otp === '123456') { // Hardcoded for demonstration
-      setIsVerified(true);
-      toast.success("Code verified successfully!");
-    } else {
-      toast.error("Invalid verification code. Please try again.");
-      setIsVerified(false);
-    }
-  };
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.");
-      return;
-    }
-    if (!isVerified) {
-      toast.error("Please verify your account with the code.");
       return;
     }
 
@@ -121,45 +82,7 @@ export default function SignUp() {
               />
             </div>
 
-            <div className="space-y-4 border-t pt-4 dark:border-gray-700">
-              <h3 className="text-lg font-semibold">Account Verification</h3>
-              <div className="grid gap-2">
-                <Label htmlFor="verification-method">Send code via</Label>
-                <Select value={verificationMethod} onValueChange={(value: 'email' | 'phone') => setVerificationMethod(value)}>
-                  <SelectTrigger id="verification-method">
-                    <SelectValue placeholder="Select method" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="email">Email</SelectItem>
-                    <SelectItem value="phone">Phone Number</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button onClick={handleSendCode} className="w-full" disabled={isCodeSent}>
-                {isCodeSent ? `Code Sent to ${verificationMethod === 'email' ? email : cellphoneNumber}` : 'Send Verification Code'}
-              </Button>
-
-              {isCodeSent && (
-                <div className="grid gap-2 mt-4">
-                  <Label htmlFor="otp-code">Enter Verification Code</Label>
-                  <InputOTP maxLength={6} value={otp} onChange={(value) => setOtp(value)}>
-                    <InputOTPGroup>
-                      <InputOTPSlot index={0} />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
-                    </InputOTPGroup>
-                  </InputOTP>
-                  <Button type="button" onClick={handleVerifyCode} className="w-full mt-2" disabled={isVerified || otp.length !== 6}>
-                    {isVerified ? 'Code Verified' : 'Verify Code'}
-                  </Button>
-                </div>
-              )}
-            </div>
-
-            <Button type="submit" className="w-full mt-6" disabled={!isVerified}>
+            <Button type="submit" className="w-full mt-6">
               Create Account
             </Button>
           </form>
