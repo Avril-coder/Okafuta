@@ -6,7 +6,7 @@ export default function MerchantLayout() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Sidebar />
-      <div className="lg:pl-64 flex flex-col flex-1">
+      <div className="lg:ml-64 flex flex-col flex-1">
         <Header />
         <main className="flex-1 pb-8">
           <Outlet />
