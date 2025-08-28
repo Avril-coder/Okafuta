@@ -13,9 +13,10 @@ import Transact from "./pages/merchant/Transact";
 import Customers from "./pages/merchant/Customers";
 import Benefits from "./pages/merchant/Benefits";
 import Settings from "./pages/merchant/Settings";
-import KycVerification from "./pages/merchant/KycVerification"; // New import for KYC
-import AdminLayout from "./components/admin/Layout"; // New import for Admin Layout
-import KycReview from "./pages/admin/KycReview"; // New import for Admin KYC Review
+import KycVerification from "./pages/merchant/KycVerification";
+import InvoicePage from "./pages/merchant/Invoice"; // New import for InvoicePage
+import AdminLayout from "./components/admin/Layout";
+import KycReview from "./pages/admin/KycReview";
 
 const queryClient = new QueryClient();
 
@@ -35,13 +36,14 @@ const App = () => (
             <Route path="transact" element={<Transact />} />
             <Route path="customers" element={<Customers />} />
             <Route path="benefits" element={<Benefits />} />
-            <Route path="kyc" element={<KycVerification />} /> {/* New merchant KYC route */}
+            <Route path="kyc" element={<KycVerification />} />
+            <Route path="invoice" element={<InvoicePage />} /> {/* New merchant Invoice route */}
             <Route path="settings" element={<Settings />} />
           </Route>
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>
-            <Route path="kyc-requests" element={<KycReview />} /> {/* New admin KYC review route */}
+            <Route path="kyc-requests" element={<KycReview />} />
             {/* Add other admin routes here */}
           </Route>
 

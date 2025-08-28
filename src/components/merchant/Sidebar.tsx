@@ -6,7 +6,8 @@ import {
   CreditCard,
   Settings,
   Wallet,
-  CheckCircle, // New icon for KYC
+  CheckCircle,
+  FileText, // New icon for Invoice
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +16,8 @@ const navigation = [
   { name: "Transact", href: "/dashboard/transact", icon: ArrowRightLeft },
   { name: "Customers", href: "/dashboard/customers", icon: Users },
   { name: "Benefits & Cards", href: "/dashboard/benefits", icon: CreditCard },
-  { name: "KYC Verification", href: "/dashboard/kyc", icon: CheckCircle }, // New KYC link
+  { name: "KYC Verification", href: "/dashboard/kyc", icon: CheckCircle },
+  { name: "Invoices", href: "/dashboard/invoice", icon: FileText }, // New Invoice link
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 

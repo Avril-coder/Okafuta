@@ -16,7 +16,7 @@ const links = [
   { name: "Bill Payment", icon: Landmark, href: "/dashboard/transact?tab=bill-payment" },
   { name: "Move Money", icon: Move, href: "/dashboard/transact?tab=move-money" },
   { name: "Create Voucher", icon: Ticket, href: "/dashboard/benefits?tab=vouchers" },
-  { name: "Invoice", icon: FileText, href: "/dashboard/transact" }, // Linked to transact for now, could be a new tab
+  { name: "Invoice", icon: FileText, href: "/dashboard/invoice" }, // Updated href to new Invoice page
 ];
 
 export function QuickLinks() {
