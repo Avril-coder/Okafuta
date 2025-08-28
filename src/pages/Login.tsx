@@ -25,7 +25,7 @@ export default function Login() {
       <Card className="relative z-10 w-full max-w-md"> {/* Ensure card is above background */}
         <CardHeader className="text-center">
           <div className="flex justify-center mb-2">
-            <Wallet className="h-10 w-10 text-amber-600" />
+            <Wallet className="h-10 w-10 text-blue-600" /> {/* Changed to text-blue-600 */}
           </div>
           <CardTitle className="text-3xl font-bold">Login</CardTitle>
           <CardDescription>Enter your credentials to access your account.</CardDescription>
