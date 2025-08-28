@@ -93,7 +93,7 @@ export default function Onboarding() {
                 </div>
                 <div>
                   <h3 className={cn("font-medium", currentStep === step.id ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-gray-400")}>
-                    Step {step.id}: {step.name} {/* Added explicit step number */}
+                    Step {step.id}: {step.name}
                   </h3>
                   <p className={cn("text-sm", currentStep === step.id ? "text-gray-600 dark:text-gray-300" : "text-gray-400 dark:text-gray-600")}>{step.description}</p>
                 </div>
@@ -102,6 +102,16 @@ export default function Onboarding() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Footer with Privacy Notice */}
+      <footer className="w-full max-w-4xl text-center mt-12">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          Read more about your personal data processing in Didit's{' '}
+          <Link to="/privacy-notice" className="text-blue-600 hover:underline dark:text-blue-400">
+            Privacy Notice
+          </Link>
+        </p>
+      </footer>
     </div>
   );
 }
