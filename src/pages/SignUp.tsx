@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Wallet } from 'lucide-react';
+import { Wallet, Briefcase, User } from 'lucide-react'; // Import Briefcase and User icons
 import { toast } from 'sonner';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { BlobBackground } from '@/components/shared/BlobBackground';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'; // Import RadioGroup components
+import { cn } from '@/lib/utils'; // Import cn for conditional class names
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -44,20 +45,34 @@ export default function SignUp() {
         <CardContent>
           <form onSubmit={handleSignUp} className="space-y-4">
             <div className="grid gap-2">
-              <Label htmlFor="account-type">Account Type</Label>
+              <Label className="mb-2">Account Type</Label>
               <RadioGroup
                 defaultValue="merchant"
                 onValueChange={(value: 'merchant' | 'customer') => setAccountType(value)}
-                className="flex space-x-4"
+                className="grid grid-cols-2 gap-4"
               >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="merchant" id="account-type-merchant" />
-                  <Label htmlFor="account-type-merchant">Merchant</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="customer" id="account-type-customer" />
-                  <Label htmlFor="account-type-customer">Customer</Label>
-                </div>
+                <Label
+                  htmlFor="account-type-merchant"
+                  className={cn(
+                    "flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground",
+                    accountType === 'merchant' && "border-primary ring-2 ring-primary"
+                  )}
+                >
+                  <RadioGroupItem value="merchant" id="account-type-merchant" className="sr-only" />
+                  <Briefcase className="mb-3 h-6 w-6" />
+                  <span>Merchant</span>
+                </Label>
+                <Label
+                  htmlFor="account-type-customer"
+                  className={cn(
+                    "flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground",
+                    accountType === 'customer' && "border-primary ring-2 ring-primary"
+                  )}
+                >
+                  <RadioGroupItem value="customer" id="account-type-customer" className="sr-only" />
+                  <User className="mb-3 h-6 w-6" />
+                  <span>Customer</span>
+                </Label>
               </RadioGroup>
             </div>
 
