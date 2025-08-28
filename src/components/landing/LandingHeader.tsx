@@ -18,13 +18,15 @@ export const LandingHeader: React.FC = () => {
   return (
     <header className="absolute top-0 left-0 right-0 z-20 w-full bg-transparent py-4 px-4 sm:px-6 lg:px-8">
       <nav className="flex items-center justify-between max-w-7xl mx-auto">
-        {/* Logo */}
+        {/* Logo Image Placeholder */}
         <div className="flex flex-col items-start">
-          <Link to="/" className="flex items-center text-2xl font-bold text-gray-900 dark:text-white">
-            <Wallet className="h-7 w-7 mr-2 text-amber-600" />
-            OKAFUTA
+          <Link to="/" className="flex items-center">
+            {/* Replace 'public/placeholder.svg' with the actual path to your logo image */}
+            {/* For dark mode, you might need a different logo or apply 'dark:invert' if your logo is light-colored */}
+            <img src="/placeholder.svg" alt="OKAFUTA Logo" className="h-10 w-auto dark:invert" />
+            {/* If you want to keep the slogan, you can add it here below the image */}
+            <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 ml-2">Secure. Seamless. Cashless.</p>
           </Link>
-          <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 ml-9">Secure. Seamless. Cashless.</p>
         </div>
 
         {/* Navigation Links for larger screens */}
@@ -60,7 +62,7 @@ export const LandingHeader: React.FC = () => {
 
           {/* Login Button */}
           <GradientButton asChild>
-            <Link to="/login">Login Now</Link> {/* Changed from /dashboard to /login */}
+            <Link to="/login">Login Now</Link>
           </GradientButton>
         </div>
 
