@@ -12,9 +12,9 @@ import { cn } from '@/lib/utils';
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const [identifier, setIdentifier] = useState(''); // Back to ID/Passport Number
-  const [areaCode, setAreaCode] = useState(''); // New state for Area Code
-  const [phoneNumber, setPhoneNumber] = useState(''); // New state for Phone Number
+  const [email, setEmail] = useState(''); // Changed from identifier to email
+  const [areaCode, setAreaCode] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
@@ -26,7 +26,7 @@ export default function SignUp() {
       return;
     }
 
-    console.log("Signing up with:", { identifier, areaCode, phoneNumber, password, accountType });
+    console.log("Signing up with:", { email, areaCode, phoneNumber, password, accountType }); // Log email
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
   };
@@ -55,7 +55,7 @@ export default function SignUp() {
                   htmlFor="account-type-merchant"
                   className={cn(
                     "flex flex-col items-center justify-center h-28 w-28 rounded-full border-2 border-muted bg-popover hover:bg-accent hover:text-accent-foreground cursor-pointer transition-all duration-200",
-                    accountType === 'merchant' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400 shadow-lg shadow-blue-500/50" // Added glowy effect
+                    accountType === 'merchant' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400 shadow-lg shadow-blue-500/50"
                   )}
                 >
                   <RadioGroupItem value="merchant" id="account-type-merchant" className="sr-only" />
@@ -66,7 +66,7 @@ export default function SignUp() {
                   htmlFor="account-type-customer"
                   className={cn(
                     "flex flex-col items-center justify-center h-28 w-28 rounded-full border-2 border-muted bg-popover hover:bg-accent hover:text-accent-foreground cursor-pointer transition-all duration-200",
-                    accountType === 'customer' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400 shadow-lg shadow-blue-500/50" // Added glowy effect
+                    accountType === 'customer' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400 shadow-lg shadow-blue-500/50"
                   )}
                 >
                   <RadioGroupItem value="customer" id="account-type-customer" className="sr-only" />
@@ -77,13 +77,13 @@ export default function SignUp() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="identifier">ID/Passport Number</Label>
+              <Label htmlFor="email">Email</Label> {/* Changed label to Email */}
               <Input
-                id="identifier"
-                type="text"
-                placeholder="e.g., 9012345678901"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
+                id="email"
+                type="email" // Changed type to email
+                placeholder="m@example.com" // Changed placeholder
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
