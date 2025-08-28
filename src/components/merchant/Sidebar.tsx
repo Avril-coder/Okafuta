@@ -21,7 +21,9 @@ const navigation = [
 
 export function Sidebar() {
   return (
-    <div className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 lg:backdrop-blur-sm dark:border-gray-700">
+    <div className="hidden lg:flex lg:flex-col lg:w-64 lg:fixed lg:inset-y-0 
+                    lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 
+                    lg:backdrop-blur-md lg:bg-white/20 dark:border-gray-700 dark:bg-gray-900/20">
       <div className="flex items-center flex-shrink-0 px-6">
         <Wallet className="h-8 w-auto text-primary" />
         <span className="ml-2 text-lg font-semibold">Merchant</span>
@@ -43,9 +45,7 @@ export function Sidebar() {
               }
             >
               <item.icon
-                className={cn(
-                  "mr-3 flex-shrink-0 h-5 w-5",
-                )}
+                className={cn("mr-3 flex-shrink-0 h-5 w-5")}
                 aria-hidden="true"
               />
               {item.name}
