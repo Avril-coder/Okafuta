@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -8,17 +8,32 @@ import { toast } from 'sonner';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { BlobBackground } from '@/components/shared/BlobBackground';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'; // Import Select components
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [identityNumber, setIdentityNumber] = useState('');
   const [email, setEmail] = useState('');
-  const [areaCode, setAreaCode] = useState('+264'); // Default area code
+  const [areaCode, setAreaCode] = useState('+264');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [gender, setGender] = useState('');
+  const [employmentStatus, setEmploymentStatus] = useState('');
+  const [maritalStatus, setMaritalStatus] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
+
+  // Effect to update account type based on employment status
+  useEffect(() => {
+    if (employmentStatus === 'Business' || employmentStatus === 'Self-Employed') {
+      setAccountType('merchant');
+    } else if (employmentStatus === 'Student' || employmentStatus === 'Employed') {
+      setAccountType('customer');
+    }
+  }, [employmentStatus]);
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +42,19 @@ export default function SignUp() {
       return;
     }
 
-    console.log("Signing up with:", { email, areaCode, phoneNumber, password, accountType });
+    console.log("Signing up with:", {
+      firstName,
+      lastName,
+      identityNumber,
+      email,
+      areaCode,
+      phoneNumber,
+      gender,
+      employmentStatus,
+      maritalStatus,
+      password,
+      accountType,
+    });
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
   };
@@ -45,10 +72,133 @@ export default function SignUp() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignUp} className="space-y-4">
+            <div className="grid grid-cols-2 gap-2">
+              <div className="grid gap-2">
+                <Label htmlFor="firstName">First Name</Label>
+                <Input
+                  id="firstName"
+                  type="text"
+                  placeholder="John"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  placeholder="Doe"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="identityNumber">Identity Number / ID</Label>
+              <Input
+                id="identityNumber"
+                type="text"
+                placeholder="e.g., 9012345678901"
+                value={identityNumber}
+                onChange={(e) => setIdentityNumber(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="grid grid-cols-3 gap-2">
+              <div className="col-span-1">
+                <Label htmlFor="areaCode">Area Code</Label>
+                <Select value={areaCode} onValueChange={setAreaCode} required>
+                  <SelectTrigger id="areaCode">
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="+1">+1 (USA/Canada)</SelectItem>
+                    <SelectItem value="+44">+44 (UK)</SelectItem>
+                    <SelectItem value="+264">+264 (Namibia)</SelectItem>
+                    <SelectItem value="+234">+234 (Nigeria)</SelectItem>
+                    <SelectItem value="+27">+27 (South Africa)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="col-span-2">
+                <Label htmlFor="phoneNumber">Phone Number</Label>
+                <Input
+                  id="phoneNumber"
+                  type="tel"
+                  placeholder="e.g., 812345678"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="grid gap-2">
+                <Label htmlFor="gender">Gender</Label>
+                <Select value={gender} onValueChange={setGender} required>
+                  <SelectTrigger id="gender">
+                    <SelectValue placeholder="Select Gender" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="male">Male</SelectItem>
+                    <SelectItem value="female">Female</SelectItem>
+                    <SelectItem value="other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="maritalStatus">Marital Status</Label>
+                <Select value={maritalStatus} onValueChange={setMaritalStatus} required>
+                  <SelectTrigger id="maritalStatus">
+                    <SelectValue placeholder="Select Status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="single">Single</SelectItem>
+                    <SelectItem value="married">Married</SelectItem>
+                    <SelectItem value="divorced">Divorced</SelectItem>
+                    <SelectItem value="widowed">Widowed</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="grid gap-2">
+              <Label htmlFor="employmentStatus">Employment Status</Label>
+              <Select value={employmentStatus} onValueChange={setEmploymentStatus} required>
+                <SelectTrigger id="employmentStatus">
+                  <SelectValue placeholder="Select Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Student">Student</SelectItem>
+                  <SelectItem value="Employed">Employed</SelectItem>
+                  <SelectItem value="Self-Employed">Self-Employed</SelectItem>
+                  <SelectItem value="Business">Business</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
             <div className="grid gap-2">
               <Label className="mb-2">Account Type</Label>
               <RadioGroup
-                defaultValue="merchant"
+                value={accountType} // Controlled by state
                 onValueChange={(value: 'merchant' | 'customer') => setAccountType(value)}
                 className="flex justify-center gap-8"
               >
@@ -77,46 +227,6 @@ export default function SignUp() {
               </RadioGroup>
             </div>
 
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div className="grid grid-cols-3 gap-2">
-              <div className="col-span-1">
-                <Label htmlFor="areaCode">Area Code</Label>
-                <Select value={areaCode} onValueChange={setAreaCode} required>
-                  <SelectTrigger id="areaCode">
-                    <SelectValue placeholder="Select" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="+1">+1 (USA/Canada)</SelectItem>
-                    <SelectItem value="+44">+44 (UK)</SelectItem>
-                    <SelectItem value="+264">+264 (Namibia)</SelectItem>
-                    <SelectItem value="+234">+234 (Nigeria)</SelectItem>
-                    <SelectItem value="+27">+27 (South Africa)</SelectItem>
-                    {/* Add more area codes as needed */}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="col-span-2">
-                <Label htmlFor="phoneNumber">Phone Number</Label>
-                <Input
-                  id="phoneNumber"
-                  type="tel"
-                  placeholder="e.g., 812345678"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  required
-                />
-              </div>
-            </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <Input
