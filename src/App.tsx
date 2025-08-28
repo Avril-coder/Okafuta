@@ -15,9 +15,10 @@ import Benefits from "./pages/merchant/Benefits";
 import Settings from "./pages/merchant/Settings";
 import KycVerification from "./pages/merchant/KycVerification";
 import InvoicePage from "./pages/merchant/Invoice";
-import Profile from "./pages/merchant/Profile"; // New import for Profile page
+import Profile from "./pages/merchant/Profile";
 import AdminLayout from "./components/admin/Layout";
 import KycReview from "./pages/admin/KycReview";
+import { WalletProvider } from "./context/WalletContext"; // Import WalletProvider
 
 const queryClient = new QueryClient();
 
@@ -32,14 +33,14 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           
-          <Route path="/dashboard" element={<MerchantLayout />}>
+          <Route path="/dashboard" element={<WalletProvider><MerchantLayout /></WalletProvider>}> {/* Wrap with WalletProvider */}
             <Route index element={<MerchantDashboard />} />
             <Route path="transact" element={<Transact />} />
             <Route path="customers" element={<Customers />} />
             <Route path="benefits" element={<Benefits />} />
             <Route path="kyc" element={<KycVerification />} />
             <Route path="invoice" element={<InvoicePage />} />
-            <Route path="profile" element={<Profile />} /> {/* New merchant Profile route */}
+            <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 
