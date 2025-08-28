@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
+import { GradientButton } from '@/components/landing/GradientButton';
+import { BlobBackground } from '@/components/shared/BlobBackground'; // Import BlobBackground
 
 // Define a list of common country codes
 const countryCodes = [
@@ -47,8 +48,9 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
-      <Card className="w-full max-w-md">
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 overflow-hidden">
+      <BlobBackground /> {/* Add the blob background */}
+      <Card className="relative z-10 w-full max-w-md"> {/* Ensure card is above background */}
         <CardHeader className="text-center">
           <div className="flex justify-center mb-2">
             <Wallet className="h-10 w-10 text-amber-600" />
