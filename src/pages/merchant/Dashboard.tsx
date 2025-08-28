@@ -1,7 +1,7 @@
 import { BalanceCard } from "@/components/merchant/BalanceCard";
 import { QuickLinks } from "@/components/merchant/QuickLinks";
 import { RecentActivity } from "@/components/merchant/RecentActivity";
-import { DollarSign, Globe } from "lucide-react";
+// Removed DollarSign, Globe imports as they are no longer used in BalanceCard
 
 export default function MerchantDashboard() {
   return (
@@ -16,9 +16,9 @@ export default function MerchantDashboard() {
       </div>
 
       <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <BalanceCard currency="USD" amount="$12,345.67" icon={DollarSign} />
-        <BalanceCard currency="NAD" amount="N$ 185,185.05" icon={Globe} />
-        <BalanceCard currency="NGN" amount="₦ 9,876,543.21" icon={Globe} />
+        <BalanceCard currency="USD" amount="12,345.67" currencySymbol="$" />
+        <BalanceCard currency="NAD" amount="185,185.05" currencySymbol="N$" />
+        <BalanceCard currency="NGN" amount="9,876,543.21" currencySymbol="₦" />
       </div>
 
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
