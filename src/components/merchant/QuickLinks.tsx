@@ -8,14 +8,15 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Link } from "react-router-dom"; // Import Link
 
 const links = [
-  { name: "Add Money", icon: ArrowDownToLine },
-  { name: "Withdraw", icon: ArrowUpFromLine },
-  { name: "Bill Payment", icon: Landmark },
-  { name: "Move Money", icon: Move },
-  { name: "Create Voucher", icon: Ticket },
-  { name: "Invoice", icon: FileText },
+  { name: "Add Money", icon: ArrowDownToLine, href: "/dashboard/transact?tab=add-fund" },
+  { name: "Withdraw", icon: ArrowUpFromLine, href: "/dashboard/transact?tab=payout" },
+  { name: "Bill Payment", icon: Landmark, href: "/dashboard/transact?tab=bill-payment" },
+  { name: "Move Money", icon: Move, href: "/dashboard/transact?tab=move-money" },
+  { name: "Create Voucher", icon: Ticket, href: "/dashboard/benefits?tab=vouchers" },
+  { name: "Invoice", icon: FileText, href: "/dashboard/transact" }, // Linked to transact for now, could be a new tab
 ];
 
 export function QuickLinks() {
@@ -31,9 +32,12 @@ export function QuickLinks() {
               key={link.name}
               variant="outline"
               className="flex flex-col h-24 w-full"
+              asChild // Use asChild to pass props to the Link component
             >
-              <link.icon className="h-6 w-6 mb-2" />
-              <span className="text-xs text-center">{link.name}</span>
+              <Link to={link.href}>
+                <link.icon className="h-6 w-6 mb-2" />
+                <span className="text-xs text-center">{link.name}</span>
+              </Link>
             </Button>
           ))}
         </div>
