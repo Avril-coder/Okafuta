@@ -26,6 +26,14 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
 
+  // New state for conditional fields
+  const [proofOfRegistration, setProofOfRegistration] = useState<File | null>(null);
+  const [companyName, setCompanyName] = useState('');
+  const [companyAddress, setCompanyAddress] = useState('');
+  const [salary, setSalary] = useState('');
+  const [payslip, setPayslip] = useState<File | null>(null);
+  const [placeOfResidence, setPlaceOfResidence] = useState('');
+
   // Effect to update account type based on employment status
   useEffect(() => {
     if (employmentStatus === 'Business' || employmentStatus === 'Self-Employed') {
@@ -42,6 +50,18 @@ export default function SignUp() {
       return;
     }
 
+    // Basic validation for conditional fields
+    if (employmentStatus === 'Student' && !proofOfRegistration) {
+      toast.error("Please upload proof of registration.");
+      return;
+    }
+    if (employmentStatus === 'Employed') {
+      if (!companyName || !companyAddress || !salary || !payslip || !placeOfResidence) {
+        toast.error("Please fill all required fields for employment status and upload payslip.");
+        return;
+      }
+    }
+
     console.log("Signing up with:", {
       firstName,
       lastName,
@@ -54,6 +74,15 @@ export default function SignUp() {
       maritalStatus,
       password,
       accountType,
+      // Conditional fields
+      ...(employmentStatus === 'Student' && { proofOfRegistration: proofOfRegistration?.name }),
+      ...(employmentStatus === 'Employed' && {
+        companyName,
+        companyAddress,
+        salary,
+        payslip: payslip?.name,
+        placeOfResidence,
+      }),
     });
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
@@ -98,7 +127,7 @@ export default function SignUp() {
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="identityNumber">Identity Number / ID</Label>
+              <Label htmlFor="identityNumber">ID / Passport Number</Label> {/* Updated label */}
               <Input
                 id="identityNumber"
                 type="text"
@@ -194,6 +223,80 @@ export default function SignUp() {
                 </SelectContent>
               </Select>
             </div>
+
+            {/* Conditional fields based on Employment Status */}
+            {employmentStatus === 'Student' && (
+              <div className="grid gap-2">
+                <Label htmlFor="proofOfRegistration">Proof of Registration</Label>
+                <Input
+                  id="proofOfRegistration"
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(e) => setProofOfRegistration(e.target.files ? e.target.files[0] : null)}
+                  required
+                />
+              </div>
+            )}
+
+            {employmentStatus === 'Employed' && (
+              <>
+                <div className="grid gap-2">
+                  <Label htmlFor="companyName">Company Name</Label>
+                  <Input
+                    id="companyName"
+                    type="text"
+                    placeholder="e.g., Tech Solutions Inc."
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="companyAddress">Physical Address (Company)</Label>
+                  <Input
+                    id="companyAddress"
+                    type="text"
+                    placeholder="e.g., 456 Business Rd, City, Country"
+                    value={companyAddress}
+                    onChange={(e) => setCompanyAddress(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="salary">Salary (Net Pay)</Label>
+                  <Input
+                    id="salary"
+                    type="number"
+                    placeholder="e.g., 15000.00"
+                    value={salary}
+                    onChange={(e) => setSalary(e.target.value)}
+                    step="0.01"
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="payslip">Payslip Attachment</Label>
+                  <Input
+                    id="payslip"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => setPayslip(e.target.files ? e.target.files[0] : null)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="placeOfResidence">Place of Residence</Label>
+                  <Input
+                    id="placeOfResidence"
+                    type="text"
+                    placeholder="e.g., 789 Residential St, City, Country"
+                    value={placeOfResidence}
+                    onChange={(e) => setPlaceOfResidence(e.target.value)}
+                    required
+                  />
+                </div>
+              </>
+            )}
 
             <div className="grid gap-2">
               <Label className="mb-2">Account Type</Label>
