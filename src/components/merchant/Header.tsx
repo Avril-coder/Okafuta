@@ -34,7 +34,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="-ml-2 flex items-center justify-center text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary lg:hidden"
+              className="flex items-center justify-center text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary lg:hidden"
             >
               <span className="sr-only">Open sidebar</span>
               <Menu className="h-5 w-5" aria-hidden="true" />
@@ -73,8 +73,8 @@ export function Header() {
           </SheetContent>
         </Sheet>
 
-        <div className="flex-1 flex">
-          <form className="w-full flex md:ml-0" action="#" method="GET">
+        <div className="flex"> {/* Removed flex-1 */}
+          <form className="flex md:ml-0 max-w-xs lg:max-w-sm" action="#" method="GET"> {/* Added max-w-xs and lg:max-w-sm */}
             <label htmlFor="search-field" className="sr-only">
               Search
             </label>
