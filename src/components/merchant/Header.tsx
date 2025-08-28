@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Search, Bell, Menu, Wallet, LayoutDashboard, ArrowRightLeft, Users, CreditCard, Settings, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
