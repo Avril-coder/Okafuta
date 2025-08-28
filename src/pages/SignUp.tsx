@@ -30,6 +30,10 @@ export default function SignUp() {
   const [studentType, setStudentType] = useState<'local' | 'foreign' | ''>(''); // 'local', 'foreign', or '' (undetermined)
   const [proofOfRegistration, setProofOfRegistration] = useState<File | null>(null);
   const [studyPermit, setStudyPermit] = useState<File | null>(null);
+  // NEW: Student physical address and proof
+  const [studentPhysicalAddress, setStudentPhysicalAddress] = useState('');
+  const [studentProofOfAddressFile, setStudentProofOfAddressFile] = useState<File | null>(null);
+
 
   // Conditional fields for Employed employment status
   const [companyNameEmployed, setCompanyNameEmployed] = useState('');
@@ -67,6 +71,9 @@ export default function SignUp() {
       setStudentType('');
       setProofOfRegistration(null);
       setStudyPermit(null);
+      // NEW: Clear student address fields
+      setStudentPhysicalAddress('');
+      setStudentProofOfAddressFile(null);
     }
   }, [employmentStatus]);
 
@@ -124,6 +131,15 @@ export default function SignUp() {
         toast.error("Please upload your study permit.");
         return;
       }
+      // NEW: Validate student address fields
+      if (!studentPhysicalAddress) {
+        toast.error("Please enter your physical address.");
+        return;
+      }
+      if (!studentProofOfAddressFile) {
+        toast.error("Please upload a water bill or lease agreement for proof of address.");
+        return;
+      }
     }
     if (employmentStatus === 'Employed') {
       if (!companyNameEmployed || !companyAddressEmployed || !salary || !payslip || !placeOfResidenceEmployed) {
@@ -170,6 +186,9 @@ export default function SignUp() {
         studentType,
         proofOfRegistration: proofOfRegistration?.name,
         ...(studentType === 'foreign' && { studyPermit: studyPermit?.name }),
+        // NEW: Student address fields
+        physicalAddress: studentPhysicalAddress,
+        proofOfAddressFile: studentProofOfAddressFile?.name,
       }),
       ...(employmentStatus === 'Employed' && {
         companyName: companyNameEmployed,
@@ -394,6 +413,29 @@ export default function SignUp() {
                     />
                   </div>
                 )}
+                {/* NEW: Student Physical Address */}
+                <div className="grid gap-2">
+                  <Label htmlFor="studentPhysicalAddress">Physical Address</Label>
+                  <Input
+                    id="studentPhysicalAddress"
+                    type="text"
+                    placeholder="e.g., 123 University Ave, City, Country"
+                    value={studentPhysicalAddress}
+                    onChange={(e) => setStudentPhysicalAddress(e.target.value)}
+                    required
+                  />
+                </div>
+                {/* NEW: Student Proof of Address File */}
+                <div className="grid gap-2">
+                  <Label htmlFor="studentProofOfAddressFile">Water Bill / Lease Agreement (Proof of Address)</Label>
+                  <Input
+                    id="studentProofOfAddressFile"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => setStudentProofOfAddressFile(e.target.files ? e.target.files[0] : null)}
+                    required
+                  />
+                </div>
               </>
             )}
 
