@@ -60,7 +60,7 @@ export const LandingHeader: React.FC = () => {
 
           {/* Login Button */}
           <GradientButton asChild>
-            <Link to="/dashboard">Login Now</Link>
+            <Link to="/login">Login Now</Link> {/* Changed from /dashboard to /login */}
           </GradientButton>
         </div>
 
