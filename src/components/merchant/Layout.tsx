@@ -4,9 +4,9 @@ import { Header } from "./Header";
 
 export default function MerchantLayout() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex">
       <Sidebar />
-      <div className="flex flex-col flex-1"> {/* Removed lg:ml-64 */}
+      <div className="flex flex-col flex-1 w-full">
         <Header />
         <main className="flex-1 pb-8">
           <Outlet />

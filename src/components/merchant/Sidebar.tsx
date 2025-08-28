@@ -8,7 +8,7 @@ import {
   Wallet,
   CheckCircle,
   FileText,
-  User, // New icon for Profile
+  User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +19,7 @@ const navigation = [
   { name: "Benefits & Cards", href: "/dashboard/benefits", icon: CreditCard },
   { name: "KYC Verification", href: "/dashboard/kyc", icon: CheckCircle },
   { name: "Invoices", href: "/dashboard/invoice", icon: FileText },
-  { name: "Profile", href: "/dashboard/profile", icon: User }, // New Profile link
+  { name: "Profile", href: "/dashboard/profile", icon: User },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 

@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
-import { Menu as HeadlessMenu, Transition } from "@headlessui/react";
-import { Search, Bell, Menu, Wallet, LayoutDashboard, ArrowRightLeft, Users, CreditCard, Settings, User } from "lucide-react"; // Added User icon
+import { Search, Bell, Menu, Wallet, LayoutDashboard, ArrowRightLeft, Users, CreditCard, Settings, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -13,9 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { NavLink, Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { toast } from "sonner"; // Import toast
+import { toast } from "sonner";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -29,7 +28,6 @@ export function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // In a real application, you would clear user session/token here.
     toast.success("You have been logged out.");
     navigate('/login');
   };
@@ -44,9 +42,10 @@ export function Header() {
               variant="ghost"
               size="icon"
               className="flex items-center justify-center text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary lg:hidden"
+              aria-label="Open menu"
             >
               <span className="sr-only">Open sidebar</span>
-              <Menu className="h-5 w-5" aria-hidden="true" />
+              <Menu className="h-6 w-6" aria-hidden="true" />
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[240px] p-0">
@@ -82,8 +81,8 @@ export function Header() {
           </SheetContent>
         </Sheet>
 
-        <div className="flex"> {/* Removed flex-1 */}
-          <form className="flex md:ml-0 max-w-xs lg:max-w-sm" action="#" method="GET"> {/* Added max-w-xs and lg:max-w-sm */}
+        <div className="flex">
+          <form className="flex md:ml-0 max-w-xs lg:max-w-sm" action="#" method="GET">
             <label htmlFor="search-field" className="sr-only">
               Search
             </label>
@@ -105,14 +104,13 @@ export function Header() {
           </form>
         </div>
         <div className="ml-4 flex items-center md:ml-6">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="Notifications">
             <Bell className="h-6 w-6" aria-hidden="true" />
-            <span className="sr-only">View notifications</span>
           </Button>
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+              <Button variant="ghost" className="relative h-8 w-8 rounded-full" aria-label="User menu">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                   <AvatarFallback>CN</AvatarFallback>
@@ -122,8 +120,7 @@ export function Header() {
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">User ID</p> {/* Changed from shadcn to User ID */}
-                  {/* Removed the email line */}
+                  <p className="text-sm font-medium leading-none">User ID</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -133,7 +130,6 @@ export function Header() {
                   Profile
                 </Link>
               </DropdownMenuItem>
-              {/* Removed Billing DropdownMenuItem */}
               <DropdownMenuItem asChild>
                 <Link to="/dashboard/settings">
                   <Settings className="mr-2 h-4 w-4" />

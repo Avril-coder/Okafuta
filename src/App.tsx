@@ -8,7 +8,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Onboarding from "./pages/Onboarding";
-import ForgotPassword from "./pages/ForgotPassword"; // Import the new ForgotPassword page
+import ForgotPassword from "./pages/ForgotPassword";
 import MerchantLayout from "./components/merchant/Layout";
 import MerchantDashboard from "./pages/merchant/Dashboard";
 import Transact from "./pages/merchant/Transact";
@@ -35,7 +35,7 @@ const App = () => (
           <Route path="/login" element={<Login />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} /> {/* New ForgotPassword route */}
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           
           <Route path="/dashboard" element={<WalletProvider><MerchantLayout /></WalletProvider>}>
             <Route index element={<MerchantDashboard />} />
@@ -51,10 +51,9 @@ const App = () => (
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="kyc-requests" element={<KycReview />} />
-            {/* Add other admin routes here */}
           </Route>
 
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          {/* Catch-all route for 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
