@@ -6,13 +6,15 @@ import { Input } from '@/components/ui/input';
 import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
 import { GradientButton } from '@/components/landing/GradientButton';
-import { BlobBackground } from '@/components/shared/BlobBackground'; // Import BlobBackground
+import { BlobBackground } from '@/components/shared/BlobBackground';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'; // Import RadioGroup components
 
 export default function SignUp() {
   const navigate = useNavigate();
   const [identifier, setIdentifier] = useState(''); // This will be for ID/Passport Number
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant'); // New state for account type
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,24 +25,42 @@ export default function SignUp() {
 
     // In a real application, you would handle user registration here.
     // For now, we'll just simulate a successful sign-up and redirect.
-    console.log("Signing up with:", { identifier, password });
+    console.log("Signing up with:", { identifier, password, accountType });
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
   };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 overflow-hidden">
-      <BlobBackground /> {/* Add the blob background */}
-      <Card className="relative z-10 w-full max-w-md"> {/* Ensure card is above background */}
+      <BlobBackground />
+      <Card className="relative z-10 w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-2">
-            <Wallet className="h-10 w-10 text-blue-600" /> {/* Changed to text-blue-600 */}
+            <Wallet className="h-10 w-10 text-blue-600" />
           </div>
           <CardTitle className="text-3xl font-bold">Sign Up</CardTitle>
-          <CardDescription>Create your account to get started.</CardDescription>
+          <CardDescription>Create your account to get started as a Merchant or Customer.</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignUp} className="space-y-4">
+            <div className="grid gap-2">
+              <Label htmlFor="account-type">Account Type</Label>
+              <RadioGroup
+                defaultValue="merchant"
+                onValueChange={(value: 'merchant' | 'customer') => setAccountType(value)}
+                className="flex space-x-4"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="merchant" id="account-type-merchant" />
+                  <Label htmlFor="account-type-merchant">Merchant</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="customer" id="account-type-customer" />
+                  <Label htmlFor="account-type-customer">Customer</Label>
+                </div>
+              </RadioGroup>
+            </div>
+
             <div className="grid gap-2">
               <Label htmlFor="identifier">ID/Passport Number</Label>
               <Input
