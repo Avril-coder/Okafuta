@@ -7,7 +7,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
-import Onboarding from "./pages/Onboarding"; // Import the new Onboarding page
+import Onboarding from "./pages/Onboarding";
+import ForgotPassword from "./pages/ForgotPassword"; // Import the new ForgotPassword page
 import MerchantLayout from "./components/merchant/Layout";
 import MerchantDashboard from "./pages/merchant/Dashboard";
 import Transact from "./pages/merchant/Transact";
@@ -32,8 +33,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/onboarding" element={<Onboarding />} /> {/* New Onboarding route */}
-          <Route path="/signup" element={<SignUp />} /> {/* Simplified SignUp route */}
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} /> {/* New ForgotPassword route */}
           
           <Route path="/dashboard" element={<WalletProvider><MerchantLayout /></WalletProvider>}>
             <Route index element={<MerchantDashboard />} />

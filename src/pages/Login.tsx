@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -6,26 +6,29 @@ import { Input } from '@/components/ui/input';
 import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
 import { GradientButton } from '@/components/landing/GradientButton';
-import { BlobBackground } from '@/components/shared/BlobBackground'; // Import BlobBackground
+import { BlobBackground } from '@/components/shared/BlobBackground';
+import { Checkbox } from '@/components/ui/checkbox'; // Import Checkbox
 
 export default function Login() {
   const navigate = useNavigate();
+  const [rememberMe, setRememberMe] = useState(false); // State for remember me checkbox
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real application, you would handle user authentication here.
     // For now, we'll just simulate a successful login and redirect to dashboard.
+    console.log("Remember Me:", rememberMe); // Log rememberMe state
     toast.success("Logged in successfully!");
     navigate('/dashboard');
   };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 overflow-hidden">
-      <BlobBackground /> {/* Add the blob background */}
-      <Card className="relative z-10 w-full max-w-md"> {/* Ensure card is above background */}
+      <BlobBackground />
+      <Card className="relative z-10 w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-2">
-            <Wallet className="h-10 w-10 text-blue-600" /> {/* Changed to text-blue-600 */}
+            <Wallet className="h-10 w-10 text-blue-600" />
           </div>
           <CardTitle className="text-3xl font-bold">Login</CardTitle>
           <CardDescription>Enter your credentials to access your account.</CardDescription>
@@ -39,6 +42,21 @@ export default function Login() {
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" required />
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="remember-me"
+                  checked={rememberMe}
+                  onCheckedChange={(checked) => setRememberMe(!!checked)}
+                />
+                <Label htmlFor="remember-me" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                  Remember me
+                </Label>
+              </div>
+              <Link to="/forgot-password" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                Forgot Password?
+              </Link>
             </div>
             <GradientButton type="submit" className="w-full">
               Login
