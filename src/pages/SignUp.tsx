@@ -26,13 +26,19 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
 
-  // New state for conditional fields
+  // New state for conditional fields (Employment Status)
   const [proofOfRegistration, setProofOfRegistration] = useState<File | null>(null);
   const [companyName, setCompanyName] = useState('');
   const [companyAddress, setCompanyAddress] = useState('');
   const [salary, setSalary] = useState('');
   const [payslip, setPayslip] = useState<File | null>(null);
   const [placeOfResidence, setPlaceOfResidence] = useState('');
+
+  // New state for conditional fields (Marital Status)
+  const [marriageCertificate, setMarriageCertificate] = useState<File | null>(null);
+  const [divorceDocument, setDivorceDocument] = useState<File | null>(null);
+  const [deathCertificate, setDeathCertificate] = useState<File | null>(null);
+
 
   // Effect to update account type based on employment status
   useEffect(() => {
@@ -50,7 +56,7 @@ export default function SignUp() {
       return;
     }
 
-    // Basic validation for conditional fields
+    // Basic validation for conditional employment fields
     if (employmentStatus === 'Student' && !proofOfRegistration) {
       toast.error("Please upload proof of registration.");
       return;
@@ -60,6 +66,20 @@ export default function SignUp() {
         toast.error("Please fill all required fields for employment status and upload payslip.");
         return;
       }
+    }
+
+    // Basic validation for conditional marital status fields
+    if (maritalStatus === 'married' && !marriageCertificate) {
+      toast.error("Please upload your marriage certificate.");
+      return;
+    }
+    if (maritalStatus === 'divorced' && !divorceDocument) {
+      toast.error("Please upload your divorce decree or supporting document.");
+      return;
+    }
+    if (maritalStatus === 'widowed' && !deathCertificate) {
+      toast.error("Please upload the death certificate or supporting document.");
+      return;
     }
 
     console.log("Signing up with:", {
@@ -74,7 +94,7 @@ export default function SignUp() {
       maritalStatus,
       password,
       accountType,
-      // Conditional fields
+      // Conditional employment fields
       ...(employmentStatus === 'Student' && { proofOfRegistration: proofOfRegistration?.name }),
       ...(employmentStatus === 'Employed' && {
         companyName,
@@ -83,6 +103,10 @@ export default function SignUp() {
         payslip: payslip?.name,
         placeOfResidence,
       }),
+      // Conditional marital status fields
+      ...(maritalStatus === 'married' && { marriageCertificate: marriageCertificate?.name }),
+      ...(maritalStatus === 'divorced' && { divorceDocument: divorceDocument?.name }),
+      ...(maritalStatus === 'widowed' && { deathCertificate: deathCertificate?.name }),
     });
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
@@ -208,6 +232,44 @@ export default function SignUp() {
                 </Select>
               </div>
             </div>
+
+            {/* Conditional fields based on Marital Status */}
+            {maritalStatus === 'married' && (
+              <div className="grid gap-2">
+                <Label htmlFor="marriageCertificate">Marriage Certificate</Label>
+                <Input
+                  id="marriageCertificate"
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(e) => setMarriageCertificate(e.target.files ? e.target.files[0] : null)}
+                  required
+                />
+              </div>
+            )}
+            {maritalStatus === 'divorced' && (
+              <div className="grid gap-2">
+                <Label htmlFor="divorceDocument">Divorce Decree / Supporting Document</Label>
+                <Input
+                  id="divorceDocument"
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(e) => setDivorceDocument(e.target.files ? e.target.files[0] : null)}
+                  required
+                />
+              </div>
+            )}
+            {maritalStatus === 'widowed' && (
+              <div className="grid gap-2">
+                <Label htmlFor="deathCertificate">Death Certificate / Supporting Document</Label>
+                <Input
+                  id="deathCertificate"
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  onChange={(e) => setDeathCertificate(e.target.files ? e.target.files[0] : null)}
+                  required
+                />
+              </div>
+            )}
 
             <div className="grid gap-2">
               <Label htmlFor="employmentStatus">Employment Status</Label>
