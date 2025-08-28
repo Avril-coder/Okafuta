@@ -30,7 +30,6 @@ export default function SignUp() {
   const [studentType, setStudentType] = useState<'local' | 'foreign' | ''>(''); // 'local', 'foreign', or '' (undetermined)
   const [proofOfRegistration, setProofOfRegistration] = useState<File | null>(null);
   const [studyPermit, setStudyPermit] = useState<File | null>(null);
-  // NEW: Student physical address and proof
   const [studentPhysicalAddress, setStudentPhysicalAddress] = useState('');
   const [studentProofOfAddressFile, setStudentProofOfAddressFile] = useState<File | null>(null);
 
@@ -41,13 +40,17 @@ export default function SignUp() {
   const [salary, setSalary] = useState('');
   const [payslip, setPayslip] = useState<File | null>(null);
   const [placeOfResidenceEmployed, setPlaceOfResidenceEmployed] = useState('');
+  const [employedProofOfResidentialAddressFile, setEmployedProofOfResidentialAddressFile] = useState<File | null>(null);
+
 
   // Conditional fields for Self-Employed / Business employment status
   const [businessCompanyName, setBusinessCompanyName] = useState('');
   const [businessRegistrationNumber, setBusinessRegistrationNumber] = useState('');
   const [businessNatureOfBusiness, setBusinessNatureOfBusiness] = useState('');
-  const [businessPhysicalAddress, setBusinessPhysicalAddress] = useState('');
-  const [businessPlaceOfBusinessFile, setBusinessPlaceOfBusinessFile] = useState<File | null>(null);
+  const [businessPhysicalAddress, setBusinessPhysicalAddress] = useState(''); // Business physical address
+  const [businessPlaceOfBusinessFile, setBusinessPlaceOfBusinessFile] = useState<File | null>(null); // Proof of business address
+  const [businessResidentialAddress, setBusinessResidentialAddress] = useState(''); // Residential address for business owner
+  const [businessProofOfResidentialAddressFile, setBusinessProofOfResidentialAddressFile] = useState<File | null>(null); // Proof of residential address
 
 
   // Conditional fields for Marital Status
@@ -71,7 +74,6 @@ export default function SignUp() {
       setStudentType('');
       setProofOfRegistration(null);
       setStudyPermit(null);
-      // NEW: Clear student address fields
       setStudentPhysicalAddress('');
       setStudentProofOfAddressFile(null);
     }
@@ -85,6 +87,7 @@ export default function SignUp() {
       setSalary('');
       setPayslip(null);
       setPlaceOfResidenceEmployed('');
+      setEmployedProofOfResidentialAddressFile(null);
     }
   }, [employmentStatus]);
 
@@ -96,6 +99,8 @@ export default function SignUp() {
       setBusinessNatureOfBusiness('');
       setBusinessPhysicalAddress('');
       setBusinessPlaceOfBusinessFile(null);
+      setBusinessResidentialAddress('');
+      setBusinessProofOfResidentialAddressFile(null);
     }
   }, [employmentStatus]);
 
@@ -131,7 +136,6 @@ export default function SignUp() {
         toast.error("Please upload your study permit.");
         return;
       }
-      // NEW: Validate student address fields
       if (!studentPhysicalAddress) {
         toast.error("Please enter your physical address.");
         return;
@@ -146,11 +150,23 @@ export default function SignUp() {
         toast.error("Please fill all required fields for employment status and upload payslip.");
         return;
       }
+      if (!employedProofOfResidentialAddressFile) {
+        toast.error("Please upload a water bill or lease agreement for proof of residential address.");
+        return;
+      }
     }
     // Validation for Self-Employed / Business fields
     if (employmentStatus === 'Self-Employed' || employmentStatus === 'Business') {
       if (!businessCompanyName || !businessRegistrationNumber || !businessNatureOfBusiness || !businessPhysicalAddress || !businessPlaceOfBusinessFile) {
         toast.error("Please fill all required fields for business/self-employed status and upload a document for place of business.");
+        return;
+      }
+      if (!businessResidentialAddress) {
+        toast.error("Please enter your residential address.");
+        return;
+      }
+      if (!businessProofOfResidentialAddressFile) {
+        toast.error("Please upload a water bill or lease agreement for proof of residential address.");
         return;
       }
     }
@@ -186,7 +202,6 @@ export default function SignUp() {
         studentType,
         proofOfRegistration: proofOfRegistration?.name,
         ...(studentType === 'foreign' && { studyPermit: studyPermit?.name }),
-        // NEW: Student address fields
         physicalAddress: studentPhysicalAddress,
         proofOfAddressFile: studentProofOfAddressFile?.name,
       }),
@@ -196,14 +211,17 @@ export default function SignUp() {
         salary,
         payslip: payslip?.name,
         placeOfResidence: placeOfResidenceEmployed,
+        proofOfResidentialAddressFile: employedProofOfResidentialAddressFile?.name,
       }),
       // Self-Employed / Business fields
       ...( (employmentStatus === 'Self-Employed' || employmentStatus === 'Business') && {
         companyName: businessCompanyName,
         registrationNumber: businessRegistrationNumber,
         natureOfBusiness: businessNatureOfBusiness,
-        physicalAddress: businessPhysicalAddress,
-        placeOfBusinessFile: businessPlaceOfBusinessFile?.name,
+        businessPhysicalAddress: businessPhysicalAddress,
+        businessPlaceOfBusinessFile: businessPlaceOfBusinessFile?.name,
+        residentialAddress: businessResidentialAddress,
+        proofOfResidentialAddressFile: businessProofOfResidentialAddressFile?.name,
       }),
       // Conditional marital status fields
       ...(maritalStatus === 'married' && { marriageCertificate: marriageCertificate?.name }),
@@ -413,7 +431,6 @@ export default function SignUp() {
                     />
                   </div>
                 )}
-                {/* NEW: Student Physical Address */}
                 <div className="grid gap-2">
                   <Label htmlFor="studentPhysicalAddress">Physical Address</Label>
                   <Input
@@ -425,7 +442,6 @@ export default function SignUp() {
                     required
                   />
                 </div>
-                {/* NEW: Student Proof of Address File */}
                 <div className="grid gap-2">
                   <Label htmlFor="studentProofOfAddressFile">Water Bill / Lease Agreement (Proof of Address)</Label>
                   <Input
@@ -496,6 +512,16 @@ export default function SignUp() {
                     required
                   />
                 </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="employedProofOfResidentialAddressFile">Water Bill / Lease Agreement (Proof of Residential Address)</Label>
+                  <Input
+                    id="employedProofOfResidentialAddressFile"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => setEmployedProofOfResidentialAddressFile(e.target.files ? e.target.files[0] : null)}
+                    required
+                  />
+                </div>
               </>
             )}
 
@@ -536,7 +562,7 @@ export default function SignUp() {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <Label htmlFor="businessPhysicalAddress">Physical Address</Label>
+                  <Label htmlFor="businessPhysicalAddress">Physical Address (Business)</Label>
                   <Input
                     id="businessPhysicalAddress"
                     type="text"
@@ -553,6 +579,27 @@ export default function SignUp() {
                     type="file"
                     accept=".pdf,.jpg,.jpeg,.png"
                     onChange={(e) => setBusinessPlaceOfBusinessFile(e.target.files ? e.target.files[0] : null)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="businessResidentialAddress">Residential Address</Label>
+                  <Input
+                    id="businessResidentialAddress"
+                    type="text"
+                    placeholder="e.g., 789 Home St, City, Country"
+                    value={businessResidentialAddress}
+                    onChange={(e) => setBusinessResidentialAddress(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="businessProofOfResidentialAddressFile">Water Bill / Lease Agreement (Proof of Residential Address)</Label>
+                  <Input
+                    id="businessProofOfResidentialAddressFile"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    onChange={(e) => setBusinessProofOfResidentialAddressFile(e.target.files ? e.target.files[0] : null)}
                     required
                   />
                 </div>
