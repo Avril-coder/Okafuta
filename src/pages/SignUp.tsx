@@ -6,13 +6,29 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+
+// Define a list of common country codes
+const countryCodes = [
+  { label: 'United States (+1)', value: '+1' },
+  { label: 'United Kingdom (+44)', value: '+44' },
+  { label: 'Nigeria (+234)', value: '+234' },
+  { label: 'Namibia (+264)', value: '+264' },
+  { label: 'South Africa (+27)', value: '+27' },
+  { label: 'Canada (+1)', value: '+1' },
+  { label: 'Australia (+61)', value: '+61' },
+  { label: 'Germany (+49)', value: '+49' },
+  { label: 'France (+33)', value: '+33' },
+  { label: 'India (+91)', value: '+91' },
+];
 
 export default function SignUp() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [cellphoneNumber, setCellphoneNumber] = useState('');
+  const [selectedCountryCode, setSelectedCountryCode] = useState(countryCodes[0].value); // Default to first in list
+  const [localPhoneNumber, setLocalPhoneNumber] = useState('');
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,8 +37,11 @@ export default function SignUp() {
       return;
     }
 
+    const fullPhoneNumber = `${selectedCountryCode}${localPhoneNumber}`;
+
     // In a real application, you would handle user registration here.
     // For now, we'll just simulate a successful sign-up and redirect.
+    console.log("Signing up with:", { email, fullPhoneNumber, password });
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
   };
@@ -52,14 +71,29 @@ export default function SignUp() {
             </div>
             <div className="grid gap-2">
               <Label htmlFor="cellphoneNumber">Cellphone Number</Label>
-              <Input
-                id="cellphoneNumber"
-                type="tel"
-                placeholder="+1234567890"
-                value={cellphoneNumber}
-                onChange={(e) => setCellphoneNumber(e.target.value)}
-                required
-              />
+              <div className="flex space-x-2">
+                <Select value={selectedCountryCode} onValueChange={setSelectedCountryCode}>
+                  <SelectTrigger className="w-[120px]">
+                    <SelectValue placeholder="Code" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {countryCodes.map((country) => (
+                      <SelectItem key={country.value} value={country.value}>
+                        {country.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Input
+                  id="localPhoneNumber"
+                  type="tel"
+                  placeholder="e.g., 812345678"
+                  value={localPhoneNumber}
+                  onChange={(e) => setLocalPhoneNumber(e.target.value)}
+                  required
+                  className="flex-1"
+                />
+              </div>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
