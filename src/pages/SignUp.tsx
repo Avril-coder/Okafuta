@@ -12,7 +12,7 @@ import { cn } from '@/lib/utils'; // Import cn for conditional class names
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const [identifier, setIdentifier] = useState(''); // This will be for ID/Passport Number
+  const [email, setEmail] = useState(''); // Changed from identifier to email
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant'); // New state for account type
@@ -26,7 +26,7 @@ export default function SignUp() {
 
     // In a real application, you would handle user registration here.
     // For now, we'll just simulate a successful sign-up and redirect.
-    console.log("Signing up with:", { identifier, password, accountType });
+    console.log("Signing up with:", { email, password, accountType }); // Log email
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
   };
@@ -49,41 +49,41 @@ export default function SignUp() {
               <RadioGroup
                 defaultValue="merchant"
                 onValueChange={(value: 'merchant' | 'customer') => setAccountType(value)}
-                className="grid grid-cols-2 gap-4"
+                className="flex justify-center gap-8" // Adjusted for spacing circular items
               >
                 <Label
                   htmlFor="account-type-merchant"
                   className={cn(
-                    "flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground",
-                    accountType === 'merchant' && "border-primary ring-2 ring-primary"
+                    "flex flex-col items-center justify-center h-28 w-28 rounded-full border-2 border-muted bg-popover hover:bg-accent hover:text-accent-foreground cursor-pointer transition-all duration-200",
+                    accountType === 'merchant' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400"
                   )}
                 >
                   <RadioGroupItem value="merchant" id="account-type-merchant" className="sr-only" />
-                  <Briefcase className="mb-3 h-6 w-6" />
-                  <span>Merchant</span>
+                  <Briefcase className="mb-2 h-7 w-7" />
+                  <span className="text-sm font-medium">Merchant</span>
                 </Label>
                 <Label
                   htmlFor="account-type-customer"
                   className={cn(
-                    "flex flex-col items-center justify-between rounded-md border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground",
-                    accountType === 'customer' && "border-primary ring-2 ring-primary"
+                    "flex flex-col items-center justify-center h-28 w-28 rounded-full border-2 border-muted bg-popover hover:bg-accent hover:text-accent-foreground cursor-pointer transition-all duration-200",
+                    accountType === 'customer' && "border-blue-600 ring-2 ring-blue-600 text-blue-600 dark:text-blue-400"
                   )}
                 >
                   <RadioGroupItem value="customer" id="account-type-customer" className="sr-only" />
-                  <User className="mb-3 h-6 w-6" />
-                  <span>Customer</span>
+                  <User className="mb-2 h-7 w-7" />
+                  <span className="text-sm font-medium">Customer</span>
                 </Label>
               </RadioGroup>
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="identifier">ID/Passport Number</Label>
+              <Label htmlFor="email">Email</Label> {/* Reverted to Email */}
               <Input
-                id="identifier"
-                type="text"
-                placeholder="e.g., 9012345678901"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
+                id="email"
+                type="email"
+                placeholder="m@example.com" // Reverted placeholder
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
