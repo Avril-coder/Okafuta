@@ -1,6 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Briefcase, ReceiptText, Handshake, Send, Link as LinkIcon, Code, ShoppingCart } from 'lucide-react';
+import {
+  Wallet,        // For Add Fund
+  Send,          // For Send Money
+  Handshake,     // For Request Money
+  ReceiptText,   // For Bill Payment
+  Move,          // For Move Money
+  ArrowUpFromLine, // For Payout
+  Gift,          // For Group Rebate
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface QuickActionLinkProps {
@@ -10,13 +18,13 @@ interface QuickActionLinkProps {
 }
 
 const quickActionLinks: QuickActionLinkProps[] = [
-  { name: 'Business Tools', href: '/dashboard/settings', icon: Briefcase },
-  { name: 'Invoicing', href: '/dashboard/invoice', icon: ReceiptText },
-  { name: 'Request Payments', href: '/dashboard/transact?tab=request-money', icon: Handshake },
-  { name: 'Send Payments', href: '/dashboard/transact?tab=send-money', icon: Send },
-  { name: 'Payment Links', href: '/dashboard/benefits?tab=vouchers', icon: LinkIcon }, // Reusing vouchers tab for now
-  { name: 'Pay Buttons', href: '/dashboard/settings', icon: Code }, // Placeholder for a dedicated page
-  { name: 'Checkout', href: '/dashboard/transact?tab=payout', icon: ShoppingCart }, // Reusing payout tab for now
+  { name: 'Add Fund', href: '/dashboard/transact?tab=add-fund', icon: Wallet },
+  { name: 'Send Money', href: '/dashboard/transact?tab=send-money', icon: Send },
+  { name: 'Request Money', href: '/dashboard/transact?tab=request-money', icon: Handshake },
+  { name: 'Bill Payment', href: '/dashboard/transact?tab=bill-payment', icon: ReceiptText },
+  { name: 'Move Money', href: '/dashboard/transact?tab=move-money', icon: Move },
+  { name: 'Payout', href: '/dashboard/transact?tab=payout', icon: ArrowUpFromLine },
+  { name: 'Group Rebate', href: '/dashboard/transact?tab=group-rebate', icon: Gift },
 ];
 
 export const TransactionQuickActions: React.FC = () => {
