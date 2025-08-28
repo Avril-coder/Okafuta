@@ -47,7 +47,7 @@ export default function Onboarding() {
 
       <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
         {/* QR Code Section */}
-        <Card className="flex flex-col items-center justify-center p-8 text-center h-full shadow-none border-none bg-gray-50 dark:bg-gray-900"> {/* Removed shadow */}
+        <Card className="flex flex-col items-center justify-center p-8 text-center h-full shadow-none border-none bg-gray-50 dark:bg-gray-900">
           <CardHeader>
             <CardTitle className="text-2xl font-semibold">Start Verification on Mobile</CardTitle>
           </CardHeader>
@@ -66,7 +66,7 @@ export default function Onboarding() {
         </Card>
 
         {/* Verification Steps List */}
-        <Card className="p-6 h-full shadow-none border-none bg-gray-50 dark:bg-gray-900"> {/* Removed shadow */}
+        <Card className="p-6 h-full shadow-none border-none bg-gray-50 dark:bg-gray-900">
           <CardHeader>
             <CardTitle className="text-xl font-semibold mb-4">Verification Steps</CardTitle>
           </CardHeader>
@@ -77,22 +77,24 @@ export default function Onboarding() {
                 className={cn(
                   "flex items-center p-4 rounded-lg transition-all duration-200",
                   currentStep === step.id
-                    ? "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700" // Removed shadow-sm
-                    : "bg-gray-100 dark:bg-gray-800" // Slightly lighter gray for inactive background
+                    ? "bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700"
+                    : "bg-gray-100 dark:bg-gray-800"
                 )}
               >
                 <div
                   className={cn(
                     "flex items-center justify-center h-10 w-10 rounded-full mr-4",
                     currentStep === step.id
-                      ? "bg-blue-600 text-white" // Darker blue for active icon background
-                      : "bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-600" // Lighter gray for inactive icon and text
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-600"
                   )}
                 >
                   <step.icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className={cn("font-medium", currentStep === step.id ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-gray-400")}>{step.name}</h3>
+                  <h3 className={cn("font-medium", currentStep === step.id ? "text-gray-900 dark:text-white" : "text-gray-500 dark:text-gray-400")}>
+                    Step {step.id}: {step.name} {/* Added explicit step number */}
+                  </h3>
                   <p className={cn("text-sm", currentStep === step.id ? "text-gray-600 dark:text-gray-300" : "text-gray-400 dark:text-gray-600")}>{step.description}</p>
                 </div>
               </div>
