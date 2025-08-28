@@ -1,4 +1,4 @@
-import { MadeWithDyad } from "@/components/made-with-dyad";
+            import { MadeWithDyad } from "@/components/made-with-dyad";
 import { LandingHeader } from "@/components/landing/LandingHeader";
 import { HeroSection } from "@/components/landing/HeroSection";
 
