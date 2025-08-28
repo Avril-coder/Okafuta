@@ -25,7 +25,7 @@ export const LandingHeader: React.FC = () => {
             {/* For dark mode, you might need a different logo or apply 'dark:invert' if your logo is light-colored */}
             <img src="/placeholder.svg" alt="OKAFUTA Logo" className="h-10 w-auto dark:invert" />
             {/* If you want to keep the slogan, you can add it here below the image */}
-            <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 ml-2">Secure. Seamless. Cashless.</p>
+            {/* <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 ml-2">Secure. Seamless. Cashless.</p> */}
           </Link>
         </div>
 
