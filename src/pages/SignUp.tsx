@@ -27,8 +27,9 @@ export default function SignUp() {
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
 
   // New state for conditional fields (Employment Status)
+  const [studentType, setStudentType] = useState<'local' | 'foreign' | ''>(''); // 'local', 'foreign', or '' (undetermined)
   const [proofOfRegistration, setProofOfRegistration] = useState<File | null>(null);
-  const [studyPermit, setStudyPermit] = useState<File | null>(null); // Study permit is now always shown for students
+  const [studyPermit, setStudyPermit] = useState<File | null>(null);
   const [companyName, setCompanyName] = useState('');
   const [companyAddress, setCompanyAddress] = useState('');
   const [salary, setSalary] = useState('');
@@ -53,10 +54,26 @@ export default function SignUp() {
   // Effect to clear student-specific fields if employment status changes from Student
   useEffect(() => {
     if (employmentStatus !== 'Student') {
+      setStudentType('');
       setProofOfRegistration(null);
       setStudyPermit(null);
     }
   }, [employmentStatus]);
+
+  // Simulate student type detection based on identity number
+  useEffect(() => {
+    if (employmentStatus === 'Student' && identityNumber) {
+      // Simple mock detection: if ID contains "FOREIGN", assume foreign student
+      if (identityNumber.toUpperCase().includes('FOREIGN')) {
+        setStudentType('foreign');
+      } else {
+        setStudentType('local');
+      }
+    } else if (employmentStatus !== 'Student') {
+      setStudentType(''); // Reset if not a student
+    }
+  }, [identityNumber, employmentStatus]);
+
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,12 +83,16 @@ export default function SignUp() {
     }
 
     // Basic validation for conditional employment fields
-    if (employmentStatus === 'Student' && !proofOfRegistration) {
-      toast.error("Please upload proof of registration.");
-      return;
+    if (employmentStatus === 'Student') {
+      if (!proofOfRegistration) {
+        toast.error("Please upload proof of registration.");
+        return;
+      }
+      if (studentType === 'foreign' && !studyPermit) {
+        toast.error("Please upload your study permit.");
+        return;
+      }
     }
-    // Note: Study Permit is now optional in frontend validation, assuming backend handles conditional requirement based on ID/Passport.
-    
     if (employmentStatus === 'Employed') {
       if (!companyName || !companyAddress || !salary || !payslip || !placeOfResidence) {
         toast.error("Please fill all required fields for employment status and upload payslip.");
@@ -107,8 +128,9 @@ export default function SignUp() {
       accountType,
       // Conditional employment fields
       ...(employmentStatus === 'Student' && {
+        studentType,
         proofOfRegistration: proofOfRegistration?.name,
-        studyPermit: studyPermit?.name, // Always include if present
+        ...(studentType === 'foreign' && { studyPermit: studyPermit?.name }),
       }),
       ...(employmentStatus === 'Employed' && {
         companyName,
@@ -169,7 +191,7 @@ export default function SignUp() {
               <Input
                 id="identityNumber"
                 type="text"
-                placeholder="e.g., 9012345678901"
+                placeholder="e.g., 9012345678901 (type 'FOREIGN' for foreign student demo)"
                 value={identityNumber}
                 onChange={(e) => setIdentityNumber(e.target.value)}
                 required
@@ -313,16 +335,18 @@ export default function SignUp() {
                     required
                   />
                 </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="studyPermit">Study Permit (For Foreign Students)</Label> {/* Clarified label */}
-                  <Input
-                    id="studyPermit"
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => setStudyPermit(e.target.files ? e.target.files[0] : null)}
-                    // Removed 'required' here, as it's conditionally required by backend logic
-                  />
-                </div>
+                {studentType === 'foreign' && (
+                  <div className="grid gap-2">
+                    <Label htmlFor="studyPermit">Study Permit</Label>
+                    <Input
+                      id="studyPermit"
+                      type="file"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      onChange={(e) => setStudyPermit(e.target.files ? e.target.files[0] : null)}
+                      required
+                    />
+                  </div>
+                )}
               </>
             )}
 
