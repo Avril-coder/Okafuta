@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 // Define a list of common country codes
 const countryCodes = [
@@ -116,9 +116,9 @@ export default function SignUp() {
               />
             </div>
 
-            <Button type="submit" className="w-full mt-6">
+            <GradientButton type="submit" className="w-full mt-6">
               Create Account
-            </Button>
+            </GradientButton>
           </form>
           <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{' '}

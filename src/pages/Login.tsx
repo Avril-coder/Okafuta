@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 export default function Login() {
   const navigate = useNavigate();
@@ -38,9 +38,9 @@ export default function Login() {
               <Label htmlFor="password">Password</Label>
               <Input id="password" type="password" required />
             </div>
-            <Button type="submit" className="w-full">
+            <GradientButton type="submit" className="w-full">
               Login
-            </Button>
+            </GradientButton>
           </form>
           <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
             Don't have an account?{' '}
