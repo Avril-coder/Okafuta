@@ -13,9 +13,9 @@ import {
   Send,          // For Send Money
   Handshake,     // For Request Money
   ReceiptText,   // For Bill Payment
-  Move,          // For Move Money
-  ArrowUpFromLine, // For Payout
-  Gift,          // For Group Rebate
+  Shuffle,       // Changed from Move for Move Money
+  Banknote,      // Changed from ArrowUpFromLine for Payout
+  Percent,       // Changed from Gift for Group Rebate
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -24,9 +24,9 @@ const transactionTabsConfig = [
   { value: "send-money", name: "Send Money", icon: Send },
   { value: "request-money", name: "Request Money", icon: Handshake },
   { value: "bill-payment", name: "Bill Payment", icon: ReceiptText },
-  { value: "move-money", name: "Move Money", icon: Move },
-  { value: "payout", name: "Payout", icon: ArrowUpFromLine },
-  { value: "group-rebate", name: "Group Rebate", icon: Gift },
+  { value: "move-money", name: "Move Money", icon: Shuffle },
+  { value: "payout", name: "Payout", icon: Banknote },
+  { value: "group-rebate", name: "Group Rebate", icon: Percent },
 ];
 
 export default function Transact() {
