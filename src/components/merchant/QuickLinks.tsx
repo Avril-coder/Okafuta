@@ -5,18 +5,20 @@ import {
   Landmark,
   Move,
   Ticket,
+  ReceiptText, // Import for Offer Bill Payment
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 
 const links = [
   { name: "Add Money", icon: ArrowDownToLine, href: "/dashboard/transact?tab=add-fund" },
   { name: "Withdraw", icon: ArrowUpFromLine, href: "/dashboard/transact?tab=payout" },
   { name: "Bill Payment", icon: Landmark, href: "/dashboard/transact?tab=bill-payment" },
+  { name: "Offer Bill Payment", icon: ReceiptText, href: "/dashboard/offer-bill-payment" }, // New link
   { name: "Move Money", icon: Move, href: "/dashboard/transact?tab=move-money" },
   { name: "Create Voucher", icon: Ticket, href: "/dashboard/benefits?tab=vouchers" },
-  { name: "Invoice", icon: FileText, href: "/dashboard/invoice" }, // Updated href to new Invoice page
+  { name: "Invoice", icon: FileText, href: "/dashboard/invoice" },
 ];
 
 export function QuickLinks() {
@@ -32,7 +34,7 @@ export function QuickLinks() {
               key={link.name}
               variant="outline"
               className="flex flex-col h-24 w-full"
-              asChild // Use asChild to pass props to the Link component
+              asChild
             >
               <Link to={link.href}>
                 <link.icon className="h-6 w-6 mb-2" />
