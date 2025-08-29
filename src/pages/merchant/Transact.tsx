@@ -1,7 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AddFundTab } from "@/components/transact/AddFundTab";
 import { SendMoneyTab } from "@/components/transact/SendMoneyTab";
-import { RequestMoneyTab } from "@/components/transact/RequestMoneyTab";
 import { BillPaymentTab } from "@/components/transact/BillPaymentTab";
 import { MoveMoneyTab } from "@/components/transact/MoveMoneyTab";
 import { PayoutTab } from "@/components/transact/PayoutTab";
@@ -11,7 +10,6 @@ import React from "react";
 import {
   Wallet,        // For Add Fund
   Send,          // For Send Money
-  Handshake,     // For Request Money
   ReceiptText,   // For Bill Payment
   Shuffle,       // Changed from Move for Move Money
   Banknote,      // Changed from ArrowUpFromLine for Payout
@@ -22,7 +20,6 @@ import { cn } from '@/lib/utils';
 const transactionTabsConfig = [
   { value: "add-fund", name: "Add Fund", icon: Wallet },
   { value: "send-money", name: "Send Money", icon: Send },
-  { value: "request-money", name: "Request Money", icon: Handshake },
   { value: "bill-payment", name: "Bill Payment", icon: ReceiptText },
   { value: "move-money", name: "Move Money", icon: Shuffle },
   { value: "payout", name: "Payout", icon: Banknote },
@@ -39,7 +36,7 @@ export default function Transact() {
       <p className="text-gray-600 dark:text-gray-400 mb-8">Manage all your payment operations from one place.</p>
 
       <Tabs defaultValue={defaultTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 h-auto flex-wrap gap-4 mb-8">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 h-auto flex-wrap gap-4 mb-8">
           {transactionTabsConfig.map((tab) => (
             <TabsTrigger
               key={tab.value}
@@ -70,9 +67,7 @@ export default function Transact() {
         <TabsContent value="send-money" className="mt-6">
           <SendMoneyTab />
         </TabsContent>
-        <TabsContent value="request-money" className="mt-6">
-          <RequestMoneyTab />
-        </TabsContent>
+        {/* RequestMoneyTab removed */}
         <TabsContent value="bill-payment" className="mt-6">
           <BillPaymentTab />
         </TabsContent>
