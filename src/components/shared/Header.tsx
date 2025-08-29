@@ -21,7 +21,6 @@ export const SharedHeader: React.FC = () => {
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
             <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
-            <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Didit</span>
           </Link>
         </div>
 
@@ -59,7 +58,6 @@ export const SharedHeader: React.FC = () => {
                 <div className="flex items-center justify-between mb-8">
                   <Link to="/" className="flex items-center">
                     <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
-                    <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Didit</span>
                   </Link>
                 </div>
                 

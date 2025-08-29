@@ -29,7 +29,6 @@ export default function Login() {
             <div className="flex justify-center mb-2">
               <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-12 w-auto" />
             </div>
-            <CardTitle className="text-3xl font-bold">Login</CardTitle>
             <CardDescription>Enter your credentials to access your account.</CardDescription>
           </CardHeader>
           <CardContent>

@@ -238,7 +238,6 @@ export default function SignUp() {
             <div className="flex justify-center mb-2">
               <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-12 w-auto" />
             </div>
-            <CardTitle className="text-3xl font-bold">Sign Up</CardTitle>
             <CardDescription>Create your account to get started as a Merchant or Customer.</CardDescription>
           </CardHeader>
           <CardContent>
