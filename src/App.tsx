@@ -17,8 +17,6 @@ import Benefits from "./pages/merchant/Benefits";
 import Settings from "./pages/merchant/Settings";
 import InvoicePage from "./pages/merchant/Invoice";
 import Profile from "./pages/merchant/Profile";
-import AdminLayout from "./components/admin/Layout";
-import KycReview from "./pages/admin/KycReview";
 import { WalletProvider } from "./context/WalletContext";
 import { UserProvider } from "./context/UserContext";
 
@@ -46,11 +44,6 @@ const App = () => (
               <Route path="invoice" element={<InvoicePage />} />
               <Route path="profile" element={<Profile />} />
               <Route path="settings" element={<Settings />} />
-            </Route>
-
-            {/* Admin Routes */}
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route path="kyc-requests" element={<KycReview />} />
             </Route>
 
             {/* Catch-all route for 404 */}
