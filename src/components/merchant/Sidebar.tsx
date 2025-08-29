@@ -5,9 +5,6 @@ import {
   Users,
   CreditCard,
   Settings,
-  Wallet,
-  CheckCircle,
-  FileText,
   User,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -17,8 +14,6 @@ const navigation = [
   { name: "Transact", href: "/dashboard/transact", icon: ArrowRightLeft },
   { name: "Customers", href: "/dashboard/customers", icon: Users },
   { name: "Benefits & Cards", href: "/dashboard/benefits", icon: CreditCard },
-  { name: "KYC Verification", href: "/dashboard/kyc", icon: CheckCircle },
-  { name: "Invoices", href: "/dashboard/invoice", icon: FileText },
   { name: "Profile", href: "/dashboard/profile", icon: User },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
@@ -29,7 +24,7 @@ export function Sidebar() {
                     lg:border-r lg:border-gray-200 lg:pt-5 lg:pb-4 
                     lg:backdrop-blur-md lg:bg-white/20 dark:border-gray-700 dark:bg-gray-900/20">
       <div className="flex items-center flex-shrink-0 px-6">
-        <Wallet className="h-8 w-auto text-primary" />
+        <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
         <span className="ml-2 text-lg font-semibold">Merchant</span>
       </div>
       <div className="mt-6 h-0 flex-1 flex flex-col overflow-y-auto">

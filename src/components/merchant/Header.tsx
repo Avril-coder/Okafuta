@@ -1,5 +1,5 @@
 import React from "react";
-import { Search, Bell, Menu, Wallet, LayoutDashboard, ArrowRightLeft, Users, CreditCard, Settings, User } from "lucide-react";
+import { Search, Bell, Menu, LayoutDashboard, ArrowRightLeft, Users, CreditCard, Settings, User } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -51,7 +51,7 @@ export function Header() {
           <SheetContent side="left" className="w-[240px] p-0">
             <div className="flex flex-col p-4 space-y-1">
               <Link to="/dashboard" className="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-6">
-                <Wallet className="h-6 w-6 mr-2 text-amber-600" />
+                <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto mr-2" />
                 Merchant
               </Link>
               {navigation.map((item) => (

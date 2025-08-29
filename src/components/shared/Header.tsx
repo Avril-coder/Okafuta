@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Menu, Wallet } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { GradientButton } from '@/components/landing/GradientButton';
 
@@ -20,7 +20,7 @@ export const SharedHeader: React.FC = () => {
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
-            <Wallet className="h-8 w-auto text-blue-600" />
+            <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
             <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Didit</span>
           </Link>
         </div>
@@ -58,7 +58,7 @@ export const SharedHeader: React.FC = () => {
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between mb-8">
                   <Link to="/" className="flex items-center">
-                    <Wallet className="h-8 w-auto text-blue-600" />
+                    <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
                     <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Didit</span>
                   </Link>
                 </div>

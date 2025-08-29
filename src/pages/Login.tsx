@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { BlobBackground } from '@/components/shared/BlobBackground';
@@ -28,7 +27,7 @@ export default function Login() {
         <Card className="relative z-10 w-full max-w-md">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-2">
-              <Wallet className="h-10 w-10 text-blue-600" />
+              <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-12 w-auto" />
             </div>
             <CardTitle className="text-3xl font-bold">Login</CardTitle>
             <CardDescription>Enter your credentials to access your account.</CardDescription>

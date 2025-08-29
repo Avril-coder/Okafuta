@@ -5,13 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { TriangleAlert } from 'lucide-react';
-
-// Mock KYC status for demonstration. In a real app, this would come from a backend/context.
-// For now, let's assume a global state or context provides this.
-// For this example, we'll hardcode it to 'pending' to show the restriction.
-const mockMerchantKycStatus: 'not_submitted' | 'pending' | 'verified' | 'rejected' = 'pending'; // Change this to 'verified' to enable payouts
 
 export const PayoutTab: React.FC = () => {
   const payoutHistory = [
@@ -25,21 +18,8 @@ export const PayoutTab: React.FC = () => {
     { id: 'W2', date: '2023-10-25', customer: 'Customer Y', amount: 'N$ 50.00', status: 'Pending' },
   ];
 
-  const isKycVerified = mockMerchantKycStatus === 'verified';
-
   return (
     <div className="space-y-6">
-      {!isKycVerified && (
-        <Alert variant="destructive">
-          <TriangleAlert className="h-4 w-4" />
-          <AlertTitle>KYC Verification Required</AlertTitle>
-          <AlertDescription>
-            Payout functionality is disabled until your KYC documents are verified. Please complete the{' '}
-            <a href="/dashboard/kyc" className="underline font-medium">KYC Verification</a> process.
-          </AlertDescription>
-        </Alert>
-      )}
-
       <Card>
         <CardHeader>
           <CardTitle>Direct Payout</CardTitle>
@@ -48,13 +28,13 @@ export const PayoutTab: React.FC = () => {
         <CardContent className="space-y-4">
           <div className="grid gap-2">
             <Label htmlFor="payout-recipient">Recipient Account/ID</Label>
-            <Input id="payout-recipient" placeholder="e.g., vendor@example.com or bank account" disabled={!isKycVerified} />
+            <Input id="payout-recipient" placeholder="e.g., vendor@example.com or bank account" />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="payout-amount">Amount</Label>
-            <Input id="payout-amount" type="number" placeholder="e.g., 1000.00" disabled={!isKycVerified} />
+            <Input id="payout-amount" type="number" placeholder="e.g., 1000.00" />
           </div>
-          <Button className="w-full" disabled={!isKycVerified}>Initiate Payout</Button>
+          <Button className="w-full">Initiate Payout</Button>
         </CardContent>
       </Card>
 
@@ -113,8 +93,8 @@ export const PayoutTab: React.FC = () => {
                     <Badge variant="secondary">{item.status}</Badge>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button variant="outline" size="sm" className="mr-2" disabled={!isKycVerified}>Approve</Button>
-                    <Button variant="destructive" size="sm" disabled={!isKycVerified}>Reject</Button>
+                    <Button variant="outline" size="sm" className="mr-2">Approve</Button>
+                    <Button variant="destructive" size="sm">Reject</Button>
                   </TableCell>
                 </TableRow>
               ))}

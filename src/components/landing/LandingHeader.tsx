@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { ChevronDown, Wallet } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { GradientButton } from './GradientButton';
 import { cn } from '@/lib/utils';
 import { MobileMenu } from './MobileMenu';
@@ -22,7 +22,7 @@ export const LandingHeader: React.FC = () => {
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
-            <Wallet className="h-8 w-auto text-blue-600" />
+            <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
             <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">Didit</span>
           </Link>
         </div>

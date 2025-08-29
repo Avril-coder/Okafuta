@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Wallet } from 'lucide-react';
 import { toast } from 'sonner';
 import { BlobBackground } from '@/components/shared/BlobBackground';
 import { GradientButton } from '@/components/landing/GradientButton';
@@ -23,7 +22,7 @@ export default function ForgotPassword() {
         <Card className="relative z-10 w-full max-w-md">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-2">
-              <Wallet className="h-10 w-10 text-blue-600" />
+              <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-12 w-auto" />
             </div>
             <CardTitle className="text-3xl font-bold">Forgot Password</CardTitle>
             <CardDescription>Enter your email to receive a password reset link.</CardDescription>
