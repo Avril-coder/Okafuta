@@ -25,7 +25,6 @@ export function Sidebar() {
                     lg:backdrop-blur-md lg:bg-white/20 dark:border-gray-700 dark:bg-gray-900/20">
       <div className="flex items-center flex-shrink-0 px-6">
         <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
-        <span className="ml-2 text-lg font-semibold">Merchant</span>
       </div>
       <div className="mt-6 h-0 flex-1 flex flex-col overflow-y-auto">
         <nav className="flex-1 px-4 space-y-1">

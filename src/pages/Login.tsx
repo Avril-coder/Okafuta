@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
@@ -8,13 +8,17 @@ import { GradientButton } from '@/components/landing/GradientButton';
 import { BlobBackground } from '@/components/shared/BlobBackground';
 import { Checkbox } from '@/components/ui/checkbox';
 import { SharedHeader } from '@/components/shared/Header';
+import { useUser } from '@/context/UserContext';
 
 export default function Login() {
   const navigate = useNavigate();
+  const { login } = useUser();
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    // Simulate login and set user data in context
+    login({ areaCode: '+264' }); // Demo with Namibia area code
     toast.success("Logged in successfully!");
     navigate('/dashboard');
   };

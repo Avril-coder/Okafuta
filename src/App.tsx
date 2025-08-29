@@ -15,9 +15,13 @@ import Transact from "./pages/merchant/Transact";
 import Customers from "./pages/merchant/Customers";
 import Benefits from "./pages/merchant/Benefits";
 import Settings from "./pages/merchant/Settings";
+import KycVerification from "./pages/merchant/KycVerification";
 import InvoicePage from "./pages/merchant/Invoice";
 import Profile from "./pages/merchant/Profile";
+import AdminLayout from "./components/admin/Layout";
+import KycReview from "./pages/admin/KycReview";
 import { WalletProvider } from "./context/WalletContext";
+import { UserProvider } from "./context/UserContext";
 
 const queryClient = new QueryClient();
 
@@ -26,30 +30,36 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          
-          <Route path="/dashboard" element={<WalletProvider><MerchantLayout /></WalletProvider>}>
-            <Route index element={<MerchantDashboard />} />
-            <Route path="transact" element={<Transact />} />
-            <Route path="customers" element={<Customers />} />
-            <Route path="benefits" element={<Benefits />} />
-            <Route path="invoice" element={<InvoicePage />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
+      <UserProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/onboarding" element={<Onboarding />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            
+            <Route path="/dashboard" element={<WalletProvider><MerchantLayout /></WalletProvider>}>
+              <Route index element={<MerchantDashboard />} />
+              <Route path="transact" element={<Transact />} />
+              <Route path="customers" element={<Customers />} />
+              <Route path="benefits" element={<Benefits />} />
+              <Route path="kyc" element={<KycVerification />} />
+              <Route path="invoice" element={<InvoicePage />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
 
-        
+            {/* Admin Routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="kyc-requests" element={<KycReview />} />
+            </Route>
 
-          {/* Catch-all route for 404 */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+            {/* Catch-all route for 404 */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </UserProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

@@ -15,6 +15,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { useUser } from "@/context/UserContext";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -24,13 +25,29 @@ const navigation = [
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
+const getCountryFlag = (areaCode: string | undefined) => {
+  if (!areaCode) return null;
+  const flags: { [key: string]: string } = {
+    '+264': '🇳🇦', // Namibia
+    '+27': '🇿🇦',  // South Africa
+    '+234': '🇳🇬', // Nigeria
+    '+1': '🇺🇸',   // USA/Canada
+    '+44': '🇬🇧',   // UK
+  };
+  return flags[areaCode] || null;
+};
+
 export function Header() {
   const navigate = useNavigate();
+  const { user, logout } = useUser();
 
   const handleLogout = () => {
+    logout();
     toast.success("You have been logged out.");
     navigate('/login');
   };
+
+  const flag = getCountryFlag(user?.areaCode);
 
   return (
     <div className="relative z-10 flex-shrink-0 flex h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 lg:border-none">
@@ -51,8 +68,7 @@ export function Header() {
           <SheetContent side="left" className="w-[240px] p-0">
             <div className="flex flex-col p-4 space-y-1">
               <Link to="/dashboard" className="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-6">
-                <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto mr-2" />
-                Merchant
+                <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
               </Link>
               {navigation.map((item) => (
                 <NavLink
@@ -104,6 +120,7 @@ export function Header() {
           </form>
         </div>
         <div className="ml-4 flex items-center md:ml-6">
+          {flag && <span className="text-2xl mr-2" aria-label="country flag">{flag}</span>}
           <Button variant="ghost" size="icon" aria-label="Notifications">
             <Bell className="h-6 w-6" aria-hidden="true" />
           </Button>
