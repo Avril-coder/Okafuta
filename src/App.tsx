@@ -15,7 +15,6 @@ import Transact from "./pages/merchant/Transact";
 import Customers from "./pages/merchant/Customers";
 import Benefits from "./pages/merchant/Benefits";
 import Settings from "./pages/merchant/Settings";
-import KycVerification from "./pages/merchant/KycVerification";
 import InvoicePage from "./pages/merchant/Invoice";
 import Profile from "./pages/merchant/Profile";
 import AdminLayout from "./components/admin/Layout";
@@ -44,7 +43,6 @@ const App = () => (
               <Route path="transact" element={<Transact />} />
               <Route path="customers" element={<Customers />} />
               <Route path="benefits" element={<Benefits />} />
-              <Route path="kyc" element={<KycVerification />} />
               <Route path="invoice" element={<InvoicePage />} />
               <Route path="profile" element={<Profile />} />
               <Route path="settings" element={<Settings />} />
