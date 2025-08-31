@@ -11,6 +11,7 @@ const navLinks = [
   { name: 'FAQ', href: '/faq' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
+  { name: 'Pay Bill', href: '/customer/pay-bill' }, // New link for customer Pay Bill page
 ];
 
 export const SharedHeader: React.FC = () => {

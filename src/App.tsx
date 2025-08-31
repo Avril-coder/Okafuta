@@ -17,7 +17,8 @@ import Benefits from "./pages/merchant/Benefits";
 import Settings from "./pages/merchant/Settings";
 import InvoicePage from "./pages/merchant/Invoice";
 import Profile from "./pages/merchant/Profile";
-import OfferBillPayment from "./pages/merchant/OfferBillPayment"; // Import the new page
+import OfferBillPayment from "./pages/merchant/OfferBillPayment";
+import PayBill from "./pages/customer/PayBill"; // Import the new customer page
 import { WalletProvider } from "./context/WalletContext";
 import { UserProvider } from "./context/UserContext";
 
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/customer/pay-bill" element={<WalletProvider><PayBill /></WalletProvider>} /> {/* New customer route */}
             
             <Route path="/dashboard" element={<WalletProvider><MerchantLayout /></WalletProvider>}>
               <Route index element={<MerchantDashboard />} />
@@ -45,7 +47,7 @@ const App = () => (
               <Route path="invoice" element={<InvoicePage />} />
               <Route path="profile" element={<Profile />} />
               <Route path="settings" element={<Settings />} />
-              <Route path="offer-bill-payment" element={<OfferBillPayment />} /> {/* New route */}
+              <Route path="offer-bill-payment" element={<OfferBillPayment />} />
             </Route>
 
             {/* Catch-all route for 404 */}
