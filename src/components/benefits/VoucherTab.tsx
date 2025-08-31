@@ -61,24 +61,9 @@ export const VoucherTab: React.FC = () => {
             </Select>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="voucher-currency">Currency</Label>
-              <Select>
-                <SelectTrigger id="voucher-currency">
-                  <SelectValue placeholder="Select currency" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="nad">NAD</SelectItem>
-                  <SelectItem value="usd">USD</SelectItem>
-                  <SelectItem value="ngn">NGN</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="voucher-amount">Amount</Label>
-              <Input id="voucher-amount" type="number" placeholder="e.g., 50.00" />
-            </div>
+          <div className="grid gap-2">
+            <Label htmlFor="voucher-amount">Amount</Label>
+            <Input id="voucher-amount" type="number" placeholder="e.g., 50.00" />
           </div>
 
           <div className="grid gap-2">
