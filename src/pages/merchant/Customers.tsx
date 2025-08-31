@@ -8,12 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 
 export default function Customers() {
-  const pendingRequests = [
-    { id: 'req1', customer: 'Alice Smith', type: 'Withdrawal', amount: 'N$ 250.00', date: '2023-10-27', status: 'Pending' },
-    { id: 'req2', customer: 'Bob Johnson', type: 'Deposit', amount: 'N$ 500.00', date: '2023-10-27', status: 'Pending' },
-    { id: 'req3', customer: 'Charlie Brown', type: 'Voucher', amount: 'N$ 50.00', date: '2023-10-26', status: 'Pending' },
-  ];
-
+  // Removed pendingRequests data as it's no longer needed for display
   const customerTransactions = [
     { id: 'tx1', customer: 'Alice Smith', type: 'Withdrawal', amount: '-N$ 250.00', date: '2023-10-20', status: 'Completed' },
     { id: 'tx2', customer: 'David Lee', type: 'Deposit', amount: '+N$ 1000.00', date: '2023-10-19', status: 'Completed' },
@@ -29,44 +24,7 @@ export default function Customers() {
       </p>
 
       <div className="space-y-8">
-        {/* Customer Requests */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Customer Requests</CardTitle>
-            <CardDescription>Review and act on pending customer requests.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Customer</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {pendingRequests.map((request) => (
-                  <TableRow key={request.id}>
-                    <TableCell className="font-medium">{request.customer}</TableCell>
-                    <TableCell>{request.type}</TableCell>
-                    <TableCell>{request.amount}</TableCell>
-                    <TableCell>{request.date}</TableCell>
-                    <TableCell>
-                      <Badge variant="secondary">{request.status}</Badge>
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <Button variant="outline" size="sm" className="mr-2">Approve</Button>
-                      <Button variant="destructive" size="sm">Reject</Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+        {/* Customer Requests section removed */}
 
         {/* Customer Transactions */}
         <Card>
