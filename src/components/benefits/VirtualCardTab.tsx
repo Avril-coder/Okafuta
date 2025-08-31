@@ -64,7 +64,6 @@ export const VirtualCardTab: React.FC = () => {
                 <TableHead>Limit</TableHead>
                 <TableHead>Currency</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -77,12 +76,6 @@ export const VirtualCardTab: React.FC = () => {
                     <Badge variant={card.status === 'Active' ? 'default' : 'destructive'}>
                       {card.status}
                     </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Button variant="outline" size="sm" className="mr-2">
-                      {card.status === 'Active' ? 'Block' : 'Unblock'}
-                    </Button>
-                    <Button variant="destructive" size="sm">Delete</Button>
                   </TableCell>
                 </TableRow>
               ))}
