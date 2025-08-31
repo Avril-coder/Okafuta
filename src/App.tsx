@@ -18,7 +18,7 @@ import Settings from "./pages/merchant/Settings";
 import InvoicePage from "./pages/merchant/Invoice";
 import Profile from "./pages/merchant/Profile";
 import OfferBillPayment from "./pages/merchant/OfferBillPayment";
-import PayBill from "./pages/customer/PayBill"; // Import the new customer page
+// import PayBill from "./pages/customer/PayBill"; // Removed import for the customer page
 import { WalletProvider } from "./context/WalletContext";
 import { UserProvider } from "./context/UserContext";
 
@@ -37,7 +37,7 @@ const App = () => (
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/customer/pay-bill" element={<WalletProvider><PayBill /></WalletProvider>} /> {/* New customer route */}
+            {/* Removed the new customer route */}
             
             <Route path="/dashboard" element={<WalletProvider><MerchantLayout /></WalletProvider>}>
               <Route index element={<MerchantDashboard />} />
