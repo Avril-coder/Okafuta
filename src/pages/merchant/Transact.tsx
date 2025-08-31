@@ -1,26 +1,26 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AddFundTab } from "@/components/transact/AddFundTab";
 import { SendMoneyTab } from "@/components/transact/SendMoneyTab";
-// import { BillPaymentTab } from "@/components/transact/BillPaymentTab"; // Removed import
 import { MoveMoneyTab } from "@/components/transact/MoveMoneyTab";
 import { PayoutTab } from "@/components/transact/PayoutTab";
 import { GroupRebateTab } from "@/components/transact/GroupRebateTab";
+import OfferBillPayment from "@/pages/merchant/OfferBillPayment"; // Import OfferBillPayment
 import { useSearchParams } from "react-router-dom";
 import React from "react";
 import {
-  Wallet,        // For Add Fund
-  Send,          // For Send Money
-  // ReceiptText,   // For Bill Payment - Removed
-  Shuffle,       // Changed from Move for Move Money
-  Banknote,      // Changed from ArrowUpFromLine for Payout
-  Percent,       // Changed from Gift for Group Rebate
+  Wallet,
+  Send,
+  Shuffle,
+  Banknote,
+  Percent,
+  ReceiptText, // Icon for Offer Bill Payment
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const transactionTabsConfig = [
   { value: "add-fund", name: "Add Fund", icon: Wallet },
   { value: "send-money", name: "Send Money", icon: Send },
-  // { value: "bill-payment", name: "Bill Payment", icon: ReceiptText }, // Removed
+  { value: "offer-bill-payment", name: "Offer Bill Payment", icon: ReceiptText }, // New tab
   { value: "move-money", name: "Move Money", icon: Shuffle },
   { value: "payout", name: "Payout", icon: Banknote },
   { value: "group-rebate", name: "Group Rebate", icon: Percent },
@@ -36,20 +36,22 @@ export default function Transact() {
       <p className="text-gray-600 dark:text-gray-400 mb-8">Manage all your payment operations from one place.</p>
 
       <Tabs defaultValue={defaultTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 h-auto flex-wrap gap-4 mb-8">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 h-auto flex-wrap gap-4 mb-8">
           {transactionTabsConfig.map((tab) => (
             <TabsTrigger
               key={tab.value}
               value={tab.value}
               className={cn(
-                "flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200",
+                "group flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200",
                 "hover:bg-gray-100 dark:hover:bg-gray-800",
-                "data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary-foreground/10 dark:data-[state=active]:text-primary-foreground"
+                // Removed active state background/text from the trigger itself
               )}
               aria-label={tab.name}
             >
               <div className={cn(
-                "flex items-center justify-center h-14 w-14 rounded-full bg-primary/10 text-primary dark:bg-primary-foreground/10 dark:text-primary-foreground",
+                "flex items-center justify-center h-14 w-14 rounded-full",
+                "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400", // Inactive state for circle and icon
+                "group-data-[state=active]:bg-blue-100 group-data-[state=active]:text-blue-800 dark:group-data-[state=active]:bg-blue-900/30 dark:group-data-[state=active]:text-blue-200", // Active state for circle and icon
                 "transition-colors duration-200 shadow-sm group-hover:shadow-md"
               )}>
                 <tab.icon className="h-6 w-6" />
@@ -67,7 +69,9 @@ export default function Transact() {
         <TabsContent value="send-money" className="mt-6">
           <SendMoneyTab />
         </TabsContent>
-        {/* BillPaymentTab removed */}
+        <TabsContent value="offer-bill-payment" className="mt-6">
+          <OfferBillPayment />
+        </TabsContent>
         <TabsContent value="move-money" className="mt-6">
           <MoveMoneyTab />
         </TabsContent>
