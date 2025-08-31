@@ -32,14 +32,16 @@ export default function OfferBillPayment() {
               key={tab.value}
               value={tab.value}
               className={cn(
-                "flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200",
+                "group flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200",
                 "hover:bg-gray-100 dark:hover:bg-gray-800",
-                "data-[state=active]:bg-primary/10 data-[state=active]:text-primary dark:data-[state=active]:bg-primary-foreground/10 dark:data-[state=active]:text-primary-foreground"
+                // Removed active state background/text from the trigger itself
               )}
               aria-label={tab.name}
             >
               <div className={cn(
-                "flex items-center justify-center h-14 w-14 rounded-full bg-primary/10 text-primary dark:bg-primary-foreground/10 dark:text-primary-foreground",
+                "flex items-center justify-center h-14 w-14 rounded-full",
+                "bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400", // Inactive state for circle and icon
+                "group-data-[state=active]:bg-blue-100 group-data-[state=active]:text-blue-800 dark:group-data-[state=active]:bg-blue-900/30 dark:group-data-[state=active]:text-blue-200", // Active state for circle and icon
                 "transition-colors duration-200 shadow-sm group-hover:shadow-md"
               )}>
                 <tab.icon className="h-6 w-6" />
