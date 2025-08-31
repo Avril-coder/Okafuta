@@ -20,37 +20,77 @@ export const VoucherTab: React.FC = () => {
       <Card>
         <CardHeader>
           <CardTitle>Create New Voucher</CardTitle>
-          <CardDescription>Generate new promotional or reward vouchers.</CardDescription>
+          <CardDescription>Generate and send a new promotional or reward voucher.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-2">
             <Label htmlFor="voucher-name">Voucher Name</Label>
             <Input id="voucher-name" placeholder="e.g., Summer Sale" />
           </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="recipient-type">Recipient Type</Label>
+              <Select>
+                <SelectTrigger id="recipient-type">
+                  <SelectValue placeholder="Select type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="email">Email</SelectItem>
+                  <SelectItem value="username">Username</SelectItem>
+                  <SelectItem value="phone">Phone Number</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="recipient-identifier">Recipient</Label>
+              <Input id="recipient-identifier" placeholder="e.g., user@example.com" />
+            </div>
+          </div>
+
           <div className="grid gap-2">
-            <Label htmlFor="voucher-type">Voucher Type</Label>
+            <Label htmlFor="user-status">User Status</Label>
             <Select>
-              <SelectTrigger id="voucher-type">
-                <SelectValue placeholder="Select type" />
+              <SelectTrigger id="user-status">
+                <SelectValue placeholder="Select user status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="fixed">Fixed Amount</SelectItem>
-                <SelectItem value="percentage">Percentage</SelectItem>
+                <SelectItem value="existing">Existing User</SelectItem>
+                <SelectItem value="new">New User (Without an account)</SelectItem>
               </SelectContent>
             </Select>
           </div>
-          <div className="grid gap-2">
-            <Label htmlFor="voucher-value">Value</Label>
-            <Input id="voucher-value" placeholder="e.g., 50.00 or 15%" />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="voucher-currency">Currency</Label>
+              <Select>
+                <SelectTrigger id="voucher-currency">
+                  <SelectValue placeholder="Select currency" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="nad">NAD</SelectItem>
+                  <SelectItem value="usd">USD</SelectItem>
+                  <SelectItem value="ngn">NGN</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="voucher-amount">Amount</Label>
+              <Input id="voucher-amount" type="number" placeholder="e.g., 50.00" />
+            </div>
           </div>
+
           <div className="grid gap-2">
             <Label htmlFor="expiry-date">Expiry Date</Label>
             <Input id="expiry-date" type="date" />
           </div>
+
           <div className="grid gap-2">
-            <Label htmlFor="voucher-description">Description</Label>
-            <Textarea id="voucher-description" placeholder="Brief description of the voucher." />
+            <Label htmlFor="voucher-note">Note (explains the purchase)</Label>
+            <Textarea id="voucher-note" placeholder="Brief note about the voucher." />
           </div>
+
           <Button className="w-full">Create Voucher</Button>
         </CardContent>
       </Card>
