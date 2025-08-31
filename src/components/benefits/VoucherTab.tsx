@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 
 export const VoucherTab: React.FC = () => {
+  const [userStatus, setUserStatus] = useState('');
+
   const vouchers = [
     { id: 'v1', name: 'Welcome Bonus', value: 'N$ 50.00', expiry: '2024-12-31', status: 'Active' },
     { id: 'v2', name: 'Holiday Discount', value: '10%', expiry: '2024-01-15', status: 'Inactive' },
@@ -50,7 +52,7 @@ export const VoucherTab: React.FC = () => {
 
           <div className="grid gap-2">
             <Label htmlFor="user-status">User Status</Label>
-            <Select>
+            <Select value={userStatus} onValueChange={setUserStatus}>
               <SelectTrigger id="user-status">
                 <SelectValue placeholder="Select user status" />
               </SelectTrigger>
@@ -62,8 +64,10 @@ export const VoucherTab: React.FC = () => {
           </div>
 
           <div className="grid gap-2">
-            <Label htmlFor="pickup-location">Pickup Location (Optional)</Label>
-            <Select>
+            <Label htmlFor="pickup-location">
+              Pickup Location {userStatus !== 'new' && '(Optional)'}
+            </Label>
+            <Select required={userStatus === 'new'}>
               <SelectTrigger id="pickup-location">
                 <SelectValue placeholder="Select a pickup location" />
               </SelectTrigger>
