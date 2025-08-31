@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AddFundTab } from "@/components/transact/AddFundTab";
 import { SendMoneyTab } from "@/components/transact/SendMoneyTab";
-import { BillPaymentTab } from "@/components/transact/BillPaymentTab";
+// import { BillPaymentTab } from "@/components/transact/BillPaymentTab"; // Removed import
 import { MoveMoneyTab } from "@/components/transact/MoveMoneyTab";
 import { PayoutTab } from "@/components/transact/PayoutTab";
 import { GroupRebateTab } from "@/components/transact/GroupRebateTab";
@@ -10,7 +10,7 @@ import React from "react";
 import {
   Wallet,        // For Add Fund
   Send,          // For Send Money
-  ReceiptText,   // For Bill Payment
+  // ReceiptText,   // For Bill Payment - Removed
   Shuffle,       // Changed from Move for Move Money
   Banknote,      // Changed from ArrowUpFromLine for Payout
   Percent,       // Changed from Gift for Group Rebate
@@ -20,7 +20,7 @@ import { cn } from '@/lib/utils';
 const transactionTabsConfig = [
   { value: "add-fund", name: "Add Fund", icon: Wallet },
   { value: "send-money", name: "Send Money", icon: Send },
-  { value: "bill-payment", name: "Bill Payment", icon: ReceiptText },
+  // { value: "bill-payment", name: "Bill Payment", icon: ReceiptText }, // Removed
   { value: "move-money", name: "Move Money", icon: Shuffle },
   { value: "payout", name: "Payout", icon: Banknote },
   { value: "group-rebate", name: "Group Rebate", icon: Percent },
@@ -36,7 +36,7 @@ export default function Transact() {
       <p className="text-gray-600 dark:text-gray-400 mb-8">Manage all your payment operations from one place.</p>
 
       <Tabs defaultValue={defaultTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 h-auto flex-wrap gap-4 mb-8">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 h-auto flex-wrap gap-4 mb-8">
           {transactionTabsConfig.map((tab) => (
             <TabsTrigger
               key={tab.value}
@@ -67,10 +67,7 @@ export default function Transact() {
         <TabsContent value="send-money" className="mt-6">
           <SendMoneyTab />
         </TabsContent>
-        {/* RequestMoneyTab removed */}
-        <TabsContent value="bill-payment" className="mt-6">
-          <BillPaymentTab />
-        </TabsContent>
+        {/* BillPaymentTab removed */}
         <TabsContent value="move-money" className="mt-6">
           <MoveMoneyTab />
         </TabsContent>
