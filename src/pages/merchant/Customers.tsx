@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 
 export default function Customers() {
-  // Removed pendingRequests data as it's no longer needed for display
+  const [filterType, setFilterType] = useState('all');
+  const [filterCustomer, setFilterCustomer] = useState('');
+  const [filterDate, setFilterDate] = useState('');
+
   const customerTransactions = [
     { id: 'tx1', customer: 'Alice Smith', type: 'Withdrawal', amount: '-N$ 250.00', date: '2023-10-20', status: 'Completed' },
     { id: 'tx2', customer: 'David Lee', type: 'Deposit', amount: '+N$ 1000.00', date: '2023-10-19', status: 'Completed' },
     { id: 'tx3', customer: 'Eve Green', type: 'Bill Payment', amount: '-N$ 300.00', date: '2023-10-18', status: 'Completed' },
-    { id: 'tx4', customer: 'Alice Smith', type: 'Voucher', amount: '-N$ 20.00', date: '2023-10-15', status: 'Completed' },
+    { id: 'tx4', customer: 'Alice Smith', type: 'Voucher', amount: '-N$ 20.00', date: '2023-10-20', status: 'Completed' },
   ];
+
+  const filteredTransactions = customerTransactions.filter(transaction => {
+    const typeMatch = filterType === 'all' || transaction.type.toLowerCase() === filterType;
+    const customerMatch = filterCustomer === '' || transaction.customer.toLowerCase().includes(filterCustomer.toLowerCase());
+    const dateMatch = filterDate === '' || transaction.date === filterDate;
+    return typeMatch && customerMatch && dateMatch;
+  });
 
   return (
     <div className="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8 py-8">
@@ -24,9 +33,6 @@ export default function Customers() {
       </p>
 
       <div className="space-y-8">
-        {/* Customer Requests section removed */}
-
-        {/* Customer Transactions */}
         <Card>
           <CardHeader>
             <CardTitle>Customer Transactions</CardTitle>
@@ -36,7 +42,7 @@ export default function Customers() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
               <div className="grid gap-2">
                 <Label htmlFor="filter-type">Filter by Type</Label>
-                <Select>
+                <Select value={filterType} onValueChange={setFilterType}>
                   <SelectTrigger id="filter-type">
                     <SelectValue placeholder="All Types" />
                   </SelectTrigger>
@@ -51,11 +57,21 @@ export default function Customers() {
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="filter-customer">Filter by Customer</Label>
-                <Input id="filter-customer" placeholder="Customer Name" />
+                <Input
+                  id="filter-customer"
+                  placeholder="Customer Name"
+                  value={filterCustomer}
+                  onChange={(e) => setFilterCustomer(e.target.value)}
+                />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="filter-date">Filter by Date</Label>
-                <Input id="filter-date" type="date" />
+                <Input
+                  id="filter-date"
+                  type="date"
+                  value={filterDate}
+                  onChange={(e) => setFilterDate(e.target.value)}
+                />
               </div>
             </div>
 
@@ -70,26 +86,34 @@ export default function Customers() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {customerTransactions.map((transaction) => (
-                  <TableRow key={transaction.id}>
-                    <TableCell className="font-medium">{transaction.customer}</TableCell>
-                    <TableCell>{transaction.type}</TableCell>
-                    <TableCell>{transaction.amount}</TableCell>
-                    <TableCell>{transaction.date}</TableCell>
-                    <TableCell>
-                      <Badge
-                        variant={
-                          transaction.status === "Completed"
-                            ? "default"
-                            : "secondary"
-                        }
-                        className={transaction.status === "Completed" ? "bg-green-500" : ""}
-                      >
-                        {transaction.status}
-                      </Badge>
+                {filteredTransactions.length > 0 ? (
+                  filteredTransactions.map((transaction) => (
+                    <TableRow key={transaction.id}>
+                      <TableCell className="font-medium">{transaction.customer}</TableCell>
+                      <TableCell>{transaction.type}</TableCell>
+                      <TableCell>{transaction.amount}</TableCell>
+                      <TableCell>{transaction.date}</TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            transaction.status === "Completed"
+                              ? "default"
+                              : "secondary"
+                          }
+                          className={transaction.status === "Completed" ? "bg-green-500" : ""}
+                        >
+                          {transaction.status}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={5} className="text-center">
+                      No transactions found.
                     </TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
           </CardContent>
