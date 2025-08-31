@@ -93,7 +93,6 @@ export const VoucherTab: React.FC = () => {
                 <TableHead>Value</TableHead>
                 <TableHead>Expiry</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -106,10 +105,6 @@ export const VoucherTab: React.FC = () => {
                     <Badge variant={voucher.status === 'Active' ? 'default' : 'secondary'}>
                       {voucher.status}
                     </Badge>
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <Button variant="outline" size="sm" className="mr-2">Edit</Button>
-                    <Button variant="destructive" size="sm">Delete</Button>
                   </TableCell>
                 </TableRow>
               ))}
