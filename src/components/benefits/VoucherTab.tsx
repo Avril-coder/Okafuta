@@ -62,6 +62,20 @@ export const VoucherTab: React.FC = () => {
           </div>
 
           <div className="grid gap-2">
+            <Label htmlFor="pickup-location">Pickup Location (Optional)</Label>
+            <Select>
+              <SelectTrigger id="pickup-location">
+                <SelectValue placeholder="Select a pickup location" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="location-a">Okafuta HQ - Windhoek</SelectItem>
+                <SelectItem value="location-b">Okafuta Branch - Swakopmund</SelectItem>
+                <SelectItem value="location-c">Partner Store - Ongwediva</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="grid gap-2">
             <Label htmlFor="voucher-amount">Amount</Label>
             <Input id="voucher-amount" type="number" placeholder="e.g., 50.00" />
           </div>
