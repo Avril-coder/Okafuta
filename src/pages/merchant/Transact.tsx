@@ -14,12 +14,15 @@ import {
   Banknote,
   Percent,
   ReceiptText, // Icon for Offer Bill Payment
+  HandCoins,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { RequestMoneyTab } from "@/components/transact/RequestMoneyTab";
 
 const transactionTabsConfig = [
   { value: "add-fund", name: "Add Fund", icon: Wallet },
   { value: "send-money", name: "Send Money", icon: Send },
+  { value: "request-money", name: "Request Money", icon: HandCoins },
   { value: "offer-bill-payment", name: "Offer Bill Payment", icon: ReceiptText }, // New tab
   { value: "move-money", name: "Move Money", icon: Shuffle },
   { value: "payout", name: "Payout", icon: Banknote },
@@ -36,7 +39,7 @@ export default function Transact() {
       <p className="text-gray-600 dark:text-gray-400 mb-8">Manage all your payment operations from one place.</p>
 
       <Tabs defaultValue={defaultTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 h-auto flex-wrap gap-4 mb-8">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 h-auto flex-wrap gap-4 mb-8">
           {transactionTabsConfig.map((tab) => (
             <TabsTrigger
               key={tab.value}
@@ -68,6 +71,9 @@ export default function Transact() {
         </TabsContent>
         <TabsContent value="send-money" className="mt-6">
           <SendMoneyTab />
+        </TabsContent>
+        <TabsContent value="request-money" className="mt-6">
+          <RequestMoneyTab />
         </TabsContent>
         <TabsContent value="offer-bill-payment" className="mt-6">
           <OfferBillPayment />
