@@ -79,6 +79,7 @@ export default function Customers() {
                   <TableHead>Type</TableHead>
                   <TableHead>Amount</TableHead>
                   <TableHead>Date</TableHead>
+                  <TableHead>Timestamp</TableHead>
                   <TableHead>Status</TableHead>
                 </TableRow>
               </TableHeader>
@@ -90,12 +91,15 @@ export default function Customers() {
                       <TableCell>{transaction.type}</TableCell>
                       <TableCell>{transaction.amount}</TableCell>
                       <TableCell>{transaction.date}</TableCell>
+                      <TableCell>{transaction.timestamp}</TableCell>
                       <TableCell>
                         <Badge
                           variant={
                             transaction.status === "Completed"
                               ? "default"
-                              : "secondary"
+                              : transaction.status === "Pending"
+                              ? "secondary"
+                              : "destructive"
                           }
                           className={transaction.status === "Completed" ? "bg-green-500" : ""}
                         >
@@ -106,7 +110,7 @@ export default function Customers() {
                   ))
                 ) : (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center">
+                    <TableCell colSpan={6} className="text-center">
                       No transactions found.
                     </TableCell>
                   </TableRow>

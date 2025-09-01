@@ -15,7 +15,8 @@ export const allTransactions = [
     customer: "John Doe",
     type: "Withdrawal",
     status: "Completed",
-    date: "2023-10-26",
+    date: "2024-07-26",
+    timestamp: "10:45 AM",
     amount: "-$50.00",
   },
   {
@@ -24,7 +25,8 @@ export const allTransactions = [
     customer: "Peter Pan",
     type: "Deposit",
     status: "Completed",
-    date: "2023-10-26",
+    date: "2024-07-26",
+    timestamp: "11:00 AM",
     amount: "+$200.00",
   },
   {
@@ -33,7 +35,8 @@ export const allTransactions = [
     customer: "Jane Smith",
     type: "Deposit",
     status: "Pending",
-    date: "2023-10-26",
+    date: "2024-07-26",
+    timestamp: "02:15 PM",
     amount: "+$120.00",
   },
   {
@@ -42,7 +45,8 @@ export const allTransactions = [
     customer: "Sam Wilson",
     type: "Bill Payment",
     status: "Completed",
-    date: "2023-10-25",
+    date: "2024-07-25",
+    timestamp: "09:30 AM",
     amount: "-$75.50",
   },
   {
@@ -51,7 +55,8 @@ export const allTransactions = [
     customer: "Wendy Darling",
     type: "Voucher",
     status: "Completed",
-    date: "2023-10-24",
+    date: "2024-07-24",
+    timestamp: "04:00 PM",
     amount: "-$15.00",
   },
   {
@@ -60,7 +65,8 @@ export const allTransactions = [
     customer: "Alice Johnson",
     type: "Voucher",
     status: "Failed",
-    date: "2023-10-24",
+    date: "2024-07-24",
+    timestamp: "05:20 PM",
     amount: "-$25.00",
   },
 ];

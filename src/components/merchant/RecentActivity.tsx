@@ -27,6 +27,7 @@ export function RecentActivity() {
               <TableHead>Type</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Date</TableHead>
+              <TableHead>Timestamp</TableHead>
               <TableHead className="text-right">Amount</TableHead>
             </TableRow>
           </TableHeader>
@@ -50,6 +51,7 @@ export function RecentActivity() {
                   </Badge>
                 </TableCell>
                 <TableCell>{activity.date}</TableCell>
+                <TableCell>{activity.timestamp}</TableCell>
                 <TableCell className="text-right">{activity.amount}</TableCell>
               </TableRow>
             ))}
