@@ -1,60 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import { Switch } from '@/components/ui/switch';
+import { toast } from 'sonner';
+
+interface VirtualCard {
+  id: string;
+  holder: string;
+  limit: string;
+  currency: string;
+  status: 'Enabled' | 'Disabled';
+}
 
 export const VirtualCardTab: React.FC = () => {
-  const virtualCards = [
-    { id: 'vc1', holder: 'John Doe', limit: 'N$ 1000.00', currency: 'NAD', status: 'Active' },
-    { id: 'vc2', holder: 'Jane Smith', limit: 'USD 500.00', currency: 'USD', status: 'Blocked' },
-    { id: 'vc3', holder: 'Alice Johnson', limit: 'N$ 2500.00', currency: 'NAD', status: 'Active' },
-  ];
+  const [virtualCards, setVirtualCards] = useState<VirtualCard[]>([
+    { id: 'vc1', holder: 'John Doe', limit: 'N$ 1000.00', currency: 'NAD', status: 'Enabled' },
+    { id: 'vc2', holder: 'Jane Smith', limit: 'USD 500.00', currency: 'USD', status: 'Disabled' },
+    { id: 'vc3', holder: 'Alice Johnson', limit: 'N$ 2500.00', currency: 'NAD', status: 'Enabled' },
+  ]);
+
+  const handleStatusToggle = (cardId: string) => {
+    setVirtualCards(cards =>
+      cards.map(card => {
+        if (card.id === cardId) {
+          const newStatus = card.status === 'Enabled' ? 'Disabled' : 'Enabled';
+          toast.success(`Card for ${card.holder} has been ${newStatus.toLowerCase()}.`);
+          return { ...card, status: newStatus };
+        }
+        return card;
+      })
+    );
+  };
 
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Issue New Virtual Card</CardTitle>
-          <CardDescription>Create and configure virtual cards for various purposes.</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid gap-2">
-            <Label htmlFor="card-holder">Card Holder Name</Label>
-            <Input id="card-holder" placeholder="e.g., John Doe" />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="card-limit">Spending Limit</Label>
-            <Input id="card-limit" type="number" placeholder="e.g., 500.00" />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="card-currency">Currency</Label>
-            <Select>
-              <SelectTrigger id="card-currency">
-                <SelectValue placeholder="Select currency" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="nad">NAD</SelectItem>
-                <SelectItem value="usd">USD</SelectItem>
-                <SelectItem value="ngn">NGN</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="card-purpose">Purpose</Label>
-            <Input id="card-purpose" placeholder="e.g., Online Ads, Travel Expenses" />
-          </div>
-          <Button className="w-full">Issue Card</Button>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Manage Virtual Cards</CardTitle>
-          <CardDescription>Overview of all issued virtual cards.</CardDescription>
+          <CardTitle>My Virtual Cards</CardTitle>
+          <CardDescription>View your received virtual cards and manage their status.</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
@@ -64,6 +48,7 @@ export const VirtualCardTab: React.FC = () => {
                 <TableHead>Limit</TableHead>
                 <TableHead>Currency</TableHead>
                 <TableHead>Status</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -73,9 +58,19 @@ export const VirtualCardTab: React.FC = () => {
                   <TableCell>{card.limit}</TableCell>
                   <TableCell>{card.currency}</TableCell>
                   <TableCell>
-                    <Badge variant={card.status === 'Active' ? 'default' : 'destructive'}>
+                    <Badge
+                      variant={card.status === 'Enabled' ? 'default' : 'secondary'}
+                      className={card.status === 'Enabled' ? 'bg-green-500' : ''}
+                    >
                       {card.status}
                     </Badge>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <Switch
+                      checked={card.status === 'Enabled'}
+                      onCheckedChange={() => handleStatusToggle(card.id)}
+                      aria-label={`Toggle card for ${card.holder}`}
+                    />
                   </TableCell>
                 </TableRow>
               ))}
