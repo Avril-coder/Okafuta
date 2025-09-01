@@ -69,7 +69,6 @@ export const EscrowTab: React.FC = () => {
                 <TableHead>Amount</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Created Date</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -93,17 +92,6 @@ export const EscrowTab: React.FC = () => {
                     </Badge>
                   </TableCell>
                   <TableCell>{escrow.created}</TableCell>
-                  <TableCell className="text-right">
-                    {escrow.status === 'Active' && (
-                      <>
-                        <Button variant="outline" size="sm" className="mr-2">Release</Button>
-                        <Button variant="secondary" size="sm">Dispute</Button>
-                      </>
-                    )}
-                    {escrow.status === 'Disputed' && (
-                      <Button variant="outline" size="sm">Resolve</Button>
-                    )}
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

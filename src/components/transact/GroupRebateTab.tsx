@@ -101,7 +101,6 @@ export const GroupRebateTab: React.FC = () => {
                 <TableHead>Target Amount</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>End Date</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -112,10 +111,6 @@ export const GroupRebateTab: React.FC = () => {
                   <TableCell>{item.target}</TableCell>
                   <TableCell>{item.status}</TableCell>
                   <TableCell>{item.endDate}</TableCell>
-                  <TableCell className="text-right">
-                    <Button variant="outline" size="sm" className="mr-2">View</Button>
-                    <Button variant="destructive" size="sm">Delete</Button>
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
