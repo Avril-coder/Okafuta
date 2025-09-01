@@ -10,9 +10,9 @@ import { Badge } from '@/components/ui/badge';
 
 export const EscrowTab: React.FC = () => {
   const escrowTransactions = [
-    { id: 'e1', buyer: 'Customer A', seller: 'Merchant X', amount: 'N$ 1500.00', status: 'Active', created: '2023-10-20' },
-    { id: 'e2', buyer: 'Customer B', seller: 'Merchant Y', amount: 'USD 200.00', status: 'Completed', created: '2023-10-15' },
-    { id: 'e3', buyer: 'Customer C', seller: 'Merchant Z', amount: 'N$ 500.00', status: 'Disputed', created: '2023-10-10' },
+    { id: 'e1', client: 'Alice Johnson', seller: 'Merchant X', amount: 'N$ 1500.00', status: 'Active', created: '2023-10-20' },
+    { id: 'e2', client: 'Bob Williams', seller: 'Merchant Y', amount: 'USD 200.00', status: 'Completed', created: '2023-10-15' },
+    { id: 'e3', client: 'Charlie Brown', seller: 'Merchant Z', amount: 'N$ 500.00', status: 'Disputed', created: '2023-10-10' },
   ];
 
   return (
@@ -24,8 +24,8 @@ export const EscrowTab: React.FC = () => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="grid gap-2">
-            <Label htmlFor="buyer-id">Buyer Account/ID</Label>
-            <Input id="buyer-id" placeholder="e.g., buyer@example.com" />
+            <Label htmlFor="client-id">Client Account/ID</Label>
+            <Input id="client-id" placeholder="e.g., client@example.com" />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="seller-id">Seller Account/ID</Label>
@@ -64,7 +64,7 @@ export const EscrowTab: React.FC = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Buyer</TableHead>
+                <TableHead>Client</TableHead>
                 <TableHead>Seller</TableHead>
                 <TableHead>Amount</TableHead>
                 <TableHead>Status</TableHead>
@@ -75,7 +75,7 @@ export const EscrowTab: React.FC = () => {
             <TableBody>
               {escrowTransactions.map((escrow) => (
                 <TableRow key={escrow.id}>
-                  <TableCell className="font-medium">{escrow.buyer}</TableCell>
+                  <TableCell className="font-medium">{escrow.client}</TableCell>
                   <TableCell>{escrow.seller}</TableCell>
                   <TableCell>{escrow.amount}</TableCell>
                   <TableCell>
