@@ -1,66 +1,153 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useWallet } from '@/context/WalletContext';
+import { toast } from 'sonner';
 
 export const MoveMoneyTab: React.FC = () => {
-  const conversions = [
-    { id: '1', date: '2023-10-26', from: 'USD 100', to: 'NAD 1850', rate: '1:18.5', status: 'Completed' },
-    { id: '2', date: '2023-10-25', from: 'NGN 5000', to: 'USD 5', rate: '1:1000', status: 'Completed' },
-    { id: '3', date: '2023-10-24', from: 'NAD 200', to: 'NGN 10800', rate: '1:54', status: 'Pending' },
+  const { wallets, createWallet, moveFunds } = useWallet();
+  
+  // State for creating a new wallet
+  const [newWalletName, setNewWalletName] = useState('');
+  const [newWalletCurrency, setNewWalletCurrency] = useState<'USD' | 'NAD' | 'NGN' | ''>('');
+
+  // State for moving funds
+  const [fromWalletId, setFromWalletId] = useState('');
+  const [toWalletId, setToWalletId] = useState('');
+  const [moveAmount, setMoveAmount] = useState('');
+
+  // Mock history for now
+  const moveHistory = [
+    { id: '1', date: '2023-10-26', from: 'NAD Wallet', to: 'Savings (NAD)', amount: 'N$ 5000.00', status: 'Completed' },
+    { id: '2', date: '2023-10-25', from: 'USD Wallet', to: 'Travel Fund (USD)', amount: '$ 1000.00', status: 'Completed' },
   ];
+
+  const handleCreateWallet = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newWalletCurrency) {
+      createWallet(newWalletName, newWalletCurrency);
+      setNewWalletName('');
+      setNewWalletCurrency('');
+    } else {
+      toast.error("Please select a currency for the new wallet.");
+    }
+  };
+
+  const handleMoveFunds = (e: React.FormEvent) => {
+    e.preventDefault();
+    const amount = parseFloat(moveAmount);
+    if (isNaN(amount) || amount <= 0) {
+      toast.error("Please enter a valid amount to move.");
+      return;
+    }
+    moveFunds(fromWalletId, toWalletId, amount);
+    setFromWalletId('');
+    setToWalletId('');
+    setMoveAmount('');
+  };
 
   return (
     <div className="space-y-6">
+      {/* Create New Wallet Card */}
       <Card>
         <CardHeader>
-          <CardTitle>Currency Conversion</CardTitle>
-          <CardDescription>Convert funds between different currencies.</CardDescription>
+          <CardTitle>Create New Wallet</CardTitle>
+          <CardDescription>Add a new wallet, like a savings account.</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="from-currency">From Currency</Label>
-              <Select>
-                <SelectTrigger id="from-currency">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="usd">USD</SelectItem>
-                  <SelectItem value="nad">NAD</SelectItem>
-                  <SelectItem value="ngn">NGN</SelectItem>
-                </SelectContent>
-              </Select>
+        <CardContent>
+          <form onSubmit={handleCreateWallet} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="new-wallet-name">Wallet Name</Label>
+                <Input 
+                  id="new-wallet-name" 
+                  placeholder="e.g., Savings" 
+                  value={newWalletName}
+                  onChange={(e) => setNewWalletName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="new-wallet-currency">Currency</Label>
+                <Select value={newWalletCurrency} onValueChange={(value: 'USD' | 'NAD' | 'NGN') => setNewWalletCurrency(value)} required>
+                  <SelectTrigger id="new-wallet-currency">
+                    <SelectValue placeholder="Select Currency" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="USD">USD</SelectItem>
+                    <SelectItem value="NAD">NAD</SelectItem>
+                    <SelectItem value="NGN">NGN</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-            <div className="grid gap-2">
-              <Label htmlFor="to-currency">To Currency</Label>
-              <Select>
-                <SelectTrigger id="to-currency">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="usd">USD</SelectItem>
-                  <SelectItem value="nad">NAD</SelectItem>
-                  <SelectItem value="ngn">NGN</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="convert-amount">Amount</Label>
-            <Input id="convert-amount" type="number" placeholder="e.g., 100.00" />
-          </div>
-          <Button className="w-full">Convert</Button>
+            <Button type="submit" className="w-full">Create Wallet</Button>
+          </form>
         </CardContent>
       </Card>
 
+      {/* Move Money Card */}
       <Card>
         <CardHeader>
-          <CardTitle>Conversion History</CardTitle>
-          <CardDescription>Records of all currency conversions.</CardDescription>
+          <CardTitle>Move Money</CardTitle>
+          <CardDescription>Transfer funds between your wallets.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <form onSubmit={handleMoveFunds} className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="from-wallet">From Wallet</Label>
+                <Select value={fromWalletId} onValueChange={setFromWalletId} required>
+                  <SelectTrigger id="from-wallet">
+                    <SelectValue placeholder="Select source wallet" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {wallets.map(wallet => (
+                      <SelectItem key={wallet.id} value={wallet.id}>{wallet.name} - {wallet.balance.toLocaleString()}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="to-wallet">To Wallet</Label>
+                <Select value={toWalletId} onValueChange={setToWalletId} required>
+                  <SelectTrigger id="to-wallet">
+                    <SelectValue placeholder="Select destination wallet" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {wallets.map(wallet => (
+                      <SelectItem key={wallet.id} value={wallet.id}>{wallet.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="move-amount">Amount</Label>
+              <Input 
+                id="move-amount" 
+                type="number" 
+                placeholder="e.g., 100.00" 
+                value={moveAmount}
+                onChange={(e) => setMoveAmount(e.target.value)}
+                step="0.01"
+                required
+              />
+            </div>
+            <Button type="submit" className="w-full">Move Funds</Button>
+          </form>
+        </CardContent>
+      </Card>
+
+      {/* History Card */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Movement History</CardTitle>
+          <CardDescription>Records of all internal wallet transfers.</CardDescription>
         </CardHeader>
         <CardContent>
           <Table>
@@ -69,17 +156,17 @@ export const MoveMoneyTab: React.FC = () => {
                 <TableHead>Date</TableHead>
                 <TableHead>From</TableHead>
                 <TableHead>To</TableHead>
-                <TableHead>Rate</TableHead>
+                <TableHead>Amount</TableHead>
                 <TableHead>Status</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {conversions.map((item) => (
+              {moveHistory.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell>{item.date}</TableCell>
                   <TableCell>{item.from}</TableCell>
                   <TableCell>{item.to}</TableCell>
-                  <TableCell>{item.rate}</TableCell>
+                  <TableCell>{item.amount}</TableCell>
                   <TableCell>{item.status}</TableCell>
                 </TableRow>
               ))}

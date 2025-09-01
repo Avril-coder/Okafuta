@@ -5,13 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useWallet } from '@/context/WalletContext'; // Import useWallet
-import { toast } from 'sonner'; // Import toast
+import { useWallet } from '@/context/WalletContext';
+import { toast } from 'sonner';
 
 export const AddFundTab: React.FC = () => {
-  const { addFunds } = useWallet(); // Use the addFunds function from context
+  const { wallets, addFunds } = useWallet();
   const [amount, setAmount] = useState<string>('');
-  const [selectedCurrency, setSelectedCurrency] = useState<'usd' | 'nad' | 'ngn' | ''>('');
+  const [selectedWalletId, setSelectedWalletId] = useState<string>('');
 
   const fundHistory = [
     { id: '1', date: '2023-10-26', amount: '+N$ 500.00', method: 'Bank Transfer', status: 'Completed' },
@@ -27,13 +27,14 @@ export const AddFundTab: React.FC = () => {
       toast.error("Please enter a valid positive amount.");
       return;
     }
-    if (!selectedCurrency) {
-      toast.error("Please select a currency.");
+    if (!selectedWalletId) {
+      toast.error("Please select a wallet to add funds to.");
       return;
     }
 
-    addFunds(selectedCurrency, numericAmount);
-    setAmount(''); // Clear the input field
+    addFunds(selectedWalletId, numericAmount);
+    setAmount('');
+    setSelectedWalletId('');
   };
 
   return (
@@ -58,15 +59,15 @@ export const AddFundTab: React.FC = () => {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="currency-method">Currency</Label>
-              <Select value={selectedCurrency} onValueChange={(value: 'usd' | 'nad' | 'ngn') => setSelectedCurrency(value)} required>
-                <SelectTrigger id="currency-method">
-                  <SelectValue placeholder="Select currency" />
+              <Label htmlFor="wallet-select">To Wallet</Label>
+              <Select value={selectedWalletId} onValueChange={setSelectedWalletId} required>
+                <SelectTrigger id="wallet-select">
+                  <SelectValue placeholder="Select wallet" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="usd">USD</SelectItem>
-                  <SelectItem value="nad">NAD</SelectItem>
-                  <SelectItem value="ngn">NGN</SelectItem>
+                  {wallets.map(wallet => (
+                    <SelectItem key={wallet.id} value={wallet.id}>{wallet.name}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
