@@ -7,9 +7,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import { LocationCombobox } from '@/components/shared/LocationCombobox'; // Import the new component
 
 export const VoucherTab: React.FC = () => {
   const [userStatus, setUserStatus] = useState('');
+  const [pickupLocation, setPickupLocation] = useState('');
 
   const vouchers = [
     { id: 'v1', name: 'Welcome Bonus', value: 'N$ 50.00', expiry: '2024-12-31', status: 'Active' },
@@ -67,16 +69,11 @@ export const VoucherTab: React.FC = () => {
             <Label htmlFor="pickup-location">
               Pickup Location {userStatus !== 'new' && '(Optional)'}
             </Label>
-            <Select required={userStatus === 'new'}>
-              <SelectTrigger id="pickup-location">
-                <SelectValue placeholder="Select a pickup location" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="location-a">Okafuta HQ - Windhoek</SelectItem>
-                <SelectItem value="location-b">Okafuta Branch - Swakopmund</SelectItem>
-                <SelectItem value="location-c">Partner Store - Ongwediva</SelectItem>
-              </SelectContent>
-            </Select>
+            <LocationCombobox
+              value={pickupLocation}
+              onValueChange={setPickupLocation}
+              required={userStatus === 'new'}
+            />
           </div>
 
           <div className="grid gap-2">
