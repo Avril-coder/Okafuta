@@ -7,6 +7,27 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useWallet } from '@/context/WalletContext';
 import { toast } from 'sonner';
+import { v4 as uuidv4 } from 'uuid';
+
+// Define the shape of a history item
+interface MoveHistoryItem {
+  id: string;
+  date: string;
+  from: string;
+  to: string;
+  amount: string;
+  status: string;
+}
+
+// Helper to get currency symbol
+const getCurrencySymbol = (currency: 'USD' | 'NAD' | 'NGN') => {
+  switch (currency) {
+    case 'USD': return '$';
+    case 'NAD': return 'N$';
+    case 'NGN': return '₦';
+    default: return '';
+  }
+};
 
 export const MoveMoneyTab: React.FC = () => {
   const { wallets, createWallet, moveFunds } = useWallet();
@@ -20,11 +41,11 @@ export const MoveMoneyTab: React.FC = () => {
   const [toWalletId, setToWalletId] = useState('');
   const [moveAmount, setMoveAmount] = useState('');
 
-  // Mock history for now
-  const moveHistory = [
+  // State for history, initialized with mock data
+  const [moveHistory, setMoveHistory] = useState<MoveHistoryItem[]>([
     { id: '1', date: '2023-10-26', from: 'NAD Wallet', to: 'Savings (NAD)', amount: 'N$ 5000.00', status: 'Completed' },
     { id: '2', date: '2023-10-25', from: 'USD Wallet', to: 'Travel Fund (USD)', amount: '$ 1000.00', status: 'Completed' },
-  ];
+  ]);
 
   const handleCreateWallet = (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,11 +61,45 @@ export const MoveMoneyTab: React.FC = () => {
   const handleMoveFunds = (e: React.FormEvent) => {
     e.preventDefault();
     const amount = parseFloat(moveAmount);
+    
     if (isNaN(amount) || amount <= 0) {
       toast.error("Please enter a valid amount to move.");
       return;
     }
+    if (!fromWalletId || !toWalletId) {
+      toast.error("Please select both source and destination wallets.");
+      return;
+    }
+
+    const fromWallet = wallets.find(w => w.id === fromWalletId);
+    const toWallet = wallets.find(w => w.id === toWalletId);
+
+    if (!fromWallet || !toWallet) {
+      toast.error("Invalid wallet selection.");
+      return;
+    }
+    
+    if (fromWallet.balance < amount) {
+      toast.error("Insufficient funds in the source wallet.");
+      return;
+    }
+
+    // Call the context function to update balances
     moveFunds(fromWalletId, toWalletId, amount);
+
+    // Create and add the new history record
+    const newHistoryItem: MoveHistoryItem = {
+      id: uuidv4(),
+      date: new Date().toLocaleDateString('en-CA'), // YYYY-MM-DD format
+      from: fromWallet.name,
+      to: toWallet.name,
+      amount: `${getCurrencySymbol(fromWallet.currency)} ${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+      status: 'Completed'
+    };
+
+    setMoveHistory(prevHistory => [newHistoryItem, ...prevHistory]);
+
+    // Reset form fields
     setFromWalletId('');
     setToWalletId('');
     setMoveAmount('');
