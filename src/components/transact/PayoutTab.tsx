@@ -65,6 +65,10 @@ export const PayoutTab: React.FC = () => {
         toast.error("Please enter a phone number.");
         return;
       }
+      if (!reference) {
+        toast.error("Please enter a reference.");
+        return;
+      }
       payoutDetails = { selectedMethod, amount, phoneNumber, reference };
     }
 
@@ -183,8 +187,8 @@ export const PayoutTab: React.FC = () => {
                 <Input id="phoneNumber" type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="e.g., 0812345678" required />
               </div>
               <div className="grid gap-2">
-                <Label htmlFor="reference">Reference (Optional)</Label>
-                <Input id="reference" value={reference} onChange={(e) => setReference(e.target.value)} placeholder="e.g., Invoice #123" />
+                <Label htmlFor="reference">Reference</Label>
+                <Input id="reference" value={reference} onChange={(e) => setReference(e.target.value)} placeholder="e.g., Invoice #123" required />
               </div>
             </>
           )}
