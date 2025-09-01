@@ -27,6 +27,9 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
 
+  // State to manage autofilled fields
+  const [isAutofilled, setIsAutofilled] = useState(false);
+
   // Conditional fields for Student employment status
   const [studentType, setStudentType] = useState<'local' | 'foreign' | ''>('');
   const [proofOfRegistration, setProofOfRegistration] = useState<File | null>(null);
@@ -55,6 +58,32 @@ export default function SignUp() {
   const [marriageCertificate, setMarriageCertificate] = useState<File | null>(null);
   const [divorceDocument, setDivorceDocument] = useState<File | null>(null);
   const [deathCertificate, setDeathCertificate] = useState<File | null>(null);
+
+  // Effect to autofill user data based on a specific ID number
+  useEffect(() => {
+    const mockUserData = {
+      id: '9501151234567',
+      firstName: 'Maria',
+      lastName: 'Iipumbu',
+      gender: 'female',
+    };
+
+    if (identityNumber === mockUserData.id) {
+      setFirstName(mockUserData.firstName);
+      setLastName(mockUserData.lastName);
+      setGender(mockUserData.gender);
+      setIsAutofilled(true);
+      toast.info("User data autofilled based on ID number.");
+    } else {
+      // If the ID was autofilled and is now changed, clear the fields
+      if (isAutofilled) {
+        setFirstName('');
+        setLastName('');
+        setGender('');
+      }
+      setIsAutofilled(false);
+    }
+  }, [identityNumber]);
 
   // Effect to update account type based on employment status
   useEffect(() => {
@@ -252,6 +281,7 @@ export default function SignUp() {
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
+                    disabled={isAutofilled}
                   />
                 </div>
                 <div className="grid gap-2">
@@ -263,6 +293,7 @@ export default function SignUp() {
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     required
+                    disabled={isAutofilled}
                   />
                 </div>
               </div>
@@ -323,7 +354,7 @@ export default function SignUp() {
               <div className="grid grid-cols-2 gap-2">
                 <div className="grid gap-2">
                   <Label htmlFor="gender">Gender</Label>
-                  <Select value={gender} onValueChange={setGender} required>
+                  <Select value={gender} onValueChange={setGender} required disabled={isAutofilled}>
                     <SelectTrigger id="gender">
                       <SelectValue placeholder="Select Gender" />
                     </SelectTrigger>
