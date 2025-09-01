@@ -5,18 +5,15 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
+import { allTransactions, currentMerchant } from "@/data/mockData";
+
+// Filter transactions to get only those for the current merchant
+const customerTransactions = allTransactions.filter(tx => tx.merchantId === currentMerchant.id);
 
 export default function Customers() {
   const [filterType, setFilterType] = useState('all');
   const [filterCustomer, setFilterCustomer] = useState('');
   const [filterDate, setFilterDate] = useState('');
-
-  const customerTransactions = [
-    { id: 'tx1', customer: 'Alice Smith', type: 'Withdrawal', amount: '-N$ 250.00', date: '2023-10-20', status: 'Completed' },
-    { id: 'tx2', customer: 'David Lee', type: 'Deposit', amount: '+N$ 1000.00', date: '2023-10-19', status: 'Completed' },
-    { id: 'tx3', customer: 'Eve Green', type: 'Bill Payment', amount: '-N$ 300.00', date: '2023-10-18', status: 'Completed' },
-    { id: 'tx4', customer: 'Alice Smith', type: 'Voucher', amount: '-N$ 20.00', date: '2023-10-20', status: 'Completed' },
-  ];
 
   const filteredTransactions = customerTransactions.filter(transaction => {
     const typeMatch = filterType === 'all' || transaction.type.toLowerCase() === filterType;
