@@ -20,9 +20,10 @@ export const PhoneMockup: React.FC = () => {
       {/* Screen */}
       <div className="relative w-full h-full bg-white dark:bg-gray-900 rounded-[2rem] overflow-hidden flex flex-col">
         {/* Account Info - Simplified */}
-        <div className="p-4 flex items-center justify-end bg-gray-50 dark:bg-gray-800"> {/* Changed justify-center to justify-end */}
+        <div className="p-4 flex items-center justify-end bg-gray-50 dark:bg-gray-800">
           <Avatar className="h-8 w-8">
-            <AvatarFallback className="bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300"> {/* Changed color to gray */}
+            {/* Removed AvatarImage as it's not provided, using fallback with User icon */}
+            <AvatarFallback className="bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
               <User className="h-5 w-5" />
             </AvatarFallback>
           </Avatar>
@@ -31,7 +32,7 @@ export const PhoneMockup: React.FC = () => {
         {/* Balance */}
         <div className="p-4 text-center bg-white dark:bg-gray-900">
           <p className="text-sm text-gray-500 dark:text-gray-400">Available Balance</p>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-1">NGN 30.00</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-1">N$ 30.00</h2>
         </div>
 
         {/* Action Buttons */}
