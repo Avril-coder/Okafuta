@@ -26,7 +26,7 @@ export const SharedHeader: React.FC = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-8"> {/* Changed space-x-6 to space-x-8 */}
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -45,7 +45,7 @@ export const SharedHeader: React.FC = () => {
           </GradientButton>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu button - visible on small screens */}
         <div className="md:hidden flex items-center">
           <Sheet>
             <SheetTrigger asChild>
