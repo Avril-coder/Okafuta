@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import { Link } from 'react-router-dom'; // Changed import from 'next/link'
 
 export const HeroSection: React.FC = () => {
   return (
@@ -12,12 +12,12 @@ export const HeroSection: React.FC = () => {
           Streamline your transactions, manage your finances, and grow your business with our intuitive platform.
         </p>
         <div className="flex justify-center space-x-4">
-          <Link href="/signup" passHref>
+          <Link to="/signup"> {/* Removed passHref */}
             <Button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 text-lg rounded-full shadow-lg transition duration-300 ease-in-out">
               Get Started
             </Button>
           </Link>
-          <Link href="/login" passHref>
+          <Link to="/login"> {/* Removed passHref */}
             <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg rounded-full shadow-lg transition duration-300 ease-in-out">
               Learn More
             </Button>
