@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { ArrowUp, ArrowDown, Repeat, Plus, User, DollarSign } from 'lucide-react';
+import { ArrowUp, ArrowDown, HandCoins, Plus, User, DollarSign } from 'lucide-react'; // Changed Repeat to HandCoins
 import { cn } from '@/lib/utils';
 
 export const PhoneMockup: React.FC = () => {
@@ -46,7 +46,7 @@ export const PhoneMockup: React.FC = () => {
             <span className="text-xs">Cash Out</span>
           </Button>
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
-            <Repeat className="h-5 w-5 mb-1" />
+            <HandCoins className="h-5 w-5 mb-1" /> {/* Changed to HandCoins */}
             <span className="text-xs">Request</span>
           </Button>
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
