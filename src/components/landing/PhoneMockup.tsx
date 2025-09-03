@@ -20,10 +20,9 @@ export const PhoneMockup: React.FC = () => {
       {/* Screen */}
       <div className="relative w-full h-full bg-white dark:bg-gray-900 rounded-[2rem] overflow-hidden flex flex-col">
         {/* Account Info - Simplified */}
-        <div className="p-4 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
+        <div className="p-4 flex items-center justify-end bg-gray-50 dark:bg-gray-800"> {/* Changed justify-center to justify-end */}
           <Avatar className="h-8 w-8">
-            {/* Removed AvatarImage as it's not provided, using fallback with User icon */}
-            <AvatarFallback className="bg-amber-500 text-white">
+            <AvatarFallback className="bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300"> {/* Changed color to gray */}
               <User className="h-5 w-5" />
             </AvatarFallback>
           </Avatar>
