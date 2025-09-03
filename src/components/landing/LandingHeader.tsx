@@ -27,7 +27,7 @@ export const LandingHeader: React.FC = () => {
         </div>
 
         {/* Navigation Links for larger screens */}
-        <div className="hidden lg:flex items-center space-x-10"> {/* Increased space-x */}
+        <div className="hidden lg:flex items-center space-x-8">
           {navLinks.map((link) => (
             <NavLink
               key={link.name}
@@ -57,7 +57,7 @@ export const LandingHeader: React.FC = () => {
           </DropdownMenu>
 
           {/* Login Button */}
-          <GradientButton asChild className="ml-8"> {/* Added ml-8 */}
+          <GradientButton asChild>
             <Link to="/login">Login Now</Link>
           </GradientButton>
         </div>
