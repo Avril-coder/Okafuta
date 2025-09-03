@@ -26,7 +26,7 @@ export const SharedHeader: React.FC = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-10"> {/* Increased space-x */}
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -39,7 +39,7 @@ export const SharedHeader: React.FC = () => {
         </div>
 
         {/* Login Button for Desktop */}
-        <div className="hidden md:block">
+        <div className="hidden md:block ml-8"> {/* Added ml-8 */}
           <GradientButton asChild>
             <Link to="/login">Login</Link>
           </GradientButton>
