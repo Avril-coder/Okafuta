@@ -1,17 +1,17 @@
 import {
-  ArrowDownToLine,
+  // ArrowDownToLine, // Removed import
   ArrowUpFromLine,
   FileText,
   Move,
   Ticket,
-  // ReceiptText, // Removed import for Offer Bill Payment
+  Wallet, // Added Wallet icon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
 const links = [
-  { name: "Add Money", icon: ArrowDownToLine, href: "/dashboard/transact?tab=add-fund" },
+  { name: "Add Money", icon: Wallet, href: "/dashboard/transact?tab=add-fund" }, // Changed icon to Wallet
   { name: "Withdraw", icon: ArrowUpFromLine, href: "/dashboard/transact?tab=payout" },
   // { name: "Offer Bill Payment", icon: ReceiptText, href: "/dashboard/offer-bill-payment" }, // This one is removed
   { name: "Move Money", icon: Move, href: "/dashboard/transact?tab=move-money" },
