@@ -7,6 +7,7 @@ import { ScanLine, Smartphone, UserCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { SharedHeader } from '@/components/shared/Header';
+import { Footer } from '@/components/shared/Footer'; // Import Footer
 
 const verificationSteps = [
   { id: 1, name: 'ID Verification', icon: ScanLine, description: 'Upload a valid government-issued ID.' },
@@ -110,6 +111,7 @@ export default function Onboarding() {
           </p>
         </footer>
       </div>
+      <Footer /> {/* Add Footer here */}
     </div>
   );
 }

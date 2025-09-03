@@ -7,6 +7,7 @@ import { toast } from 'sonner';
 import { BlobBackground } from '@/components/shared/BlobBackground';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { SharedHeader } from '@/components/shared/Header';
+import { Footer } from '@/components/shared/Footer'; // Import Footer
 
 export default function ForgotPassword() {
   const handleResetPassword = (e: React.FormEvent) => {
@@ -46,6 +47,7 @@ export default function ForgotPassword() {
           </CardContent>
         </Card>
       </div>
+      <Footer /> {/* Add Footer here */}
     </div>
   );
 }
