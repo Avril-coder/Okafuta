@@ -1,20 +1,18 @@
 import {
-  // ArrowDownToLine, // Removed import
   ArrowUpFromLine,
   FileText,
-  Move,
+  Shuffle, // Changed Move to Shuffle
   Ticket,
-  Wallet, // Added Wallet icon
+  Wallet,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
 const links = [
-  { name: "Add Money", icon: Wallet, href: "/dashboard/transact?tab=add-fund" }, // Changed icon to Wallet
+  { name: "Add Money", icon: Wallet, href: "/dashboard/transact?tab=add-fund" },
   { name: "Withdraw", icon: ArrowUpFromLine, href: "/dashboard/transact?tab=payout" },
-  // { name: "Offer Bill Payment", icon: ReceiptText, href: "/dashboard/offer-bill-payment" }, // This one is removed
-  { name: "Move Money", icon: Move, href: "/dashboard/transact?tab=move-money" },
+  { name: "Move Money", icon: Shuffle, href: "/dashboard/transact?tab=move-money" }, // Updated to Shuffle
   { name: "Create Voucher", icon: Ticket, href: "/dashboard/benefits?tab=vouchers" },
   { name: "Invoice", icon: FileText, href: "/dashboard/invoice" },
 ];
