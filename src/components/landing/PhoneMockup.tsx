@@ -2,14 +2,14 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { ArrowUp, ArrowDown, HandCoins, User, DollarSign, Wallet } from 'lucide-react'; // Changed Plus to Wallet
+import { ArrowDown, HandCoins, User, DollarSign, Wallet, Send } from 'lucide-react'; // Added Send icon, removed ArrowUp from here
 import { cn } from '@/lib/utils';
 
 export const PhoneMockup: React.FC = () => {
   const transactions = [
     { id: 1, description: "Coffee Shop", amount: "-N$ 25.00", date: "Today", icon: DollarSign, iconColor: "text-red-500" },
-    { id: 2, description: "Salary Deposit", amount: "+N$ 5,000.00", date: "Yesterday", icon: Wallet, iconColor: "text-green-500" }, // Changed icon to Wallet
-    { id: 3, description: "Online Purchase", amount: "-N$ 150.00", date: "Oct 25", icon: ArrowUp, iconColor: "text-red-500" },
+    { id: 2, description: "Salary Deposit", amount: "+N$ 5,000.00", date: "Yesterday", icon: Wallet, iconColor: "text-green-500" },
+    { id: 3, description: "Online Purchase", amount: "-N$ 150.00", date: "Oct 25", icon: Send, iconColor: "text-red-500" }, // Changed icon to Send
     { id: 4, description: "Friend Transfer", amount: "+N$ 100.00", date: "Oct 24", icon: ArrowDown, iconColor: "text-green-500" },
   ];
 
@@ -38,7 +38,7 @@ export const PhoneMockup: React.FC = () => {
         {/* Action Buttons */}
         <div className="grid grid-cols-4 gap-2 p-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
-            <ArrowUp className="h-5 w-5 mb-1" />
+            <Send className="h-5 w-5 mb-1" /> {/* Changed to Send */}
             <span className="text-xs">Send</span>
           </Button>
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
@@ -50,7 +50,7 @@ export const PhoneMockup: React.FC = () => {
             <span className="text-xs">Request</span>
           </Button>
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
-            <Wallet className="h-5 w-5 mb-1" /> {/* Changed to Wallet */}
+            <Wallet className="h-5 w-5 mb-1" />
             <span className="text-xs">Add Money</span>
           </Button>
         </div>
