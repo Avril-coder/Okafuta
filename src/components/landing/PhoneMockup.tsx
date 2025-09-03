@@ -19,17 +19,11 @@ export const PhoneMockup: React.FC = () => {
       <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-5 bg-gray-800 dark:bg-gray-200 rounded-md z-10"></div>
       {/* Screen */}
       <div className="relative w-full h-full bg-white dark:bg-gray-900 rounded-[2rem] overflow-hidden flex flex-col">
-        {/* Account Info */}
-        <div className="p-4 flex items-center justify-between bg-gray-50 dark:bg-gray-800">
-          <div className="flex items-center space-x-2">
-            <Avatar className="h-8 w-8">
-              <AvatarFallback className="bg-amber-500 text-white">JD</AvatarFallback>
-            </Avatar>
-            <span className="text-sm font-medium text-gray-800 dark:text-gray-200">Hello, John Doe</span>
-          </div>
-          <Button variant="ghost" size="icon" className="h-8 w-8">
-            <User className="h-4 w-4 text-gray-600 dark:text-gray-400" />
-          </Button>
+        {/* Account Info - Simplified */}
+        <div className="p-4 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
+          <Avatar className="h-8 w-8">
+            <AvatarFallback className="bg-amber-500 text-white">JD</AvatarFallback>
+          </Avatar>
         </div>
 
         {/* Balance */}
