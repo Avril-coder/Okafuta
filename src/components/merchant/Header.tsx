@@ -68,7 +68,7 @@ export function Header() {
           <SheetContent side="left" className="w-[240px] p-0">
             <div className="flex flex-col p-4 space-y-1">
               <Link to="/dashboard" className="flex items-center text-xl font-bold text-gray-900 dark:text-white mb-6">
-                <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
+                <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-10 w-auto" />
               </Link>
               {navigation.map((item) => (
                 <NavLink

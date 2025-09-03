@@ -22,7 +22,7 @@ export const LandingHeader: React.FC = () => {
         {/* Logo */}
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
-            <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
+            <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-10 w-auto" />
           </Link>
         </div>
 

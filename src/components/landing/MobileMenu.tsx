@@ -26,7 +26,7 @@ export const MobileMenu: React.FC = () => {
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between mb-8">
             <Link to="/" className="flex items-center">
-              <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-8 w-auto" />
+              <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-10 w-auto" />
             </Link>
           </div>
           
