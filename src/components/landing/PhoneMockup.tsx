@@ -22,7 +22,10 @@ export const PhoneMockup: React.FC = () => {
         {/* Account Info - Simplified */}
         <div className="p-4 flex items-center justify-center bg-gray-50 dark:bg-gray-800">
           <Avatar className="h-8 w-8">
-            <AvatarFallback className="bg-amber-500 text-white">JD</AvatarFallback>
+            {/* Removed AvatarImage as it's not provided, using fallback with User icon */}
+            <AvatarFallback className="bg-amber-500 text-white">
+              <User className="h-5 w-5" />
+            </AvatarFallback>
           </Avatar>
         </div>
 
