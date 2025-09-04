@@ -6,8 +6,8 @@ import { Separator } from '@/components/ui/separator';
 import { ScanLine, Smartphone, UserCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
-import { SharedHeader } from '@/components/shared/Header';
-import { Footer } from '@/components/shared/Footer'; // Import Footer
+import { LandingHeader } from '@/components/landing/LandingHeader'; // Use LandingHeader
+import { Footer } from '@/components/shared/Footer';
 
 const verificationSteps = [
   { id: 1, name: 'ID Verification', icon: ScanLine, description: 'Upload a valid government-issued ID.' },
@@ -31,7 +31,7 @@ export default function Onboarding() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-950">
-      <SharedHeader />
+      <LandingHeader /> {/* Use LandingHeader here */}
       <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
         <header className="w-full max-w-4xl text-center mb-8">
           <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">
@@ -111,7 +111,7 @@ export default function Onboarding() {
           </p>
         </footer>
       </div>
-      <Footer /> {/* Add Footer here */}
+      <Footer />
     </div>
   );
 }

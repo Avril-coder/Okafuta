@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 import { BlobBackground } from '@/components/shared/BlobBackground';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { Checkbox } from '@/components/ui/checkbox';
-import { SharedHeader } from '@/components/shared/Header';
+import { LandingHeader } from '@/components/landing/LandingHeader'; // Use LandingHeader
 import { useUser } from '@/context/UserContext';
 
 export default function Login() {
@@ -25,7 +25,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-      <SharedHeader />
+      <LandingHeader /> {/* Use LandingHeader here */}
       <div className="flex-1 flex items-center justify-center px-4 overflow-hidden">
         <BlobBackground />
         <Card className="relative z-10 w-full max-w-md">

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu } from 'lucide-react';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { GradientButton } from '@/components/landing/GradientButton';
+import { GradientButton } from '@/components/landing/GradientButton'; // Keep GradientButton for consistency
 
 const navLinks = [
   { name: 'Home', href: '/' },
@@ -11,10 +11,9 @@ const navLinks = [
   { name: 'FAQ', href: '/faq' },
   { name: 'Blog', href: '/blog' },
   { name: 'Contact', href: '/contact' },
-  // { name: 'Pay Bill', href: '/customer/pay-bill' }, // Removed link for customer Pay Bill page
 ];
 
-export const SharedHeader: React.FC = () => {
+export const MerchantHeader: React.FC = () => {
   return (
     <header className="w-full bg-white/30 dark:bg-gray-900/30 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 pt-6 pb-4 px-4 sm:px-6 shadow-sm">
       <nav className="flex items-center justify-between max-w-7xl mx-auto">

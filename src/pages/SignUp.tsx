@@ -10,7 +10,7 @@ import { GradientButton } from '@/components/landing/GradientButton';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import { SharedHeader } from '@/components/shared/Header';
+import { LandingHeader } from '@/components/landing/LandingHeader'; // Use LandingHeader
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -259,7 +259,7 @@ export default function SignUp() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-      <SharedHeader />
+      <LandingHeader /> {/* Use LandingHeader here */}
       <div className="flex-1 flex items-center justify-center px-4 overflow-hidden">
         <BlobBackground />
         <Card className="relative z-10 w-full max-w-md">
