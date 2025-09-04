@@ -58,7 +58,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="flex items-center justify-center text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary lg:hidden"
+              className="flex items-center justify-center text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary lg:hidden rounded-full" // Added rounded-full
               aria-label="Open menu"
             >
               <span className="sr-only">Open sidebar</span>
@@ -121,7 +121,7 @@ export function Header() {
         </div>
         <div className="ml-4 flex items-center md:ml-6">
           {flag && <span className="text-2xl mr-2" aria-label="country flag">{flag}</span>}
-          <Button variant="ghost" size="icon" aria-label="Notifications">
+          <Button variant="ghost" size="icon" aria-label="Notifications" className="rounded-full"> {/* Added rounded-full */}
             <Bell className="h-6 w-6" aria-hidden="true" />
           </Button>
 

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { toast } from 'sonner';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 export default function Profile() {
   const [name, setName] = useState('John Doe');
@@ -79,7 +80,7 @@ export default function Profile() {
                 <Label htmlFor="phone">Phone Number</Label>
                 <Input id="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
               </div>
-              <Button type="submit" className="w-full">Save Profile</Button>
+              <GradientButton type="submit" className="w-full">Save Profile</GradientButton>
             </form>
           </CardContent>
         </Card>
@@ -104,7 +105,7 @@ export default function Profile() {
                 <Label htmlFor="confirm-new-password">Confirm New Password</Label>
                 <Input id="confirm-new-password" type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
               </div>
-              <Button type="submit" className="w-full">Change Password</Button>
+              <GradientButton type="submit" className="w-full">Change Password</GradientButton>
             </form>
           </CardContent>
         </Card>

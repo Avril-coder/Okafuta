@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useWallet } from '@/context/WalletContext';
 import { toast } from 'sonner';
 import { v4 as uuidv4 } from 'uuid';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 // Define the shape of a history item
 interface MoveHistoryItem {
@@ -79,6 +80,11 @@ export const MoveMoneyTab: React.FC = () => {
       return;
     }
     
+    if (fromWallet.currency !== toWallet.currency) {
+      toast.error("Cross-currency transfers are not supported. Please create a new wallet with the same currency.");
+      return;
+    }
+
     if (fromWallet.balance < amount) {
       toast.error("Insufficient funds in the source wallet.");
       return;
@@ -140,7 +146,7 @@ export const MoveMoneyTab: React.FC = () => {
                 </Select>
               </div>
             </div>
-            <Button type="submit" className="w-full">Create Wallet</Button>
+            <GradientButton type="submit" className="w-full">Create Wallet</GradientButton>
           </form>
         </CardContent>
       </Card>
@@ -193,7 +199,7 @@ export const MoveMoneyTab: React.FC = () => {
                 required
               />
             </div>
-            <Button type="submit" className="w-full">Move Funds</Button>
+            <GradientButton type="submit" className="w-full">Move Funds</GradientButton>
           </form>
         </CardContent>
       </Card>

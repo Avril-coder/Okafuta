@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 export default function Settings() {
   return (
@@ -36,7 +37,7 @@ export default function Settings() {
                 </SelectContent>
               </Select>
             </div>
-            <Button className="w-full">Save Wallet Settings</Button>
+            <GradientButton className="w-full">Save Wallet Settings</GradientButton>
           </CardContent>
         </Card>
 
@@ -51,7 +52,7 @@ export default function Settings() {
               <Label htmlFor="pin-setup">PIN Setup</Label>
               <Input id="pin-setup" type="password" placeholder="Enter new PIN" />
               <Input type="password" placeholder="Confirm new PIN" />
-              <Button className="w-full">Set/Change PIN</Button>
+              <GradientButton className="w-full">Set/Change PIN</GradientButton>
             </div>
 
             <div className="flex items-center justify-between space-x-2">
@@ -85,7 +86,7 @@ export default function Settings() {
               <Label htmlFor="security-notifications">Security Alerts</Label>
               <Switch id="security-notifications" defaultChecked />
             </div>
-            <Button className="w-full">Save Preferences</Button>
+            <GradientButton className="w-full">Save Preferences</GradientButton>
           </CardContent>
         </Card>
 
@@ -108,7 +109,7 @@ export default function Settings() {
               <Label htmlFor="services-offered">Services Offered</Label>
               <Textarea id="services-offered" placeholder="Describe the services your business provides." />
             </div>
-            <Button className="w-full">Update Profile</Button>
+            <GradientButton className="w-full">Update Profile</GradientButton>
           </CardContent>
         </Card>
       </div>

@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Info, Users } from 'lucide-react';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 export const GroupRebateTab: React.FC = () => {
   const rebates = [
@@ -27,7 +28,7 @@ export const GroupRebateTab: React.FC = () => {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Adding Group Rebate</CardTitle>
-          <Button variant="outline">
+          <Button variant="outline" className="rounded-full">
             <Users className="mr-2 h-4 w-4" />
             Group Rebate List
           </Button>
@@ -82,7 +83,7 @@ export const GroupRebateTab: React.FC = () => {
                 <Input id="targeted-amount" type="number" placeholder="0.00" step="0.01" />
               </div>
             </div>
-            <Button className="w-full">Create Group</Button>
+            <GradientButton className="w-full">Create Group</GradientButton>
           </form>
         </CardContent>
       </Card>

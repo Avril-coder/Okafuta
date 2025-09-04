@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 const eWalletOptions = ['easywallet', 'bluewallet', 'mobipay', 'ewallet'];
 
@@ -136,9 +137,9 @@ export const PayoutTab: React.FC = () => {
           />
         </div>
         <div className="pt-4">
-          <Button onClick={handleContinue} className="w-full sm:w-auto">
+          <GradientButton onClick={handleContinue} className="w-full sm:w-auto">
             Continue
-          </Button>
+          </GradientButton>
         </div>
       </CardContent>
     </Card>
@@ -148,7 +149,7 @@ export const PayoutTab: React.FC = () => {
     <Card>
       <CardHeader>
         <div className="flex items-center gap-4">
-          <Button variant="outline" size="icon" onClick={handleBack} aria-label="Go back">
+          <Button variant="outline" size="icon" onClick={handleBack} aria-label="Go back" className="rounded-full">
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
@@ -192,7 +193,7 @@ export const PayoutTab: React.FC = () => {
               </div>
             </>
           )}
-          <Button type="submit" className="w-full">Submit Payout</Button>
+          <GradientButton type="submit" className="w-full">Submit Payout</GradientButton>
         </form>
       </CardContent>
     </Card>

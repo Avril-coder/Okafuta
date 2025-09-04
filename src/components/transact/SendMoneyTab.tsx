@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 export const SendMoneyTab: React.FC = () => {
   const transferHistory = [
@@ -28,7 +29,7 @@ export const SendMoneyTab: React.FC = () => {
             <Label htmlFor="send-amount">Amount</Label>
             <Input id="send-amount" type="number" placeholder="e.g., 100.00" />
           </div>
-          <Button className="w-full">Send Funds</Button>
+          <GradientButton className="w-full">Send Funds</GradientButton>
         </CardContent>
       </Card>
 

@@ -29,7 +29,7 @@ export function QuickLinks() {
             <Button
               key={link.name}
               variant="outline"
-              className="flex flex-col h-24 w-full"
+              className="flex flex-col h-24 w-full rounded-full" // Added rounded-full
               asChild
             >
               <Link to={link.href}>

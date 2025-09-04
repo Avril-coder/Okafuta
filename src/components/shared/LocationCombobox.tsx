@@ -36,7 +36,7 @@ export function LocationCombobox({ value, onValueChange, required = false }: Loc
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className="w-full justify-between rounded-full" // Added rounded-full
           required={required && !value} // Add required attribute for form validation
         >
           {value

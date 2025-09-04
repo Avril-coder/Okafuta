@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { SharedHeader } from '@/components/shared/Header';
 import { Footer } from '@/components/shared/Footer'; // Import Footer
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 const verificationSteps = [
   { id: 1, name: 'ID Verification', icon: ScanLine, description: 'Upload a valid government-issued ID.' },
@@ -30,7 +31,7 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-950">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-800">
       <SharedHeader />
       <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
         <header className="w-full max-w-4xl text-center mb-8">
@@ -57,9 +58,9 @@ export default function Onboarding() {
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 Scan the code to start the process and continue on another device.
               </p>
-              <Button variant="outline" className="mt-6" onClick={handleNextStep}>
+              <GradientButton className="mt-6" onClick={handleNextStep}>
                 {currentStep < verificationSteps.length ? 'Simulate Next Step' : 'Proceed to Sign Up'}
-              </Button>
+              </GradientButton>
             </CardContent>
           </Card>
 

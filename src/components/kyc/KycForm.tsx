@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { CalendarIcon } from 'lucide-react';
 import { toast } from 'sonner';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 interface KycFormProps {
   onKycSubmit: (data: any) => void; // In a real app, this would send data to backend
@@ -77,7 +78,7 @@ export const KycForm: React.FC<KycFormProps> = ({ onKycSubmit, currentStatus }) 
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-full justify-start text-left font-normal",
+                    "w-full justify-start text-left font-normal rounded-full", // Added rounded-full
                     !dob && "text-muted-foreground"
                   )}
                   disabled={isFormDisabled}
@@ -158,9 +159,9 @@ export const KycForm: React.FC<KycFormProps> = ({ onKycSubmit, currentStatus }) 
             </div>
           </div>
 
-          <Button type="submit" className="w-full" disabled={isFormDisabled}>
+          <GradientButton type="submit" className="w-full" disabled={isFormDisabled}>
             {currentStatus === 'pending' ? 'Submitted (Under Review)' : currentStatus === 'verified' ? 'Verified' : 'Submit for Verification'}
-          </Button>
+          </GradientButton>
         </form>
       </CardContent>
     </Card>

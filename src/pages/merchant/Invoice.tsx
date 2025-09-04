@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 interface Invoice {
   id: string;
@@ -55,7 +56,7 @@ export default function InvoicePage() {
               <Label htmlFor="description">Description</Label>
               <Input id="description" placeholder="e.g., Services rendered" />
             </div>
-            <Button className="w-full">Generate Invoice</Button>
+            <GradientButton className="w-full">Generate Invoice</GradientButton>
           </CardContent>
         </Card>
 
@@ -101,9 +102,9 @@ export default function InvoicePage() {
                     <TableCell>{invoice.issueDate}</TableCell>
                     <TableCell>{invoice.dueDate}</TableCell>
                     <TableCell className="text-right">
-                      <Button variant="outline" size="sm" className="mr-2">View</Button>
+                      <Button variant="outline" size="sm" className="mr-2 rounded-full">View</Button>
                       {invoice.status !== 'Paid' && (
-                        <Button variant="secondary" size="sm">Mark as Paid</Button>
+                        <Button variant="secondary" size="sm" className="rounded-full">Mark as Paid</Button>
                       )}
                     </TableCell>
                   </TableRow>

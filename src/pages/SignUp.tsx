@@ -261,7 +261,7 @@ export default function SignUp() {
   const showBusinessFields = employmentStatus === 'Self-Employed' || employmentStatus === 'Business';
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950 dark:to-blue-800">
       <SharedHeader />
       <div className="flex-1 flex items-center justify-center px-4 overflow-hidden py-8">
         <BlobBackground />

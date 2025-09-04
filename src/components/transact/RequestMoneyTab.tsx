@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 export const RequestMoneyTab: React.FC = () => {
   const [identifierType, setIdentifierType] = useState('email');
@@ -64,7 +65,7 @@ export const RequestMoneyTab: React.FC = () => {
             <Label htmlFor="request-note">Note</Label>
             <Input id="request-note" placeholder="e.g., For lunch" required />
           </div>
-          <Button className="w-full">Send Request</Button>
+          <GradientButton className="w-full">Send Request</GradientButton>
         </CardContent>
       </Card>
 

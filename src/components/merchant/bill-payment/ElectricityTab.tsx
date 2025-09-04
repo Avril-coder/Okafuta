@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 interface ElectricityTabProps {
   selectedWallet: string;
@@ -148,7 +149,7 @@ export const ElectricityTab: React.FC<ElectricityTabProps> = ({
               />
             </div>
 
-            <Button type="submit" className="w-full">Continue</Button>
+            <GradientButton type="submit" className="w-full">Continue</GradientButton>
           </form>
         </CardContent>
       </Card>

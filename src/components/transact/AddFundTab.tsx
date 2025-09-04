@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useWallet } from '@/context/WalletContext';
 import { toast } from 'sonner';
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 export const AddFundTab: React.FC = () => {
   const { wallets, addFunds } = useWallet();
@@ -71,7 +72,7 @@ export const AddFundTab: React.FC = () => {
                 </SelectContent>
               </Select>
             </div>
-            <Button type="submit" className="w-full">Add Funds</Button>
+            <GradientButton type="submit" className="w-full">Add Funds</GradientButton>
           </form>
         </CardContent>
       </Card>

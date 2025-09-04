@@ -49,7 +49,7 @@ export const SharedHeader: React.FC = () => {
         <div className="md:hidden flex items-center">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="rounded-full"> {/* Added rounded-full */}
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle menu</span>
               </Button>

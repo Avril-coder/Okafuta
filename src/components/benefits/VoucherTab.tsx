@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { LocationCombobox } from '@/components/shared/LocationCombobox'; // Import the new component
+import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 export const VoucherTab: React.FC = () => {
   const [userStatus, setUserStatus] = useState('');
@@ -91,7 +92,7 @@ export const VoucherTab: React.FC = () => {
             <Textarea id="voucher-note" placeholder="Brief note about the voucher." />
           </div>
 
-          <Button className="w-full">Create Voucher</Button>
+          <GradientButton className="w-full">Create Voucher</GradientButton>
         </CardContent>
       </Card>
 
