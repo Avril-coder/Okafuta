@@ -5,12 +5,12 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Briefcase, User } from 'lucide-react';
 import { toast } from 'sonner';
+import { BlobBackground } from '@/components/shared/BlobBackground';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { SharedHeader } from '@/components/shared/Header';
-import { Footer } from '@/components/shared/Footer'; // Import Footer
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -261,7 +261,7 @@ export default function SignUp() {
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       <SharedHeader />
       <div className="flex-1 flex items-center justify-center px-4 overflow-hidden">
-        {/* BlobBackground removed */}
+        <BlobBackground />
         <Card className="relative z-10 w-full max-w-md">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-2">
@@ -700,7 +700,6 @@ export default function SignUp() {
           </CardContent>
         </Card>
       </div>
-      <Footer /> {/* Add Footer here */}
     </div>
   );
 }

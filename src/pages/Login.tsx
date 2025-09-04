@@ -4,11 +4,11 @@ import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
+import { BlobBackground } from '@/components/shared/BlobBackground';
 import { GradientButton } from '@/components/landing/GradientButton';
 import { Checkbox } from '@/components/ui/checkbox';
 import { SharedHeader } from '@/components/shared/Header';
 import { useUser } from '@/context/UserContext';
-import { Footer } from '@/components/shared/Footer'; // Import Footer
 
 export default function Login() {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function Login() {
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       <SharedHeader />
       <div className="flex-1 flex items-center justify-center px-4 overflow-hidden">
-        {/* BlobBackground removed */}
+        <BlobBackground />
         <Card className="relative z-10 w-full max-w-md">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-2">
@@ -73,7 +73,6 @@ export default function Login() {
           </CardContent>
         </Card>
       </div>
-      <Footer /> {/* Add Footer here */}
     </div>
   );
 }
