@@ -4,7 +4,7 @@ import { GradientButton } from './GradientButton';
 import { PhoneMockup } from './PhoneMockup';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { FloatingActionCards } from './FloatingActionCards';
+// import { FloatingActionCards } from './FloatingActionCards'; // Removed import
 import { BlobBackground } from '@/components/shared/BlobBackground';
 
 export const HeroSection: React.FC = () => {
@@ -27,15 +27,13 @@ export const HeroSection: React.FC = () => {
           <GradientButton asChild className="px-8 py-4 text-lg">
             <Link to="/onboarding">Create Free Account</Link>
           </GradientButton>
-          <Button asChild variant="outline" className="px-8 py-4 text-lg">
-            <Link to="/about">Learn More</Link>
-          </Button>
+          {/* Removed "Learn More" button */}
         </div>
 
-        {/* Phone Mockup with Floating Actions */}
+        {/* Phone Mockup */}
         <div className="relative w-full max-w-md mx-auto mt-12 lg:mt-0">
           <PhoneMockup />
-          <FloatingActionCards />
+          {/* Removed FloatingActionCards */}
         </div>
       </div>
 
