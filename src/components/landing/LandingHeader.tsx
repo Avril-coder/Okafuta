@@ -21,9 +21,7 @@ export const LandingHeader: React.FC = () => {
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
             <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-10 w-auto" />
-            <div className="ml-2 text-xs font-medium text-gray-700 dark:text-gray-300">
-              SECURE. SEAMLESS. CASHLESS.
-            </div>
+            {/* Removed the tagline div */}
           </Link>
         </div>
 
