@@ -17,10 +17,10 @@ export const HeroSection: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Left Side Content */}
         <div className="flex-1 text-center lg:text-left">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-blue-700 dark:text-blue-400 leading-tight mb-6">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-blue-700 dark:text-blue-400 leading-tight mb-6">
             A Better Way To Collect Payments
           </h1>
-          <p className="text-lg text-blue-600 dark:text-blue-300 mb-8 max-w-md mx-auto lg:mx-0">
+          <p className="text-base text-blue-600 dark:text-blue-300 mb-8 max-w-md mx-auto lg:mx-0">
             Streamline your transactions, manage finances effortlessly, and grow your business with our secure and seamless platform.
           </p>
           <GradientButton asChild className="px-8 py-4 text-lg">
@@ -36,7 +36,7 @@ export const HeroSection: React.FC = () => {
 
       {/* Scroll Down Icon */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <ChevronDown className="h-8 w-8 text-blue-500 dark:text-blue-300 animate-bounce" />
+        <ChevronDown className="h-6 w-6 text-blue-500 dark:text-blue-300 animate-bounce" />
       </div>
     </section>
   );
