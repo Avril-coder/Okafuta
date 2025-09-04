@@ -29,7 +29,7 @@ export default function Login() {
       <SharedHeader />
       <div className="flex-1 flex items-center justify-center px-4 overflow-hidden">
         <BlobBackground />
-        <Card className="relative z-10 w-full max-w-md">
+        <Card className="relative z-10 w-full max-w-md border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader className="text-center">
             <div className="flex justify-center mb-2">
               <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-14 w-auto" />

@@ -18,7 +18,7 @@ export const EscrowTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Create New Escrow Transaction</CardTitle>
           <CardDescription>Set up a secure escrow for transactions between parties.</CardDescription>
@@ -56,7 +56,7 @@ export const EscrowTab: React.FC = () => {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Escrow Transaction List</CardTitle>
           <CardDescription>Overview and management of all escrow transactions.</CardDescription>

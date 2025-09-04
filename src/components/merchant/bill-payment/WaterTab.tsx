@@ -65,7 +65,7 @@ export const WaterTab: React.FC<WaterTabProps> = ({
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Water Payment</CardTitle>
           <CardDescription>Offer water bill payment services to your customers.</CardDescription>
@@ -154,7 +154,7 @@ export const WaterTab: React.FC<WaterTabProps> = ({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Recent Water Payments</CardTitle>
           <CardDescription>History of water payments processed.</CardDescription>

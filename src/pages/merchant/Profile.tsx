@@ -49,7 +49,7 @@ export default function Profile() {
 
       <div className="space-y-8">
         {/* Profile Information Card */}
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>Personal Information</CardTitle>
             <CardDescription>Update your name, email, and phone number.</CardDescription>
@@ -86,7 +86,7 @@ export default function Profile() {
         </Card>
 
         {/* Change Password Card */}
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>Change Password</CardTitle>
             <CardDescription>Update your account password.</CardDescription>

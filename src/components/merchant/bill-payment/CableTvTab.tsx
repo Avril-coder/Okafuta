@@ -65,7 +65,7 @@ export const CableTvTab: React.FC<CableTvTabProps> = ({
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Cable TV Payment</CardTitle>
           <CardDescription>Offer cable TV subscription payment services to your customers.</CardDescription>
@@ -154,7 +154,7 @@ export const CableTvTab: React.FC<CableTvTabProps> = ({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Recent Cable TV Payments</CardTitle>
           <CardDescription>History of cable TV payments processed.</CardDescription>

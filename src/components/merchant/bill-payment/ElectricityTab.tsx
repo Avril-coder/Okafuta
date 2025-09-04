@@ -65,7 +65,7 @@ export const ElectricityTab: React.FC<ElectricityTabProps> = ({
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Electricity Payment</CardTitle>
           <CardDescription>Offer electricity bill payment services to your customers.</CardDescription>
@@ -154,7 +154,7 @@ export const ElectricityTab: React.FC<ElectricityTabProps> = ({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Recent Electricity Payments</CardTitle>
           <CardDescription>History of electricity payments processed.</CardDescription>

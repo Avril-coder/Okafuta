@@ -18,7 +18,7 @@ export default function Settings() {
 
       <div className="space-y-8">
         {/* Wallet Settings */}
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>Wallet Settings</CardTitle>
             <CardDescription>Configure your primary wallet and currency preferences.</CardDescription>
@@ -42,7 +42,7 @@ export default function Settings() {
         </Card>
 
         {/* Security Settings */}
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>Security</CardTitle>
             <CardDescription>Manage your account security settings.</CardDescription>
@@ -68,7 +68,7 @@ export default function Settings() {
         </Card>
 
         {/* Push Notification Preferences */}
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>Push Notification Preferences</CardTitle>
             <CardDescription>Choose which notifications you'd like to receive.</CardDescription>
@@ -91,7 +91,7 @@ export default function Settings() {
         </Card>
 
         {/* Merchant Profile */}
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>Merchant Profile</CardTitle>
             <CardDescription>Update your business information.</CardDescription>

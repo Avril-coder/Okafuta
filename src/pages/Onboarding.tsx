@@ -46,7 +46,7 @@ export default function Onboarding() {
 
         <div className="w-full max-w-4xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
           {/* QR Code Section */}
-          <Card className="flex flex-col items-center justify-center p-8 text-center h-full shadow-none border-none bg-gray-50 dark:bg-gray-900">
+          <Card className="flex flex-col items-center justify-center p-8 text-center h-full shadow-none border-none bg-gray-50 dark:bg-gray-900 border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold">Start Verification on Mobile</CardTitle>
             </CardHeader>
@@ -65,7 +65,7 @@ export default function Onboarding() {
           </Card>
 
           {/* Verification Steps List */}
-          <Card className="p-6 h-full shadow-none border-none bg-gray-50 dark:bg-gray-900">
+          <Card className="p-6 h-full shadow-none border-none bg-gray-50 dark:bg-gray-900 border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
             <CardHeader>
               <CardTitle className="text-xl font-semibold mb-4">Verification Steps</CardTitle>
             </CardHeader>

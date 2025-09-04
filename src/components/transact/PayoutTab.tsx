@@ -89,7 +89,7 @@ export const PayoutTab: React.FC = () => {
   };
 
   const renderStepOne = () => (
-    <Card>
+    <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
       <CardHeader>
         <CardTitle>Choose a payout method</CardTitle>
       </CardHeader>
@@ -99,7 +99,7 @@ export const PayoutTab: React.FC = () => {
             Payout Method
           </h3>
           <div className="space-y-4">
-            <Card className="p-4">
+            <Card className="p-4 border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
               <RadioGroup value={selectedMethod} onValueChange={setSelectedMethod}>
                 <div className="grid grid-cols-2 gap-4">
                   {eWalletOptions.map((wallet) => (
@@ -113,7 +113,7 @@ export const PayoutTab: React.FC = () => {
                 </div>
               </RadioGroup>
             </Card>
-            <Card className="p-4">
+            <Card className="p-4 border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
               <RadioGroup value={selectedMethod} onValueChange={setSelectedMethod}>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="bank" id="bank" />
@@ -146,7 +146,7 @@ export const PayoutTab: React.FC = () => {
   );
 
   const renderStepTwo = () => (
-    <Card>
+    <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
       <CardHeader>
         <div className="flex items-center gap-4">
           <Button variant="outline" size="icon" onClick={handleBack} aria-label="Go back" className="rounded-full">

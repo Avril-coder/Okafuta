@@ -30,7 +30,7 @@ export default function Customers() {
       </p>
 
       <div className="space-y-8">
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>Customer Transactions</CardTitle>
             <CardDescription>Full history of processed customer transactions.</CardDescription>

@@ -32,7 +32,7 @@ export const RequestMoneyTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Request Money</CardTitle>
           <CardDescription>Request a payment from another account.</CardDescription>
@@ -69,7 +69,7 @@ export const RequestMoneyTab: React.FC = () => {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Request History</CardTitle>
           <CardDescription>Records of money you've requested.</CardDescription>

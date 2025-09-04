@@ -65,7 +65,7 @@ export const AirtimeTab: React.FC<AirtimeTabProps> = ({
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Airtime Payment</CardTitle>
           <CardDescription>Offer airtime top-up services to your customers.</CardDescription>
@@ -154,7 +154,7 @@ export const AirtimeTab: React.FC<AirtimeTabProps> = ({
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Recent Airtime Payments</CardTitle>
           <CardDescription>History of airtime payments processed.</CardDescription>

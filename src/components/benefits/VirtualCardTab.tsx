@@ -35,7 +35,7 @@ export const VirtualCardTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>My Virtual Cards</CardTitle>
           <CardDescription>View your received virtual cards and manage their status.</CardDescription>

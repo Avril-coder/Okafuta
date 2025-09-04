@@ -15,7 +15,7 @@ const activities = allTransactions.filter(tx => tx.merchantId === currentMerchan
 
 export function RecentActivity() {
   return (
-    <Card className="col-span-1 lg:col-span-3">
+    <Card className="col-span-1 lg:col-span-3 border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
       <CardHeader>
         <CardTitle>Recent Activity</CardTitle>
       </CardHeader>

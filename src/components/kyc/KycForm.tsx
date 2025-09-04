@@ -48,7 +48,7 @@ export const KycForm: React.FC<KycFormProps> = ({ onKycSubmit, currentStatus }) 
   const isFormDisabled = currentStatus === 'pending' || currentStatus === 'verified';
 
   return (
-    <Card>
+    <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
       <CardHeader>
         <CardTitle>KYC Verification</CardTitle>
         <CardDescription>

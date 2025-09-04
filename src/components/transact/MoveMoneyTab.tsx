@@ -114,7 +114,7 @@ export const MoveMoneyTab: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Create New Wallet Card */}
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Create New Wallet</CardTitle>
           <CardDescription>Add a new wallet, like a savings account.</CardDescription>
@@ -152,7 +152,7 @@ export const MoveMoneyTab: React.FC = () => {
       </Card>
 
       {/* Move Money Card */}
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Move Money</CardTitle>
           <CardDescription>Transfer funds between your wallets.</CardDescription>
@@ -205,7 +205,7 @@ export const MoveMoneyTab: React.FC = () => {
       </Card>
 
       {/* History Card */}
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Movement History</CardTitle>
           <CardDescription>Records of all internal wallet transfers.</CardDescription>

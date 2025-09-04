@@ -34,7 +34,7 @@ export default function InvoicePage() {
 
       <div className="space-y-8">
         {/* Create New Invoice */}
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>Create New Invoice</CardTitle>
             <CardDescription>Generate a new invoice for your customers.</CardDescription>
@@ -61,7 +61,7 @@ export default function InvoicePage() {
         </Card>
 
         {/* Invoice List */}
-        <Card>
+        <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
           <CardHeader>
             <CardTitle>All Invoices</CardTitle>
             <CardDescription>Overview of all generated invoices.</CardDescription>

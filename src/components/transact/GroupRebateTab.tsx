@@ -25,7 +25,7 @@ export const GroupRebateTab: React.FC = () => {
         </AlertDescription>
       </Alert>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Adding Group Rebate</CardTitle>
           <Button variant="outline" className="rounded-full">
@@ -88,7 +88,7 @@ export const GroupRebateTab: React.FC = () => {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Group Rebate List</CardTitle>
           <CardDescription>View and manage existing group rebates.</CardDescription>

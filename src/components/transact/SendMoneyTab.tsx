@@ -15,7 +15,7 @@ export const SendMoneyTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Send Money</CardTitle>
           <CardDescription>Transfer funds to another account.</CardDescription>
@@ -33,7 +33,7 @@ export const SendMoneyTab: React.FC = () => {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Transfer History</CardTitle>
           <CardDescription>Records of money sent.</CardDescription>

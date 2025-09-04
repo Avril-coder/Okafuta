@@ -40,7 +40,7 @@ export const AddFundTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Add Money</CardTitle>
           <CardDescription>Top up your merchant wallet.</CardDescription>
@@ -77,7 +77,7 @@ export const AddFundTab: React.FC = () => {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="border-blue-200 dark:border-blue-700 shadow-sm hover:shadow-md hover:shadow-blue-500/20 transition-all duration-200">
         <CardHeader>
           <CardTitle>Fund History</CardTitle>
           <CardDescription>Recent additions to your wallet.</CardDescription>
