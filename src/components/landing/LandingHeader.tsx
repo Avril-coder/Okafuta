@@ -23,6 +23,9 @@ export const LandingHeader: React.FC = () => {
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
             <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-10 w-auto" />
+            <div className="ml-2 text-xs font-medium text-gray-700 dark:text-gray-300">
+              SECURE. SEAMLESS. CASHLESS.
+            </div>
           </Link>
         </div>
 
@@ -46,7 +49,7 @@ export const LandingHeader: React.FC = () => {
           {/* Language Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500">
+              <Button variant="outline" className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500">
                 <span>English</span>
                 <ChevronDown className="h-4 w-4" />
               </Button>
