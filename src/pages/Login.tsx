@@ -9,7 +9,7 @@ import { BlobBackground } from '@/components/shared/BlobBackground';
 import { Checkbox } from '@/components/ui/checkbox';
 import { SharedHeader } from '@/components/shared/Header';
 import { useUser } from '@/context/UserContext';
-import { Footer } from '@/components/shared/Footer'; // Import Footer
+// import { Footer } from '@/components/shared/Footer'; // Removed Footer import
 
 export default function Login() {
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ export default function Login() {
           </CardContent>
         </Card>
       </div>
-      <Footer /> {/* Add Footer here */}
+      {/* <Footer /> Removed Footer here */}
     </div>
   );
 }

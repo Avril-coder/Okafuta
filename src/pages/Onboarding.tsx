@@ -7,7 +7,7 @@ import { ScanLine, Smartphone, UserCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import { SharedHeader } from '@/components/shared/Header';
-import { Footer } from '@/components/shared/Footer'; // Import Footer
+// import { Footer } from '@/components/shared/Footer'; // Removed Footer import
 import { GradientButton } from '@/components/landing/GradientButton'; // Import GradientButton
 
 const verificationSteps = [
@@ -112,7 +112,7 @@ export default function Onboarding() {
           </p>
         </footer>
       </div>
-      <Footer /> {/* Add Footer here */}
+      {/* <Footer /> Removed Footer here */}
     </div>
   );
 }

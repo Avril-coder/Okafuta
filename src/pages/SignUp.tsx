@@ -11,7 +11,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { SharedHeader } from '@/components/shared/Header';
-import { Footer } from '@/components/shared/Footer';
+// import { Footer } from '@/components/shared/Footer'; // Removed Footer import
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -742,7 +742,7 @@ export default function SignUp() {
           </CardContent>
         </Card>
       </div>
-      <Footer />
+      {/* <Footer /> Removed Footer here */}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
-import { Footer } from "@/components/shared/Footer"; // Import Footer
+// import { Footer } from "@/components/shared/Footer"; // Removed Footer import
 
 export default function MerchantLayout() {
   return (
@@ -12,7 +12,7 @@ export default function MerchantLayout() {
         <main className="flex-1 pb-8">
           <Outlet />
         </main>
-        <Footer /> {/* Add Footer here */}
+        {/* <Footer /> Removed Footer here */}
       </div>
     </div>
   );

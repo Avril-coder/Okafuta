@@ -1,7 +1,7 @@
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { SharedHeader } from "@/components/shared/Header";
-import { Footer } from "@/components/shared/Footer"; // Import Footer
+// import { Footer } from "@/components/shared/Footer"; // Removed Footer import
 
 const Index = () => {
   return (
@@ -9,7 +9,7 @@ const Index = () => {
       <SharedHeader />
       <HeroSection />
       <MadeWithDyad />
-      <Footer /> {/* Add Footer here */}
+      {/* <Footer /> Removed Footer here */}
     </div>
   );
 };
