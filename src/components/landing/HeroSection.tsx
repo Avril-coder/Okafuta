@@ -3,7 +3,6 @@ import { ChevronDown } from 'lucide-react';
 import { GradientButton } from './GradientButton';
 import { PhoneMockup } from './PhoneMockup';
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button'; // Import Button for secondary CTA
 import { FloatingActionCards } from './FloatingActionCards'; // Import new component
 
 export const HeroSection: React.FC = () => {
@@ -19,20 +18,17 @@ export const HeroSection: React.FC = () => {
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
         {/* Headline and Subtext */}
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
-          A Smarter Way to Manage Your Money
+          A Better Way To Collect Payments
         </h1>
         <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl">
-          Send, receive, and grow your business securely and seamlessly.
+          Streamline your transactions, manage finances effortlessly, and grow your business with our secure and seamless platform.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16">
+        {/* CTA Button */}
+        <div className="flex justify-center mb-16">
           <GradientButton asChild className="px-8 py-4 text-lg">
             <Link to="/onboarding">Create Free Account</Link>
           </GradientButton>
-          <Button asChild variant="outline" className="px-8 py-4 text-lg">
-            <Link to="/about">Learn More</Link>
-          </Button>
         </div>
 
         {/* Phone Mockup with Floating Actions */}
