@@ -25,7 +25,7 @@ export default function ForgotPassword() {
             <div className="flex justify-center mb-2">
               <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-14 w-auto" />
             </div>
-            <CardTitle className="text-3xl font-bold">Forgot Password</CardTitle>
+            <CardTitle className="text-3xl font-bold"></CardTitle> {/* Removed "Forgot Password" text */}
             <CardDescription>Enter your email to receive a password reset link.</CardDescription>
           </CardHeader>
           <CardContent>
