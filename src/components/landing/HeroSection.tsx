@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-700 to-blue-500 dark:from-blue-900 dark:to-blue-700 text-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
       {/* Abstract Background Shapes */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-300 dark:bg-blue-700 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
@@ -17,10 +17,10 @@ export const HeroSection: React.FC = () => {
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Left Side Content */}
         <div className="flex-1 text-center lg:text-left">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6">
             A Better Way To Collect Payments
           </h1>
-          <p className="text-lg text-blue-100 dark:text-blue-200 mb-8 max-w-md mx-auto lg:mx-0">
+          <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-md mx-auto lg:mx-0">
             Streamline your transactions, manage finances effortlessly, and grow your business with our secure and seamless platform.
           </p>
           <GradientButton asChild className="px-8 py-4 text-lg">
@@ -36,7 +36,7 @@ export const HeroSection: React.FC = () => {
 
       {/* Scroll Down Icon */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <ChevronDown className="h-8 w-8 text-blue-100 dark:text-blue-200 animate-bounce" />
+        <ChevronDown className="h-8 w-8 text-gray-400 dark:text-gray-600 animate-bounce" />
       </div>
     </section>
   );
