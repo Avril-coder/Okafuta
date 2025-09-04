@@ -6,7 +6,8 @@ import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { BlobBackground } from '@/components/shared/BlobBackground';
 import { GradientButton } from '@/components/landing/GradientButton';
-import { LandingHeader } from '@/components/landing/LandingHeader'; // Use LandingHeader
+import { SharedHeader } from '@/components/shared/Header';
+import { Footer } from '@/components/shared/Footer'; // Import Footer
 
 export default function ForgotPassword() {
   const handleResetPassword = (e: React.FormEvent) => {
@@ -16,7 +17,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-      <LandingHeader /> {/* Use LandingHeader here */}
+      <SharedHeader />
       <div className="flex-1 flex items-center justify-center px-4 overflow-hidden">
         <BlobBackground />
         <Card className="relative z-10 w-full max-w-md">
@@ -46,6 +47,7 @@ export default function ForgotPassword() {
           </CardContent>
         </Card>
       </div>
+      <Footer /> {/* Add Footer here */}
     </div>
   );
 }

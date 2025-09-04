@@ -2,14 +2,15 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Send, ArrowUp, ArrowRightLeft, Wallet, ShoppingBag, Banknote, User } from 'lucide-react'; // Added necessary icons
+import { ArrowUpFromLine, HandCoins, User, DollarSign, Wallet, Send } from 'lucide-react'; // Changed ArrowDown to ArrowUpFromLine
 import { cn } from '@/lib/utils';
 
 export const PhoneMockup: React.FC = () => {
   const transactions = [
-    { id: 1, description: "Coffee Shop", date: "Today", amount: "-N$ 25.00", icon: ShoppingBag, iconColor: "text-red-500" },
-    { id: 2, description: "Salary Deposit", date: "Yesterday", amount: "+N$ 5,000.00", icon: Banknote, iconColor: "text-green-500" },
-    { id: 3, description: "Online Purchase", date: "Oct 25", amount: "-N$ 150.00", icon: Send, iconColor: "text-blue-500" },
+    { id: 1, description: "Coffee Shop", amount: "-N$ 25.00", date: "Today", icon: DollarSign, iconColor: "text-red-500" },
+    { id: 2, description: "Salary Deposit", amount: "+N$ 5,000.00", date: "Yesterday", icon: Wallet, iconColor: "text-green-500" },
+    { id: 3, description: "Online Purchase", amount: "-N$ 150.00", date: "Oct 25", icon: Send, iconColor: "text-red-500" },
+    { id: 4, description: "Friend Transfer", amount: "+N$ 100.00", date: "Oct 24", icon: ArrowUpFromLine, iconColor: "text-green-500" }, // Changed icon to ArrowUpFromLine
   ];
 
   return (
@@ -18,10 +19,11 @@ export const PhoneMockup: React.FC = () => {
       <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-5 bg-gray-800 dark:bg-gray-200 rounded-md z-10"></div>
       {/* Screen */}
       <div className="relative w-full h-full bg-white dark:bg-gray-900 rounded-[2rem] overflow-hidden flex flex-col">
-        {/* Top Bar */}
+        {/* Account Info - Simplified */}
         <div className="p-4 flex items-center justify-end bg-gray-50 dark:bg-gray-800">
           <Avatar className="h-8 w-8">
-            <AvatarFallback className="bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
+            {/* Removed AvatarImage as it's not provided, using fallback with User icon */}
+            <AvatarFallback className="bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
               <User className="h-5 w-5" />
             </AvatarFallback>
           </Avatar>
@@ -33,18 +35,18 @@ export const PhoneMockup: React.FC = () => {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-1">N$ 30.00</h2>
         </div>
 
-        {/* Main Action Buttons */}
+        {/* Action Buttons */}
         <div className="grid grid-cols-4 gap-2 p-4 bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
             <Send className="h-5 w-5 mb-1" />
             <span className="text-xs">Send</span>
           </Button>
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
-            <ArrowUp className="h-5 w-5 mb-1" />
+            <ArrowUpFromLine className="h-5 w-5 mb-1" /> {/* Changed to ArrowUpFromLine */}
             <span className="text-xs">Cash Out</span>
           </Button>
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
-            <ArrowRightLeft className="h-5 w-5 mb-1" />
+            <HandCoins className="h-5 w-5 mb-1" />
             <span className="text-xs">Request</span>
           </Button>
           <Button variant="ghost" className="flex flex-col h-auto py-2 px-0 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
@@ -68,9 +70,9 @@ export const PhoneMockup: React.FC = () => {
                     <p className="text-xs text-gray-500 dark:text-gray-400">{tx.date}</p>
                   </div>
                 </div>
-                <span className={cn("text-sm font-medium", tx.amount.startsWith('+') ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400")}>
+                <p className={cn("text-sm font-medium", tx.amount.startsWith('+') ? "text-green-600" : "text-red-600")}>
                   {tx.amount}
-                </span>
+                </p>
               </div>
             ))}
           </div>

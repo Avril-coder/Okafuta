@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { MobileMenu } from './MobileMenu'; // Assuming MobileMenu is still needed for small screens
+import { ChevronDown } from 'lucide-react';
 import { GradientButton } from './GradientButton';
+import { cn } from '@/lib/utils';
+import { MobileMenu } from './MobileMenu';
 
 export const LandingHeader: React.FC = () => {
   const navLinks = [
@@ -21,12 +23,11 @@ export const LandingHeader: React.FC = () => {
         <div className="flex items-center">
           <Link to="/" className="flex items-center">
             <img src="/Okafuta logo.png" alt="Okafuta Logo" className="h-10 w-auto" />
-            {/* Removed the tagline div */}
           </Link>
         </div>
 
         {/* Navigation Links for larger screens */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden lg:flex items-center space-x-8">
           {navLinks.map((link) => (
             <NavLink
               key={link.name}
@@ -42,14 +43,27 @@ export const LandingHeader: React.FC = () => {
             </NavLink>
           ))}
 
+          {/* Language Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500">
+                <span>English</span>
+                <ChevronDown className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>English</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           {/* Login Button */}
           <GradientButton asChild>
-            <Link to="/login">Login</Link>
+            <Link to="/login">Login Now</Link>
           </GradientButton>
         </div>
 
         {/* Mobile menu button - visible on small screens */}
-        <div className="md:hidden">
+        <div className="lg:hidden">
           <MobileMenu />
         </div>
       </nav>

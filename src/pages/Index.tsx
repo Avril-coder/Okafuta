@@ -1,15 +1,15 @@
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { HeroSection } from "@/components/landing/HeroSection";
-import { LandingHeader } from "@/components/landing/LandingHeader"; // Use LandingHeader
-import { Footer } from "@/components/shared/Footer";
+import { SharedHeader } from "@/components/shared/Header";
+import { Footer } from "@/components/shared/Footer"; // Import Footer
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
-      <LandingHeader /> {/* Use LandingHeader here */}
+      <SharedHeader />
       <HeroSection />
       <MadeWithDyad />
-      <Footer />
+      <Footer /> {/* Add Footer here */}
     </div>
   );
 };
