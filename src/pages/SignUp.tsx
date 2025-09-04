@@ -11,7 +11,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { SharedHeader } from '@/components/shared/Header';
-import { Footer } from '@/components/shared/Footer'; // Import Footer
+import { Footer } from '@/components/shared/Footer';
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -22,14 +22,19 @@ export default function SignUp() {
   const [areaCode, setAreaCode] = useState('+264');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [gender, setGender] = useState('');
-  const [employmentStatus, setEmploymentStatus] = useState('');
   const [maritalStatus, setMaritalStatus] = useState('');
+  const [employmentStatus, setEmploymentStatus] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState<'merchant' | 'customer'>('merchant');
 
   // State to manage autofilled fields
   const [isAutofilled, setIsAutofilled] = useState(false);
+
+  // Conditional fields for Marital Status documents
+  const [marriageCertificate, setMarriageCertificate] = useState<File | null>(null);
+  const [divorceDocument, setDivorceDocument] = useState<File | null>(null);
+  const [deathCertificate, setDeathCertificate] = useState<File | null>(null);
 
   // Conditional fields for Student employment status
   const [studentType, setStudentType] = useState<'local' | 'foreign' | ''>('');
@@ -55,11 +60,6 @@ export default function SignUp() {
   const [businessResidentialAddress, setBusinessResidentialAddress] = useState('');
   const [businessProofOfResidentialAddressFile, setBusinessProofOfResidentialAddressFile] = useState<File | null>(null);
 
-  // Conditional fields for Marital Status
-  const [marriageCertificate, setMarriageCertificate] = useState<File | null>(null);
-  const [divorceDocument, setDivorceDocument] = useState<File | null>(null);
-  const [deathCertificate, setDeathCertificate] = useState<File | null>(null);
-
   // Effect to autofill user data based on a specific ID number
   useEffect(() => {
     const mockUserData = {
@@ -76,7 +76,6 @@ export default function SignUp() {
       setIsAutofilled(true);
       toast.info("User data autofilled based on ID number.");
     } else {
-      // If the ID was autofilled and is now changed, clear the fields
       if (isAutofilled) {
         setFirstName('');
         setLastName('');
@@ -124,6 +123,7 @@ export default function SignUp() {
       setBusinessCompanyName('');
       setBusinessRegistrationNumber('');
       setBusinessNatureOfBusiness('');
+      setBusinessNatureOfBusiness('');
       setBusinessPhysicalAddress('');
       setBusinessPlaceOfBusinessFile(null);
       setBusinessResidentialAddress('');
@@ -134,14 +134,13 @@ export default function SignUp() {
   // Simulate student type detection based on identity number
   useEffect(() => {
     if (employmentStatus === 'Student' && identityNumber) {
-      // Simple mock detection: if ID contains "FOREIGN", assume foreign student
       if (identityNumber.toUpperCase().includes('FOREIGN')) {
         setStudentType('foreign');
       } else {
         setStudentType('local');
       }
     } else if (employmentStatus !== 'Student') {
-      setStudentType(''); // Reset if not a student
+      setStudentType('');
     }
   }, [identityNumber, employmentStatus]);
 
@@ -149,6 +148,20 @@ export default function SignUp() {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.");
+      return;
+    }
+
+    // Basic validation for conditional marital status fields
+    if (maritalStatus === 'married' && !marriageCertificate) {
+      toast.error("Please upload your marriage certificate.");
+      return;
+    }
+    if (maritalStatus === 'divorced' && !divorceDocument) {
+      toast.error("Please upload your divorce decree or supporting document.");
+      return;
+    }
+    if (maritalStatus === 'widowed' && !deathCertificate) {
+      toast.error("Please upload the death certificate or supporting document.");
       return;
     }
 
@@ -181,7 +194,6 @@ export default function SignUp() {
         return;
       }
     }
-    // Validation for Self-Employed / Business fields
     if (employmentStatus === 'Self-Employed' || employmentStatus === 'Business') {
       if (!businessCompanyName || !businessRegistrationNumber || !businessNatureOfBusiness || !businessPhysicalAddress || !businessPlaceOfBusinessFile) {
         toast.error("Please fill all required fields for business/self-employed status and upload a document for place of business.");
@@ -197,20 +209,6 @@ export default function SignUp() {
       }
     }
 
-    // Basic validation for conditional marital status fields
-    if (maritalStatus === 'married' && !marriageCertificate) {
-      toast.error("Please upload your marriage certificate.");
-      return;
-    }
-    if (maritalStatus === 'divorced' && !divorceDocument) {
-      toast.error("Please upload your divorce decree or supporting document.");
-      return;
-    }
-    if (maritalStatus === 'widowed' && !deathCertificate) {
-      toast.error("Please upload the death certificate or supporting document.");
-      return;
-    }
-
     console.log("Signing up with:", {
       firstName,
       lastName,
@@ -219,10 +217,13 @@ export default function SignUp() {
       areaCode,
       phoneNumber,
       gender,
-      employmentStatus,
       maritalStatus,
       password,
       accountType,
+      // Conditional marital status fields
+      ...(maritalStatus === 'married' && { marriageCertificate: marriageCertificate?.name }),
+      ...(maritalStatus === 'divorced' && { divorceDocument: divorceDocument?.name }),
+      ...(maritalStatus === 'widowed' && { deathCertificate: deathCertificate?.name }),
       // Conditional employment fields
       ...(employmentStatus === 'Student' && {
         studentType,
@@ -240,7 +241,7 @@ export default function SignUp() {
         proofOfResidentialAddressFile: employedProofOfResidentialAddressFile?.name,
       }),
       // Self-Employed / Business fields
-      ...( (employmentStatus === 'Self-Employed' || employmentStatus === 'Business') && {
+      ...((employmentStatus === 'Self-Employed' || employmentStatus === 'Business') && {
         companyName: businessCompanyName,
         registrationNumber: businessRegistrationNumber,
         natureOfBusiness: businessNatureOfBusiness,
@@ -249,19 +250,20 @@ export default function SignUp() {
         residentialAddress: businessResidentialAddress,
         proofOfResidentialAddressFile: businessProofOfResidentialAddressFile?.name,
       }),
-      // Conditional marital status fields
-      ...(maritalStatus === 'married' && { marriageCertificate: marriageCertificate?.name }),
-      ...(maritalStatus === 'divorced' && { divorceDocument: divorceDocument?.name }),
-      ...(maritalStatus === 'widowed' && { deathCertificate: deathCertificate?.name }),
     });
     toast.success("Account created successfully! Please log in.");
     navigate('/login');
   };
 
+  const showMaritalDocs = maritalStatus === 'married' || maritalStatus === 'divorced' || maritalStatus === 'widowed';
+  const showStudentFields = employmentStatus === 'Student';
+  const showEmployedFields = employmentStatus === 'Employed';
+  const showBusinessFields = employmentStatus === 'Self-Employed' || employmentStatus === 'Business';
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       <SharedHeader />
-      <div className="flex-1 flex items-center justify-center px-4 overflow-hidden">
+      <div className="flex-1 flex items-center justify-center px-4 overflow-hidden py-8">
         <BlobBackground />
         <Card className="relative z-10 w-full max-w-md">
           <CardHeader className="text-center">
@@ -272,6 +274,7 @@ export default function SignUp() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignUp} className="space-y-4">
+              {/* Basic Info Fields (Always Visible) */}
               <div className="grid grid-cols-2 gap-2">
                 <div className="grid gap-2">
                   <Label htmlFor="firstName">First Name</Label>
@@ -382,43 +385,55 @@ export default function SignUp() {
                 </div>
               </div>
 
-              {/* Conditional fields based on Marital Status */}
-              {maritalStatus === 'married' && (
-                <div className="grid gap-2">
-                  <Label htmlFor="marriageCertificate">Marriage Certificate</Label>
-                  <Input
-                    id="marriageCertificate"
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => setMarriageCertificate(e.target.files ? e.target.files[0] : null)}
-                    required
-                  />
-                </div>
-              )}
-              {maritalStatus === 'divorced' && (
-                <div className="grid gap-2">
-                  <Label htmlFor="divorceDocument">Divorce Decree / Supporting Document</Label>
-                  <Input
-                    id="divorceDocument"
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => setDivorceDocument(e.target.files ? e.target.files[0] : null)}
-                    required
-                  />
-                </div>
-              )}
-              {maritalStatus === 'widowed' && (
-                <div className="grid gap-2">
-                  <Label htmlFor="deathCertificate">Death Certificate / Supporting Document</Label>
-                  <Input
-                    id="deathCertificate"
-                    type="file"
-                    accept=".pdf,.jpg,.jpeg,.png"
-                    onChange={(e) => setDeathCertificate(e.target.files ? e.target.files[0] : null)}
-                    required
-                  />
-                </div>
-              )}
+              {/* Conditional Marital Status Documents */}
+              <div
+                className={cn(
+                  "grid gap-2 overflow-hidden transition-all duration-500 ease-in-out",
+                  showMaritalDocs ? "max-h-[300px] opacity-100 pt-4 border-t dark:border-gray-700" : "max-h-0 opacity-0"
+                )}
+              >
+                {showMaritalDocs && (
+                  <>
+                    <h3 className="text-lg font-semibold mb-2">Marital Status Documents</h3>
+                    {maritalStatus === 'married' && (
+                      <div className="grid gap-2">
+                        <Label htmlFor="marriageCertificate">Marriage Certificate</Label>
+                        <Input
+                          id="marriageCertificate"
+                          type="file"
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={(e) => setMarriageCertificate(e.target.files ? e.target.files[0] : null)}
+                          required
+                        />
+                      </div>
+                    )}
+                    {maritalStatus === 'divorced' && (
+                      <div className="grid gap-2">
+                        <Label htmlFor="divorceDocument">Divorce Decree / Supporting Document</Label>
+                        <Input
+                          id="divorceDocument"
+                          type="file"
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={(e) => setDivorceDocument(e.target.files ? e.target.files[0] : null)}
+                          required
+                        />
+                      </div>
+                    )}
+                    {maritalStatus === 'widowed' && (
+                      <div className="grid gap-2">
+                        <Label htmlFor="deathCertificate">Death Certificate / Supporting Document</Label>
+                        <Input
+                          id="deathCertificate"
+                          type="file"
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={(e) => setDeathCertificate(e.target.files ? e.target.files[0] : null)}
+                          required
+                        />
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
 
               <div className="grid gap-2">
                 <Label htmlFor="employmentStatus">Employment Status</Label>
@@ -435,207 +450,233 @@ export default function SignUp() {
                 </Select>
               </div>
 
-              {/* Conditional fields based on Employment Status */}
-              {employmentStatus === 'Student' && (
-                <>
-                  <div className="grid gap-2">
-                    <Label htmlFor="proofOfRegistration">Proof of Registration</Label>
-                    <Input
-                      id="proofOfRegistration"
-                      type="file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      onChange={(e) => setProofOfRegistration(e.target.files ? e.target.files[0] : null)}
-                      required
-                    />
-                  </div>
-                  {studentType === 'foreign' && (
+              {/* Conditional Employment Fields - Student */}
+              <div
+                className={cn(
+                  "grid gap-2 overflow-hidden transition-all duration-500 ease-in-out",
+                  showStudentFields ? "max-h-[600px] opacity-100 pt-4 border-t dark:border-gray-700" : "max-h-0 opacity-0"
+                )}
+              >
+                {showStudentFields && (
+                  <>
+                    <h3 className="text-lg font-semibold mb-2">Student Details</h3>
                     <div className="grid gap-2">
-                      <Label htmlFor="studyPermit">Study Permit</Label>
+                      <Label htmlFor="proofOfRegistration">Proof of Registration</Label>
                       <Input
-                        id="studyPermit"
+                        id="proofOfRegistration"
                         type="file"
                         accept=".pdf,.jpg,.jpeg,.png"
-                        onChange={(e) => setStudyPermit(e.target.files ? e.target.files[0] : null)}
+                        onChange={(e) => setProofOfRegistration(e.target.files ? e.target.files[0] : null)}
                         required
                       />
                     </div>
-                  )}
-                  <div className="grid gap-2">
-                    <Label htmlFor="studentPhysicalAddress">Physical Address</Label>
-                    <Input
-                      id="studentPhysicalAddress"
-                      type="text"
-                      placeholder="e.g., 123 University Ave, City, Country"
-                      value={studentPhysicalAddress}
-                      onChange={(e) => setStudentPhysicalAddress(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="studentProofOfAddressFile">Water Bill / Lease Agreement (Proof of Address)</Label>
-                    <Input
-                      id="studentProofOfAddressFile"
-                      type="file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      onChange={(e) => setStudentProofOfAddressFile(e.target.files ? e.target.files[0] : null)}
-                      required
-                    />
-                  </div>
-                </>
-              )}
+                    {studentType === 'foreign' && (
+                      <div className="grid gap-2">
+                        <Label htmlFor="studyPermit">Study Permit</Label>
+                        <Input
+                          id="studyPermit"
+                          type="file"
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          onChange={(e) => setStudyPermit(e.target.files ? e.target.files[0] : null)}
+                          required
+                        />
+                      </div>
+                    )}
+                    <div className="grid gap-2">
+                      <Label htmlFor="studentPhysicalAddress">Physical Address</Label>
+                      <Input
+                        id="studentPhysicalAddress"
+                        type="text"
+                        placeholder="e.g., 123 University Ave, City, Country"
+                        value={studentPhysicalAddress}
+                        onChange={(e) => setStudentPhysicalAddress(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="studentProofOfAddressFile">Water Bill / Lease Agreement (Proof of Address)</Label>
+                      <Input
+                        id="studentProofOfAddressFile"
+                        type="file"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        onChange={(e) => setStudentProofOfAddressFile(e.target.files ? e.target.files[0] : null)}
+                        required
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
 
-              {employmentStatus === 'Employed' && (
-                <>
-                  <div className="grid gap-2">
-                    <Label htmlFor="companyNameEmployed">Company Name</Label>
-                    <Input
-                      id="companyNameEmployed"
-                      type="text"
-                      placeholder="e.g., Tech Solutions Inc."
-                      value={companyNameEmployed}
-                      onChange={(e) => setCompanyNameEmployed(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="companyAddressEmployed">Physical Address (Company)</Label>
-                    <Input
-                      id="companyAddressEmployed"
-                      type="text"
-                      placeholder="e.g., 456 Business Rd, City, Country"
-                      value={companyAddressEmployed}
-                      onChange={(e) => setCompanyAddressEmployed(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="salary">Salary (Net Pay)</Label>
-                    <Input
-                      id="salary"
-                      type="number"
-                      placeholder="e.g., 15000.00"
-                      value={salary}
-                      onChange={(e) => setSalary(e.target.value)}
-                      step="0.01"
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="payslip">Payslip Attachment</Label>
-                    <Input
-                      id="payslip"
-                      type="file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      onChange={(e) => setPayslip(e.target.files ? e.target.files[0] : null)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="placeOfResidenceEmployed">Place of Residence</Label>
-                    <Input
-                      id="placeOfResidenceEmployed"
-                      type="text"
-                      placeholder="e.g., 789 Residential St, City, Country"
-                      value={placeOfResidenceEmployed}
-                      onChange={(e) => setPlaceOfResidenceEmployed(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="employedProofOfResidentialAddressFile">Water Bill / Lease Agreement (Proof of Residential Address)</Label>
-                    <Input
-                      id="employedProofOfResidentialAddressFile"
-                      type="file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      onChange={(e) => setEmployedProofOfResidentialAddressFile(e.target.files ? e.target.files[0] : null)}
-                      required
-                    />
-                  </div>
-                </>
-              )}
+              {/* Conditional Employment Fields - Employed */}
+              <div
+                className={cn(
+                  "grid gap-2 overflow-hidden transition-all duration-500 ease-in-out",
+                  showEmployedFields ? "max-h-[800px] opacity-100 pt-4 border-t dark:border-gray-700" : "max-h-0 opacity-0"
+                )}
+              >
+                {showEmployedFields && (
+                  <>
+                    <h3 className="text-lg font-semibold mb-2">Employment Details</h3>
+                    <div className="grid gap-2">
+                      <Label htmlFor="companyNameEmployed">Company Name</Label>
+                      <Input
+                        id="companyNameEmployed"
+                        type="text"
+                        placeholder="e.g., Tech Solutions Inc."
+                        value={companyNameEmployed}
+                        onChange={(e) => setCompanyNameEmployed(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="companyAddressEmployed">Physical Address (Company)</Label>
+                      <Input
+                        id="companyAddressEmployed"
+                        type="text"
+                        placeholder="e.g., 456 Business Rd, City, Country"
+                        value={companyAddressEmployed}
+                        onChange={(e) => setCompanyAddressEmployed(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="salary">Salary (Net Pay)</Label>
+                      <Input
+                        id="salary"
+                        type="number"
+                        placeholder="e.g., 15000.00"
+                        value={salary}
+                        onChange={(e) => setSalary(e.target.value)}
+                        step="0.01"
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="payslip">Payslip Attachment</Label>
+                      <Input
+                        id="payslip"
+                        type="file"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        onChange={(e) => setPayslip(e.target.files ? e.target.files[0] : null)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="placeOfResidenceEmployed">Place of Residence</Label>
+                      <Input
+                        id="placeOfResidenceEmployed"
+                        type="text"
+                        placeholder="e.g., 789 Residential St, City, Country"
+                        value={placeOfResidenceEmployed}
+                        onChange={(e) => setPlaceOfResidenceEmployed(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="employedProofOfResidentialAddressFile">Water Bill / Lease Agreement (Proof of Residential Address)</Label>
+                      <Input
+                        id="employedProofOfResidentialAddressFile"
+                        type="file"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        onChange={(e) => setEmployedProofOfResidentialAddressFile(e.target.files ? e.target.files[0] : null)}
+                        required
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
 
-              {/* Conditional fields for Self-Employed / Business status */}
-              {(employmentStatus === 'Self-Employed' || employmentStatus === 'Business') && (
-                <>
-                  <div className="grid gap-2">
-                    <Label htmlFor="businessCompanyName">Company Name</Label>
-                    <Input
-                      id="businessCompanyName"
-                      type="text"
-                      placeholder="e.g., My Freelance Services / ABC Corp"
-                      value={businessCompanyName}
-                      onChange={(e) => setBusinessCompanyName(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="businessRegistrationNumber">Registration Number</Label>
-                    <Input
-                      id="businessRegistrationNumber"
-                      type="text"
-                      placeholder="e.g., REG123456789"
-                      value={businessRegistrationNumber}
-                      onChange={(e) => setBusinessRegistrationNumber(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="businessNatureOfBusiness">Nature of Business</Label>
-                    <Input
-                      id="businessNatureOfBusiness"
-                      type="text"
-                      placeholder="e.g., IT Consulting, Graphic Design, Retail"
-                      value={businessNatureOfBusiness}
-                      onChange={(e) => setBusinessNatureOfBusiness(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="businessPhysicalAddress">Physical Address (Business)</Label>
-                    <Input
-                      id="businessPhysicalAddress"
-                      type="text"
-                      placeholder="e.g., 101 Business Park, City, Country"
-                      value={businessPhysicalAddress}
-                      onChange={(e) => setBusinessPhysicalAddress(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="businessPlaceOfBusinessFile">Place of Business (Document/Proof)</Label>
-                    <Input
-                      id="businessPlaceOfBusinessFile"
-                      type="file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      onChange={(e) => setBusinessPlaceOfBusinessFile(e.target.files ? e.target.files[0] : null)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="businessResidentialAddress">Residential Address</Label>
-                    <Input
-                      id="businessResidentialAddress"
-                      type="text"
-                      placeholder="e.g., 789 Home St, City, Country"
-                      value={businessResidentialAddress}
-                      onChange={(e) => setBusinessResidentialAddress(e.target.value)}
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="businessProofOfResidentialAddressFile">Water Bill / Lease Agreement (Proof of Residential Address)</Label>
-                    <Input
-                      id="businessProofOfResidentialAddressFile"
-                      type="file"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      onChange={(e) => setBusinessProofOfResidentialAddressFile(e.target.files ? e.target.files[0] : null)}
-                      required
-                    />
-                  </div>
-                </>
-              )}
+              {/* Conditional Employment Fields - Self-Employed / Business */}
+              <div
+                className={cn(
+                  "grid gap-2 overflow-hidden transition-all duration-500 ease-in-out",
+                  showBusinessFields ? "max-h-[900px] opacity-100 pt-4 border-t dark:border-gray-700" : "max-h-0 opacity-0"
+                )}
+              >
+                {showBusinessFields && (
+                  <>
+                    <h3 className="text-lg font-semibold mb-2">Business Details</h3>
+                    <div className="grid gap-2">
+                      <Label htmlFor="businessCompanyName">Company Name</Label>
+                      <Input
+                        id="businessCompanyName"
+                        type="text"
+                        placeholder="e.g., My Freelance Services / ABC Corp"
+                        value={businessCompanyName}
+                        onChange={(e) => setBusinessCompanyName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="businessRegistrationNumber">Registration Number</Label>
+                      <Input
+                        id="businessRegistrationNumber"
+                        type="text"
+                        placeholder="e.g., REG123456789"
+                        value={businessRegistrationNumber}
+                        onChange={(e) => setBusinessRegistrationNumber(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="businessNatureOfBusiness">Nature of Business</Label>
+                      <Input
+                        id="businessNatureOfBusiness"
+                        type="text"
+                        placeholder="e.g., IT Consulting, Graphic Design, Retail"
+                        value={businessNatureOfBusiness}
+                        onChange={(e) => setBusinessNatureOfBusiness(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="businessPhysicalAddress">Physical Address (Business)</Label>
+                      <Input
+                        id="businessPhysicalAddress"
+                        type="text"
+                        placeholder="e.g., 101 Business Park, City, Country"
+                        value={businessPhysicalAddress}
+                        onChange={(e) => setBusinessPhysicalAddress(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="businessPlaceOfBusinessFile">Place of Business (Document/Proof)</Label>
+                      <Input
+                        id="businessPlaceOfBusinessFile"
+                        type="file"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        onChange={(e) => setBusinessPlaceOfBusinessFile(e.target.files ? e.target.files[0] : null)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="businessResidentialAddress">Residential Address</Label>
+                      <Input
+                        id="businessResidentialAddress"
+                        type="text"
+                        placeholder="e.g., 789 Home St, City, Country"
+                        value={businessResidentialAddress}
+                        onChange={(e) => setBusinessResidentialAddress(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="businessProofOfResidentialAddressFile">Water Bill / Lease Agreement (Proof of Residential Address)</Label>
+                      <Input
+                        id="businessProofOfResidentialAddressFile"
+                        type="file"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        onChange={(e) => setBusinessProofOfResidentialAddressFile(e.target.files ? e.target.files[0] : null)}
+                        required
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
 
-              <div className="grid gap-2">
+              {/* Account Type and Password (Always Visible) */}
+              <div className="grid gap-2 pt-4 border-t dark:border-gray-700">
                 <Label className="mb-2">Account Type</Label>
                 <RadioGroup
                   value={accountType}
@@ -701,7 +742,7 @@ export default function SignUp() {
           </CardContent>
         </Card>
       </div>
-      <Footer /> {/* Add Footer here */}
+      <Footer />
     </div>
   );
 }
