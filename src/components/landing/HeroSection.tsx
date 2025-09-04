@@ -5,21 +5,21 @@ import { PhoneMockup } from './PhoneMockup';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { FloatingActionCards } from './FloatingActionCards';
-import { BlobBackground } from '@/components/shared/BlobBackground'; // Import BlobBackground
+import { BlobBackground } from '@/components/shared/BlobBackground';
 
 export const HeroSection: React.FC = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900 text-center">
       {/* Abstract Background Shapes */}
-      <BlobBackground /> {/* Use the new BlobBackground component */}
+      <BlobBackground />
 
       <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
         {/* Headline and Subtext */}
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4">
-          A Smarter Way to Manage Your Money
+          A Better Way to Collect Your Payments
         </h1>
         <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl">
-          Send, receive, and grow your business securely and seamlessly.
+          Collect payments from your customers with ease and security.
         </p>
 
         {/* CTA Buttons */}
